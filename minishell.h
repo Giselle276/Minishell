@@ -39,4 +39,6 @@
 
 #define HISTORY_FILE ".minishell_history"
 
+void	print_header(void);
+
 #endif

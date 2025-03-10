@@ -102,7 +102,7 @@ int main(void)
 {
     char *input;
     char *args[100];
-
+    print_header();
     load_history(); // Cargar historial al inicio
 
     while (1)
