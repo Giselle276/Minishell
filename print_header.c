@@ -1,8 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_header.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gmaccha- <gmaccha-@student.42.fr>          #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-03-10 12:19:18 by gmaccha-          #+#    #+#             */
+/*   Updated: 2025-03-10 12:19:18 by gmaccha-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
+
 static void	print_shell(void)
 {
-	printf("                        *@@@@@@/ \n");
-	printf("                      @@.        .@@\n");
-	printf("             @@....,@@,            .@@,....@@\n");
+	printf("                        *✦✦✦✦✦/\n");
+	printf("                      ✦✦.        .✦✦\n");
+	printf("             ✦✦....,✦✦,            .✦✦,....✦✦\n");
 	printf("           @     ..*,@.            .@**..     @\n");
 	printf("          @/     ..*,@.            .@,,..     /@\n");
 	printf("          @.      .**@.            .@**.      .@\n");
@@ -19,20 +33,19 @@ static void	print_shell(void)
 	printf("        @@@.....,@@. ..&@..@..@..@&.. .@@,,....@@@\n");
 	printf("              @@@$..@@$..@@.@@ @@..&@@..$@@@\n");
 	printf("              .@....,$@@@@@@@@@@@@@@$,,...@\n");
-	printf("                   *((*.          .****\n");
+	printf("\n");
+	printf("        By : cgil                   By : gmaccha- \n");
+	printf("_________________________{ ☆&&☆ }_______________________\n"RST);
 }
 
-void print_header(void) {
-    char *username;
-
-    printf("\e[0;35m");
-    printf("┌─┐┬─┐┌─┐┌┬┐┌┬┐┬ ┬  ┬  ┬┌┬┐┌┬┐┬  ┌─┐  ┌─┐┬ ┬┌─┐┬  ┬\n");
-    printf("├─┘├┬┘├┤  │  │ └┬┘  │  │ │  │ │  ├┤   └─┐├─┤├┤ │  │\n");
-    printf("┴  ┴└─└─┘ ┴  ┴  ┴   ┴─┘┴ ┴  ┴ ┴─┘└─┘  └─┘┴ ┴└─┘┴─┘┴─┘\n");
-    printf("\e[0;35m");
+void print_header(void)
+{
+    printf(S"");
+    printf(" ┌─┐┬─┐┌─┐┌┬┐┌┬┐┬ ┬  ┬  ┬┌┬┐┌┬┐┬  ┌─┐  ┌─┐┬ ┬┌─┐┬  ┬\n");
+    printf(" ├─┘├┬┘├┤  │  │ └┬┘  │  │ │  │ │  ├┤   └─┐├─┤├┤ │  │\n");
+    printf(" ┴  ┴└─└─┘ ┴  ┴  ┴   ┴─┘┴ ┴  ┴ ┴─┘└─┘  └─┘┴ ┴└─┘┴─┘┴─┘\n");
+    printf(S"");
     print_shell();
-    printf("\e[0;31m");
-    username = getenv("USER");
-    printf("\n\n\nWelcome: @%s", username);
-    printf("\n");
+    printf(Y"\n\n\nWelcome: Evaluator");
+    printf("\n"RST);
 }

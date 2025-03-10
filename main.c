@@ -107,7 +107,7 @@ int main(void)
 
     while (1)
     {
-        input = readline("minishell> "); // Mostrar el prompt
+        input = readline(S"minishell> "RST); // Mostrar el prompt
 
         if (!input) // Detectar Ctrl+D (EOF) para salir
         {

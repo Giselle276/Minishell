@@ -36,6 +36,7 @@
 # define M		"\033[1;35m"
 # define C		"\033[1;36m"
 # define W		"\033[1;37m"
+# define S      "\033[38;5;147m"
 
 #define HISTORY_FILE ".minishell_history"
 
