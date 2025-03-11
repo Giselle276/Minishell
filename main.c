@@ -13,131 +13,146 @@
 #include "minishell.h"
 
 
+// Función para validar la entrada del usuario
+int validate_input(const char *input) {
+    int open_single_quote = 0, open_double_quote = 0;
+    for (int i = 0; input[i] != '\0'; i++) {
+        if (input[i] == '\\' && !open_single_quote) {
+            return 0; // Entrada inválida si hay una barra invertida fuera de comillas simples
+        }
+        if (input[i] == ';' && !open_single_quote) {
+            return 0; // Entrada inválida si hay un punto y coma fuera de comillas simples
+        }
+        if (input[i] == '\"' && !open_single_quote) {
+            open_double_quote ^= 1;
+        }
+        if (input[i] == '\'' && !open_double_quote) { // Aquí se corrige la comilla
+            open_single_quote ^= 1;
+        }
+    }
+    return !(open_single_quote || open_double_quote); // Verifica que las comillas estén cerradas
+}
+
+
 // Cargar historial desde un archivo
-void load_history()
-{
-    if (read_history(HISTORY_FILE) != 0)
-    {
+void load_history() {
+    if (read_history(HISTORY_FILE) != 0) {
         printf("No se pudo cargar el historial.\n");
     }
 }
 
 // Guardar historial en un archivo
-void save_history()
-{
-    if (write_history(HISTORY_FILE) != 0)
-    {
+void save_history() {
+    if (write_history(HISTORY_FILE) != 0) {
         printf("No se pudo guardar el historial.\n");
     }
 }
 
 // Buscar la ruta del ejecutable en la variable PATH
-char *get_path(char *cmd)
-{
-    char *path = getenv("PATH"); // Obtener la variable PATH
+char *get_path(char *cmd) {
+    char *path = getenv("PATH");
     if (!path) return NULL;
 
-    char *path_copy = strdup(path); // Copia porque strtok modifica la cadena
-    char *dir = strtok(path_copy, ":"); // Separar por ":"
+    char *path_copy = strdup(path);
+    char *dir = strtok(path_copy, ":");
     char *full_path = NULL;
 
-    while (dir)
-    {
-        full_path = malloc(strlen(dir) + strlen(cmd) + 2); // Reservar memoria
-        if (!full_path)
-            return NULL;
+    while (dir) {
+        full_path = malloc(strlen(dir) + strlen(cmd) + 2);
+        if (!full_path) return NULL;
 
-        sprintf(full_path, "%s/%s", dir, cmd); // Construir la ruta completa
+        sprintf(full_path, "%s/%s", dir, cmd);
 
-        if (access(full_path, X_OK) == 0) // Verificar si es ejecutable
-        {
+        if (access(full_path, X_OK) == 0) {
             free(path_copy);
-            return full_path; // Retornar la ruta del ejecutable
+            return full_path;
         }
 
         free(full_path);
-        dir = strtok(NULL, ":"); // Siguiente directorio en PATH
+        dir = strtok(NULL, ":");
     }
 
     free(path_copy);
-    return NULL; // No encontrado
+    return NULL;
 }
 
 // Ejecutar un comando con fork y execve
-void execute_command(char *cmd, char **args)
-{
-    pid_t pid = fork(); // Crear un proceso hijo
+void execute_command(char *cmd, char **args) {
+    pid_t pid = fork();
 
-    if (pid == -1) // Error en fork
-    {
+    if (pid == -1) {
         perror("fork");
         exit(EXIT_FAILURE);
-    }
-    else if (pid == 0) // Proceso hijo
-    {
-        if (strchr(cmd, '/') != NULL) // Si tiene '/' es ruta absoluta o relativa
-        {
+    } else if (pid == 0) {
+        if (strchr(cmd, '/') != NULL) {
             execve(cmd, args, NULL);
-        }
-        else
-        {
-            char *path = get_path(cmd); // Buscar en PATH
-            if (path)
-            {
+        } else {
+            char *path = get_path(cmd);
+            if (path) {
                 execve(path, args, NULL);
                 free(path);
             }
         }
-        perror("execve"); // Si llega aquí, hubo un error
+        perror("execve");
         exit(EXIT_FAILURE);
-    }
-    else // Proceso padre
-    {
-        waitpid(pid, NULL, 0); // Esperar al hijo
+    } else {
+        waitpid(pid, NULL, 0);
     }
 }
 
+// Función para tokenizar la entrada respetando comillas
+void parse_input(char *input, char **args) {
+    int i = 0;
+    char *ptr = input;
+    while (*ptr) {
+        while (*ptr == ' ') ptr++; // Omitir espacios iniciales
+        if (*ptr == '\"' || *ptr == '\'') {
+            char quote = *ptr++;
+            args[i] = ptr;
+            while (*ptr && *ptr != quote) ptr++;
+            if (*ptr) *ptr++ = '\0';
+        } else {
+            args[i] = ptr;
+            while (*ptr && *ptr != ' ') ptr++;
+            if (*ptr) *ptr++ = '\0';
+        }
+        i++;
+    }
+    args[i] = NULL;
+}
+
 // Función principal del minishell
-int main(void)
-{
+int main(void) {
     char *input;
     char *args[100];
-    print_header();
-    load_history(); // Cargar historial al inicio
+    load_history();
 
-    while (1)
-    {
-        input = readline(S"minishell> "RST); // Mostrar el prompt
+    while (1) {
+        input = readline("minishell> ");
 
-        if (!input) // Detectar Ctrl+D (EOF) para salir
-        {
+        if (!input) {
             printf("\nexit\n");
             break;
         }
 
-        if (*input) // Si el comando no está vacío
-        {
-            add_history(input);  // Agregar al historial en memoria
-            save_history();      // Guardar el historial en el archivo
+        if (!validate_input(input)) {
+            printf("Entrada inválida: no se permiten barras invertidas ni punto y coma, y las comillas deben cerrarse.\n");
+            free(input);
+            continue;
         }
 
-        // Tokenizar la entrada en argumentos
-        int i = 0;
-        char *token = strtok(input, " ");
-        while (token && i < 99)
-        {
-            args[i++] = token;
-            token = strtok(NULL, " ");
+        if (*input) {
+            add_history(input);
+            save_history();
         }
-        args[i] = NULL;
 
-        // Ejecutar el comando si hay algo escrito
+        parse_input(input, args);
+
         if (args[0])
             execute_command(args[0], args);
 
-        free(input); // Liberar memoria de readline
+        free(input);
     }
-
     return 0;
 }
 
