@@ -1,6 +1,6 @@
 NAME = minishell
-SRC = main.c \
-	  print_header.c
+SRC =  main.c \
+      print_header.c
 
 OBJ = $(SRC:.c=.o)
 CC = cc
@@ -9,8 +9,8 @@ CFLAGS = -Wall -Wextra -Werror
 FUCHSIA = \033[38;2;237;62;247m
 RESET = \033[0m
 
-
 INCLUDES = minishell.h
+
 %.o: %.c $(INCLUDES)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
@@ -41,4 +41,4 @@ fclean:
 
 re: fclean all
 
-.PHONY: clean fclean all re
+.PHONY: clean fclean all re progreso

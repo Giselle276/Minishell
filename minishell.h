@@ -49,6 +49,23 @@
 
 #define HISTORY_FILE ".minishell_history"
 
+/*typedef enum e_type {
+	CMD,
+	PIPE,
+	REDIR_IN,
+	REDIR_OUT,
+	APPEND, // >> -> si no existe lo crea y si existe lo agrega al final
+	HEREDOC,
+}			t_type;
+
+typedef struct s_token
+{
+	char *value;
+	t_type type;
+	struct s_token	*next;
+}				t_token;
+*/
+
 void	print_header(void);
 
 #endif
