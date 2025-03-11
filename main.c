@@ -48,18 +48,26 @@ void save_history() {
     }
 }
 
-// Buscar la ruta del ejecutable en la variable PATH
+//Buscar la ruta del ejecutable en la variable PATH sin strtok
 char *get_path(char *cmd) {
     char *path = getenv("PATH");
     if (!path) return NULL;
 
     char *path_copy = strdup(path);
-    char *dir = strtok(path_copy, ":");
+    if (!path_copy) return NULL;
+
+    char *dir = path_copy;
     char *full_path = NULL;
 
     while (dir) {
+        char *next = strchr(dir, ':'); // Encontrar el próximo ':'
+        if (next) *next = '\0'; // Reemplazar ':' temporalmente con '\0'
+
         full_path = malloc(strlen(dir) + strlen(cmd) + 2);
-        if (!full_path) return NULL;
+        if (!full_path) {
+            free(path_copy);
+            return NULL;
+        }
 
         sprintf(full_path, "%s/%s", dir, cmd);
 
@@ -69,7 +77,8 @@ char *get_path(char *cmd) {
         }
 
         free(full_path);
-        dir = strtok(NULL, ":");
+        if (!next) break; // Si no hay más ':', salir del bucle
+        dir = next + 1; // Mover al siguiente directorio
     }
 
     free(path_copy);
@@ -125,10 +134,11 @@ void parse_input(char *input, char **args) {
 int main(void) {
     char *input;
     char *args[100];
+    print_header();
     load_history();
 
     while (1) {
-        input = readline("minishell> ");
+        input = readline(USER_M"minishell> "RST);
 
         if (!input) {
             printf("\nexit\n");
