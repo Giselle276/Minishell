@@ -1,4 +1,3 @@
-# Archivos fuente
 SRC = ft_isalpha.c \
       ft_isdigit.c \
       ft_isalnum.c \
@@ -34,41 +33,30 @@ SRC = ft_isalpha.c \
       ft_striteri.c \
       ft_split.c \
 
-# Nombre de la biblioteca
 NAME = libft.a
 
-# Archivos objeto
 OBJ = $(SRC:.c=.o)
 
-# Compilador y opciones
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-# Comando para crear la biblioteca
 AR = ar
 ARFLAGS = rcs
 
-# Regla principal
 all: $(NAME)
 
-# Regla para crear la biblioteca
 $(NAME): $(OBJ)
-	$(AR) $(ARFLAGS) $(NAME) $(OBJ)
+	@$(AR) $(ARFLAGS) $(NAME) $(OBJ)
 
-# Regla para compilar archivos objeto
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
-# Regla para limpiar archivos objeto
 clean:
-	rm -f $(OBJ)
+	@rm -f $(OBJ)
 
-# Regla para limpiar completamente
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
-# Regla para recompilar
 re: fclean all
 
-# Declarar las reglas como 'phony'
 .PHONY: clean fclean all re
