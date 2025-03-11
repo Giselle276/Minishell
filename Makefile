@@ -8,7 +8,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 FUCHSIA = \033[38;2;237;62;247m
 RESET = \033[0m
-
+MAKE = make --no-print-directory
 INCLUDES = minishell.h
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
@@ -21,7 +21,7 @@ $(NAME): $(OBJ) $(LIBFT)
 	@printf "\033[38;5;147m"
 	@echo "Ｌｏａｄｉｎｇ Ｐｒｅｔｔｙ Ｌｉｔｔｌｅ Ｓｈｅｌｌ"
 	@$(MAKE) -s progreso
-	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME) -lreadline
+	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME) -lreadline > /dev/null 2>&1
 	@printf "\033[38;2;252;255;166m                     done \n\033[0m"
 
 # Regla para compilar la libft
@@ -41,12 +41,12 @@ all: $(NAME)
 clean:
 	@$(RM) $(OBJ)
 	@printf "\033[38;5;250mcleaned 🗑️\n\033[0m"
-	@$(MAKE) -C $(LIBFT_DIR) clean  # Limpieza de libft
+	@$(MAKE) -C $(LIBFT_DIR) clean > /dev/null 2>&1
 
 fclean:
 	@$(RM) $(NAME) $(OBJ)
 	@printf "\033[38;5;250mfully cleaned 🗑️\n\033[0m"
-	@$(MAKE) -C $(LIBFT_DIR) fclean  # Limpieza total de libft
+	@$(MAKE) -C $(LIBFT_DIR) fclean > /dev/null 2>&1
 
 re: fclean all
 
