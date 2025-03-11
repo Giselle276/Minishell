@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-
 // Función para validar la entrada del usuario
 int validate_input(const char *input) {
     int open_single_quote = 0, open_double_quote = 0;
@@ -43,8 +42,8 @@ void load_history() {
 
 // Guardar historial en un archivo
 void save_history() {
-    if (write_history(HISTORY_FILE) != 0) {
-        printf("No se pudo guardar el historial.\n");
+    if (write_history(HISTORY_FILE) != 0)
+    {
     }
 }
 
@@ -163,6 +162,6 @@ int main(void) {
 
         free(input);
     }
-    return 0;
+
 }
 

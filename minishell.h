@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -27,6 +27,7 @@
 # include <errno.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include "./libft/libft.h"
 
 # define RST	"\033[0m"
 //# define RED	"\033[1;31m"
@@ -49,13 +50,15 @@
 
 #define HISTORY_FILE ".minishell_history"
 
-/*typedef enum e_type {
+typedef enum e_type {
 	CMD,
+	BUILTIN,
 	PIPE,
 	REDIR_IN,
 	REDIR_OUT,
 	APPEND, // >> -> si no existe lo crea y si existe lo agrega al final
 	HEREDOC,
+	SEMICOLON,
 }			t_type;
 
 typedef struct s_token
@@ -64,8 +67,9 @@ typedef struct s_token
 	t_type type;
 	struct s_token	*next;
 }				t_token;
-*/
+
 
 void	print_header(void);
+void	token_type(t_token *first);
 
 #endif
