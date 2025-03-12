@@ -137,7 +137,7 @@ int main(void) {
 	load_history();
 
 	while (1) {
-		input = readline(USER_M"minishell> "RST);
+		input = readline(USER_M"✨🐚✨minishell$ "RST);
 
 		if (!input) {
 			printf("\nexit\n");

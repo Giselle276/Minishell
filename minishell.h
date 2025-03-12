@@ -67,7 +67,7 @@ typedef struct s_token
 	t_type type;
 	struct s_token	*next;
 }				t_token;
-
+/*
 typedef struct s_process
 {
 	char				*local_env[32];
@@ -91,6 +91,7 @@ typedef struct s_session
 	int			std_fd[2];
 }	t_session;
 
+
 typedef struct s_cmds
 {
 	t_session	*session;
@@ -99,6 +100,8 @@ typedef struct s_cmds
 	t_token		**piped_cmd;
 	t_token		*simple_cmd;
 }	t_cmd_tab;
+
+*/
 
 void	print_header(void);
 void	token_type(t_token *first);
