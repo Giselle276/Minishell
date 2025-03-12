@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   ft_strcmpp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmaccha- <gmaccha-@student.42.fr>          #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-03-11 12:20:18 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025-03-11 12:20:18 by gmaccha-         ###   ########.fr       */
+/*   Created: 2025-03-12 08:43:46 by gmaccha-          #+#    #+#             */
+/*   Updated: 2025-03-12 08:43:46 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-t_process	*parser(t_cmd_tab *tb)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	t_token		**tokens;
-	int			mood;
-	t_process	*process;
+	int				i;
+	unsigned char	*str1;
+	unsigned char	*str2;
 
-	mood = 1;// comando simple por defecto
-	if (tb->piped_cmd != NULL)
-	{
-		tokens = tb->piped_cmd;
-		mood = 0;
-	}
-	else
-		tokens = &tb->simple_cmd;
-	process = simple_or_piped(tokens, mood);
-	return (process);
+	str1 = (unsigned char *)s1;
+	str2 = (unsigned char *)s2;
+	i = 0;
+	while (s1[i] != '\0' && s2[i] != '\0')
+		i++;
+	return (str1[i] - str2[i]);
 }

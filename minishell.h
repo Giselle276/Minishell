@@ -68,8 +68,40 @@ typedef struct s_token
 	struct s_token	*next;
 }				t_token;
 
+typedef struct s_process
+{
+	char				*local_env[32];
+	char				*command;
+	char				*argv[64];
+	t_file				*input_file[16];
+	t_file				*output_file[16];
+	struct s_process	*next;
+	struct s_process	*prev;
+}						t_process;
+
+
+typedef struct s_session
+{
+	t_ht_tab	*env;
+	t_process	*process_lst;
+	char		**envp;
+	char		**child_envp;
+	int			errcd;
+	int			stat;
+	int			std_fd[2];
+}	t_session;
+
+typedef struct s_cmds
+{
+	t_session	*session;
+	char		*cmd_line;
+	char		**cmd_splitted;
+	t_token		**piped_cmd;
+	t_token		*simple_cmd;
+}	t_cmd_tab;
 
 void	print_header(void);
 void	token_type(t_token *first);
+
 
 #endif
