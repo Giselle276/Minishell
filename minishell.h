@@ -67,7 +67,15 @@ typedef struct s_token
 	t_type type;
 	struct s_token	*next;
 }				t_token;
-/*
+
+// flags [2: O_RDONLY |1: WRONLY CREAT APPEND| 0: WRONLY CREAT TRUNC ]
+typedef struct s_file
+{
+	char				*path;
+	int					flags;
+	int					fd;
+}						t_file;
+
 typedef struct s_process
 {
 	char				*local_env[32];
@@ -101,7 +109,7 @@ typedef struct s_cmds
 	t_token		*simple_cmd;
 }	t_cmd_tab;
 
-*/
+
 
 void	print_header(void);
 void	token_type(t_token *first);
