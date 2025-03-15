@@ -38,11 +38,11 @@ void	token_type(t_token *first)
 		if (check_builtin(token->value))
 			token->type = BUILTIN;
 		else if (ft_strcmp(">", token->value))
-			token->type = REDIR_IN;
+			token->type = REDIR_OUT;
 		else if (ft_strcmp(">>", token->value))
 			token->type = APPEND;
 		else if (ft_strcmp("<", token->value))
-			token->type = REDIR_OUT;
+			token->type = REDIR_IN;
 		else if (ft_strcmp("<<", token->value))
 			token->type = HEREDOC;
 		else if (ft_strcmp(";", token->value))

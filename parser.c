@@ -12,37 +12,21 @@
 
 #include "minishell.h"
 
-t_process	*parse_command(t_token **tokens)
+void push_process(t_process **lst, t_process *new_process)
 {
-	t_process	*process;
-	int			*i;
-	t_token		*temp;
+    t_process *last;
 
-	process = ft_calloc(1, sizeof(t_process)); // Reserva memoria para `t_process`
-	i = ft_calloc(4, sizeof(int)); // Reserva memoria para índices de argumentos
-	if (!process) // Verifica si la asignación falló
-		return (NULL);
+    if (*lst == NULL) // Si la lista está vacía
+        *lst = new_process; // El nuevo proceso es la cabeza
+    else
+    {
+        last = *lst; // Apunta al primer proceso de la lista
+        while (last->next != NULL) // Busca el último nodo
+            last = last->next;
 
-	temp = *tokens; // Apunta al primer token del comando
-
-	while (temp != NULL) // Recorre la lista de tokens
-	{
-		if (temp->type == T_IREDIRECT) // Si es una redirección de entrada "<"
-			parse_iredirect(process, &temp, i, true);
-		else if (temp->type == T_IREADNOHISTORY) // Si es una redirección especial "<<" (heredoc)
-			parse_iredirect(process, &temp, i, false);
-		else if (temp->type == T_OREDIRECT) // Si es una redirección de salida ">"
-			parse_oredirect(process, &temp, false, i);
-		else if (temp->type == T_OAPPEND) // Si es una redirección de salida en modo ">>"
-			parse_oredirect(process, &temp, true, i);
-		else // Si es parte del comando (nombre o argumento)
-			parse_words(process, temp, i);
-
-		temp = temp->next; // Avanza al siguiente token
-	}
-
-	free(i); // Libera la memoria de los índices
-	return (process); // Devuelve el proceso con la información cargada
+        last->next = new_process; // Conecta el nuevo proceso al final
+        new_process->prev = last; // Establece el puntero hacia atrás
+    }
 }
 
 t_process	*simple_or_piped(t_token **tokens, int flag)
@@ -71,7 +55,6 @@ t_process	*simple_or_piped(t_token **tokens, int flag)
 	process_lst = head; // Asigna la cabeza de la lista
 	return (process_lst); // Devuelve la lista de procesos
 }
-
 
 t_process	*parser(t_cmd_tab *tb)
 {

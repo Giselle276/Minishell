@@ -50,6 +50,7 @@
 
 #define HISTORY_FILE ".minishell_history"
 
+
 typedef enum e_type {
 	CMD,
 	BUILTIN,
@@ -111,8 +112,12 @@ typedef struct s_cmds
 
 
 
-void	print_header(void);
-void	token_type(t_token *first);
+void		print_header(void);
+void		token_type(t_token *first);
+t_process	*parser(t_cmd_tab *tb);
+t_process	*simple_or_piped(t_token **tokens, int flag);
+t_process	*parse_command(t_token **tokens);
+void 		push_process(t_process **lst, t_process *new_process);
 
 
 #endif
