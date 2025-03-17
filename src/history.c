@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgil <cgil@student.42madrid.com>           #+#  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-03-17 11:04:57 by cgil              #+#    #+#             */
-/*   Updated: 2025-03-17 11:04:57 by cgil             ###   ########.fr       */
+/*   Created: 2025/03/17 11:04:57 by cgil              #+#    #+#             */
+/*   Updated: 2025/03/17 18:49:26 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 //reemplazar porque no estan permitidas!!!!!!!!!!!
 

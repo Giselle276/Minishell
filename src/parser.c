@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          #+#  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-03-11 12:20:18 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025-03-11 12:20:18 by gmaccha-         ###   ########.fr       */
+/*   Created: 2025/03/11 12:20:18 by gmaccha-          #+#    #+#             */
+/*   Updated: 2025/03/17 18:49:46 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 // Función para tokenizar la entrada respetando comillas
 

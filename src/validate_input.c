@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   validate_input.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgil <cgil@student.42madrid.com>           #+#  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-03-17 10:51:52 by cgil              #+#    #+#             */
-/*   Updated: 2025-03-17 10:51:52 by cgil             ###   ########.fr       */
+/*   Created: 2025/03/17 10:51:52 by cgil              #+#    #+#             */
+/*   Updated: 2025/03/17 18:49:54 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int validate_input(const char *input) {
 	int open_single_quote = 0, open_double_quote = 0;

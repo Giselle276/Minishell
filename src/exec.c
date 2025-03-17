@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgil <cgil@student.42madrid.com>           #+#  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-03-17 11:08:03 by cgil              #+#    #+#             */
-/*   Updated: 2025-03-17 11:08:03 by cgil             ###   ########.fr       */
+/*   Created: 2025/03/17 11:08:03 by cgil              #+#    #+#             */
+/*   Updated: 2025/03/17 18:49:23 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 //Buscar la ruta del ejecutable en la variable PATH sin strtok
 char *get_path(char *cmd) {

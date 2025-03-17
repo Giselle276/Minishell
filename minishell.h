@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          #+#  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-03-07 12:08:41 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025-03-07 12:08:41 by gmaccha-         ###   ########.fr       */
+/*   Created: 2025/03/07 12:08:41 by gmaccha-          #+#    #+#             */
+/*   Updated: 2025/03/17 18:39:28 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@
 # include "./libft/libft.h"
 
 # define RST	"\033[0m"
-//# define RED	"\033[1;31m"
 # define G		"\033[1;32m"
 #define  Y		"\033[38;2;252;255;166m"
 # define B		"\033[1;34m"
