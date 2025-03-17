@@ -51,8 +51,26 @@
 #define HISTORY_FILE ".minishell_history"
 
 
+typedef enum e_errcode
+{
+	SIGEXIT,
+	ESYNTAX,
+	EUSAGE,
+	EPARSE,
+	EUNFQT,
+	EEMPTYLN,
+	ECOMMAND,
+	ENUMARG,
+	EALLOC,
+	ECMDNF = 127,
+	SINT = 130,
+	SQUIT = 131,
+	__ERRMAX
+}					t_errcode;
+
+
 typedef enum e_type {
-	CMD,
+	TEXT,
 	BUILTIN,
 	PIPE,
 	REDIR_IN,

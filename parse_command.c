@@ -22,7 +22,7 @@ int parse_iredirect(t_process *p, t_token **tk, int i[], t_bool r_only)
     token = *tk;
 
     // Si el siguiente token no es una palabra (nombre de archivo), retorna error
-    if (token->type != CMD)
+    if (token->type != TEXT)
         return (EPARSE);
 
     // Reservamos memoria para la estructura t_file que almacenará la redirección
@@ -87,3 +87,4 @@ t_process	*parse_command(t_token **tokens)
 	free(i); // Libera la memoria de los índices
 	return (process); // Devuelve el proceso con la información cargada
 }
+

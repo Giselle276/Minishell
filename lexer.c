@@ -50,7 +50,7 @@ void	token_type(t_token *first)
 		else if (ft_strcmp("|", token->value))
 			token->type = PIPE;
 		else
-			token->type = CMD;
+			token->type = TEXT;
 		token = token->next;
 	}
 }
