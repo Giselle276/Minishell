@@ -68,7 +68,6 @@ typedef enum e_errcode
 	__ERRMAX
 }					t_errcode;
 
-
 typedef enum e_type {
 	TEXT,
 	BUILTIN,
@@ -109,7 +108,7 @@ typedef struct s_process
 
 typedef struct s_session
 {
-	t_ht_tab	*env;
+	//t_ht_tab	*env;
 	t_process	*process_lst;
 	char		**envp;
 	char		**child_envp;
@@ -132,10 +131,15 @@ typedef struct s_cmds
 
 void		print_header(void);
 void		token_type(t_token *first);
-t_process	*parser(t_cmd_tab *tb);
-t_process	*simple_or_piped(t_token **tokens, int flag);
-t_process	*parse_command(t_token **tokens);
+//t_process	*parser(t_cmd_tab *tb);
+//t_process	*simple_or_piped(t_token **tokens, int flag);
+//t_process	*parse_command(t_token **tokens);
 void 		push_process(t_process **lst, t_process *new_process);
-
+int 		validate_input(const char *input);
+void		load_history();
+void		save_history();
+char		*get_path(char *cmd);
+void		execute_command(char *cmd, char **args);
+void 		parse_input(char *input, char **args);
 
 #endif

@@ -1,7 +1,11 @@
 NAME = minishell
 SRC =  main.c \
       print_header.c \
-	  parse_command.c
+	  parse_command.c \
+	  validate_input.c \
+	  history.c \
+	  exec.c \
+	  parser.c \
 
 OBJ = $(SRC:.c=.o)
 CC = cc
