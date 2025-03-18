@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-int parse_iredirect(t_process *p, t_token **tk, int i[], t_bool r_only)
+/*
+int parse_iredirect(t_process *p, t_token **tk, int i[], bool r_only)
 {
     t_token *token;
     t_file *input;
@@ -88,3 +88,4 @@ t_process	*parse_command(t_token **tokens)
 	return (process); // Devuelve el proceso con la información cargada
 }
 
+*/

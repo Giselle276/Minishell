@@ -13,7 +13,7 @@
 #include "../minishell.h"
 
 // Función para tokenizar la entrada respetando comillas
-
+/*
 void parse_input(char *input, char **args) {
 	int i = 0;
 	char *ptr = input;
@@ -95,3 +95,4 @@ t_process	*parser(t_cmd_tab *tb)
 	process = simple_or_piped(tokens, flag);
 	return (process);
 }
+*/

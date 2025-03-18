@@ -11,8 +11,9 @@
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-int main(void) {
+/*
+int main(void)
+{
 	char *input;
 	char *args[100];
 	print_header();
@@ -38,5 +39,24 @@ int main(void) {
 			execute_command(args[0], args);
 		free(input);
 	}
+}*/
+
+int main (int argc, char *argv[], char *envp[])
+{
+	t_session	*shell_status;
+
+	(void) argv;
+	if (argc != 1)
+		print_error("Run as : ./minishell");
+	shell_status = init_shell(envp);
+	print_header();
+	//run_shell(shell_status);
+	//clean_shell(shell_status);
+	return (EXIT_SUCCESS);
 }
 
+void print_error(char *str)
+{
+	printf("%s\n", str);
+	exit(EXIT_FAILURE);
+}

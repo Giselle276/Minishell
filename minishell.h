@@ -67,7 +67,8 @@ typedef enum e_errcode
 	__ERRMAX
 }					t_errcode;
 
-typedef enum e_type {
+typedef enum e_type
+{
 	TEXT,
 	BUILTIN,
 	PIPE,
@@ -105,9 +106,32 @@ typedef struct s_process
 }						t_process;
 
 
+typedef struct s_hash_item
+{
+	char	*key;
+	char	*value;
+	bool	is_env;
+}	t_hash_item;
+
+//  Double linked list
+typedef struct s_double_list
+{
+	t_hash_item				*item;
+	struct s_double_list	*next;
+	struct s_double_list	*prev;
+}	t_double_list;
+
+typedef struct s_hash_tab
+{
+	t_hash_item	**items;
+	t_double_list	**overflow_buckets;
+	int			size;
+	int			count;
+}	t_hash_tab;
+
 typedef struct s_session
 {
-	//t_ht_tab	*env;
+	t_hash_tab	*env;
 	t_process	*process_lst;
 	char		**envp;
 	char		**child_envp;
@@ -139,6 +163,10 @@ void		load_history();
 void		save_history();
 char		*get_path(char *cmd);
 void		execute_command(char *cmd, char **args);
-void 		parse_input(char *input, char **args);
+//void 		parse_input(char *input, char **args);
+void		print_error(char *str);
+//void		clean_shell(shell_status);
+t_session	*init_shell(char *envp[]);
+t_hash_tab	*load_env(char *envp[]);
 
 #endif

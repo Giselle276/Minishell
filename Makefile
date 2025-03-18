@@ -5,7 +5,8 @@ SRC = src/main.c \
       src/validate_input.c \
       src/history.c \
       src/exec.c \
-      src/parser.c
+      src/parser.c \
+	  src/init_shell.c
 
 OBJDIR = objs
 OBJ = $(addprefix $(OBJDIR)/, $(notdir $(SRC:.c=.o)))
