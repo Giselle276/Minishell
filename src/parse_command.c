@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-/*int parse_iredirect(t_process *p, t_token **tk, int i[], t_bool r_only)
+int parse_iredirect(t_process *p, t_token **tk, int i[], t_bool r_only)
 {
     t_token *token;
     t_file *input;
@@ -53,9 +53,9 @@
     i[I_IRED]++; // Se incrementa el índice de archivos de entrada
 
     return (0); // Retorna 0 si todo salió bien
-}*/
+}
 
-/*t_process	*parse_command(t_token **tokens)
+t_process	*parse_command(t_token **tokens)
 {
 	t_process	*process;
 	int			*i;
@@ -86,5 +86,5 @@
 
 	free(i); // Libera la memoria de los índices
 	return (process); // Devuelve el proceso con la información cargada
-}*/
+}
 

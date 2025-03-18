@@ -51,7 +51,7 @@ void push_process(t_process **lst, t_process *new_process)
     }
 }
 
-/*t_process	*simple_or_piped(t_token **tokens, int flag)
+t_process	*simple_or_piped(t_token **tokens, int flag)
 {
 	t_process	*head;
 	t_process	*command;
@@ -76,9 +76,9 @@ void push_process(t_process **lst, t_process *new_process)
 
 	process_lst = head; // Asigna la cabeza de la lista
 	return (process_lst); // Devuelve la lista de procesos
-}*/
+}
 
-/*t_process	*parser(t_cmd_tab *tb)
+t_process	*parser(t_cmd_tab *tb)
 {
 	t_token		**tokens;
 	int			flag;
@@ -94,4 +94,4 @@ void push_process(t_process **lst, t_process *new_process)
 		tokens = &tb->simple_cmd;
 	process = simple_or_piped(tokens, flag);
 	return (process);
-}*/
+}
