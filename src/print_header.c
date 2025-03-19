@@ -38,5 +38,5 @@ void	print_header(void)
 	END, BABY_BLUE, END);
 	printf("%s\t\t────────────────────────────── {˚⋆𓇼  𖦹 𓇼 ⋆°}──────────────"
 		"──────────────%s\n\n", USER_M, END);
-	printf(USER_M"\n\n\nWelcome: Evaluator\nRST");
+	printf(USER_M"\n\n\nWelcome: Evaluator\n");
 }

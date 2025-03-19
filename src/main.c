@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../minishell.h"
-/*
+
 int main(void)
 {
 	char *input;
@@ -34,29 +34,30 @@ int main(void)
 			add_history(input);
 			save_history();
 		}
-		parse_input(input, args);
+		//parse_input(input, args);
 		if (args[0])
 			execute_command(args[0], args);
 		free(input);
 	}
-}*/
+}
 
-int main (int argc, char *argv[], char *envp[])
+/*int main (int argc, char *argv[], char *envp[])
 {
-	t_session	*shell_status;
+	//t_status	*shell_status;
 
 	(void) argv;
+	(void)*envp;
 	if (argc != 1)
 		print_error("Run as : ./minishell");
-	shell_status = init_shell(envp);
+	//shell_status = init_shell(envp);
 	print_header();
 	//run_shell(shell_status);
 	//clean_shell(shell_status);
 	return (EXIT_SUCCESS);
-}
+}*/
 
-void print_error(char *str)
+/*void print_error(char *str)
 {
 	printf("%s\n", str);
 	exit(EXIT_FAILURE);
-}
+}*/

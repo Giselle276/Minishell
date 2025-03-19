@@ -129,27 +129,6 @@ typedef struct s_hash_tab
 	int			count;
 }	t_hash_tab;
 
-typedef struct s_session
-{
-	t_hash_tab	*env;
-	t_process	*process_lst;
-	char		**envp;
-	char		**child_envp;
-	int			errcd;
-	int			stat;
-	int			std_fd[2];
-}	t_session;
-
-
-typedef struct s_cmds
-{
-	t_session	*session;
-	char		*cmd_line;
-	char		**cmd_splitted;
-	t_token		**piped_cmd;
-	t_token		*simple_cmd;
-}	t_cmd_tab;
-
 
 
 void		print_header(void);
@@ -166,7 +145,6 @@ void		execute_command(char *cmd, char **args);
 //void 		parse_input(char *input, char **args);
 void		print_error(char *str);
 //void		clean_shell(shell_status);
-t_session	*init_shell(char *envp[]);
 t_hash_tab	*load_env(char *envp[]);
 
 #endif

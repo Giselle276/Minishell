@@ -12,9 +12,9 @@
 
 #include "../minishell.h"
 
-t_session	*init_shell(char *envp[])
+/*t_status	*init_shell(char *envp[])
 {
-	t_session	*shell_status;
+	t_status	*shell_status;
 
 	shell_status = ft_calloc(1, sizeof(t_session));
 
@@ -29,4 +29,4 @@ t_session	*init_shell(char *envp[])
 	shell_status->std_fd[0] = STDIN_FILENO;
 	shell_status->std_fd[1] = STDOUT_FILENO;
 	return (shell_status);
-}
+}*/
