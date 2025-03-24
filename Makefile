@@ -3,7 +3,6 @@ SRC = src/main.c \
       src/print_header.c \
       src/parse_command.c \
       src/validate_input.c \
-      src/history.c \
       src/exec.c \
       src/parser.c \
 	  src/init_shell.c
@@ -32,7 +31,6 @@ $(NAME): $(OBJ) $(LIBFT)
 	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME) -lreadline > /dev/null 2>&1
 	@printf "\033[38;2;252;255;166m                     done \n\033[0m"
 
-# Regla para compilar la libft
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
 

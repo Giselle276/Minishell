@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          #+#  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-03-18 12:27:52 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025-03-18 12:27:52 by gmaccha-         ###   ########.fr       */
+/*   Created: 2025/03/18 12:27:52 by gmaccha-          #+#    #+#             */
+/*   Updated: 2025/03/19 17:14:21 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_hash_tab	*load_env(char *envp[])
+/*t_hash_tab	*load_env(char *envp[])
 {
 	t_ht_tab	*env;
 	int			i;
@@ -25,4 +25,4 @@ t_hash_tab	*load_env(char *envp[])
 		i++;
 	}
 	return (env);
-}
+}*/

@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:08:41 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/03/17 18:39:28 by claudia          ###   ########.fr       */
+/*   Updated: 2025/03/22 18:40:04 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,15 @@
 #define BABY_BLUE		"\033[38;2;177;240;247m"
 
 # define RED "\033[0;31m"
+#define DARK_PINK "\033[38;2;189;30;30m"
+#define LIGHT_PINK "\033[38;2;216;131;115m"
 # define GREEN "\033[1;32m"
 # define YELLOW "\033[0;33m"
 # define BLUE "\033[1;34m"
 # define END "\033[0m"
 # define CYAN "\033[1;36m"
 
-#define HISTORY_FILE ".minishell_history"
-
-
-typedef enum e_errcode
+typedef enum e_errcode // codigos de error
 {
 	SIGEXIT,
 	ESYNTAX,
@@ -67,7 +66,7 @@ typedef enum e_errcode
 	__ERRMAX
 }					t_errcode;
 
-typedef enum e_type
+typedef enum e_type // tipo de token
 {
 	TEXT,
 	BUILTIN,
@@ -79,22 +78,21 @@ typedef enum e_type
 	SEMICOLON,
 }			t_type;
 
-typedef struct s_token
+typedef struct s_token // clasificacion de los tokens
 {
 	char *value;
 	t_type type;
 	struct s_token	*next;
 }				t_token;
-
-// flags [2: O_RDONLY |1: WRONLY CREAT APPEND| 0: WRONLY CREAT TRUNC ]
-typedef struct s_file
+// flags [2: O_RDONLY |1: WRONLY CREAT APPEND| 0: WRONLY CREAT TRUNC]
+typedef struct s_file // estructura de los archivos
 {
 	char				*path;
 	int					flags;
 	int					fd;
 }						t_file;
 
-typedef struct s_process
+typedef struct s_process // estructura de los procesos
 {
 	char				*local_env[32];
 	char				*command;
@@ -106,7 +104,7 @@ typedef struct s_process
 }						t_process;
 
 
-typedef struct s_hash_item
+typedef struct s_hash_item // estructura de los items
 {
 	char	*key;
 	char	*value;
@@ -121,7 +119,7 @@ typedef struct s_double_list
 	struct s_double_list	*prev;
 }	t_double_list;
 
-typedef struct s_hash_tab
+typedef struct s_hash_tab 
 {
 	t_hash_item	**items;
 	t_double_list	**overflow_buckets;
@@ -138,8 +136,6 @@ void		token_type(t_token *first);
 //t_process	*parse_command(t_token **tokens);
 void 		push_process(t_process **lst, t_process *new_process);
 int 		validate_input(const char *input);
-void		load_history();
-void		save_history();
 char		*get_path(char *cmd);
 void		execute_command(char *cmd, char **args);
 //void 		parse_input(char *input, char **args);

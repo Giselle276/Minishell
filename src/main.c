@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:09:13 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/03/17 18:49:36 by claudia          ###   ########.fr       */
+/*   Updated: 2025/03/22 19:26:00 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,24 @@ int main(void)
 {
 	char *input;
 	char *args[100];
+	
 	print_header();
-	load_history();
-
-	while (1) {
+	while (1) 
+	{
 		input = readline(USER_M"✨minishell$ "RST);
-		if (!input) {
-			printf("\nexit\n");
+		if (!input) 
+		{
+			printf("\nexiting shell\n"); // ctrl + d
 			break;
 		}
-		if (!validate_input(input)) {
-			printf("Entrada inválida: no se permiten barras invertidas ni punto y coma, y las comillas deben cerrarse.\n");
+		if (!validate_input(input)) 
+		{
+			printf("Invalid input, check correct use of the minishell\n");
 			free(input);
 			continue;
 		}
-		if (*input) {
+		if (*input)
 			add_history(input);
-			save_history();
-		}
 		//parse_input(input, args);
 		if (args[0])
 			execute_command(args[0], args);
@@ -54,10 +54,4 @@ int main(void)
 	//run_shell(shell_status);
 	//clean_shell(shell_status);
 	return (EXIT_SUCCESS);
-}*/
-
-/*void print_error(char *str)
-{
-	printf("%s\n", str);
-	exit(EXIT_FAILURE);
 }*/
