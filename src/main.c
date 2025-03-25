@@ -6,13 +6,13 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:09:13 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/03/22 19:26:00 by claudia          ###   ########.fr       */
+/*   Updated: 2025/03/24 18:23:33 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int main(void)
+/*int main(void)
 {
 	char *input;
 	char *args[100];
@@ -39,19 +39,19 @@ int main(void)
 			execute_command(args[0], args);
 		free(input);
 	}
-}
-
-/*int main (int argc, char *argv[], char *envp[])
-{
-	//t_status	*shell_status;
-
-	(void) argv;
-	(void)*envp;
-	if (argc != 1)
-		print_error("Run as : ./minishell");
-	//shell_status = init_shell(envp);
-	print_header();
-	//run_shell(shell_status);
-	//clean_shell(shell_status);
-	return (EXIT_SUCCESS);
 }*/
+
+int main(int ac, char *av[], char *envp[])
+{
+	char	*input;
+	t_status	*shell_status;
+
+	(void)av;
+	if (ac !=  1)
+		error_exit(EUSAGE);
+	print_header();
+	shell_status = start_shell(envp);
+	shell_loop(shell_status);
+	//free_shell(shell_status);
+	return (EXIT_SUCCESS);
+}

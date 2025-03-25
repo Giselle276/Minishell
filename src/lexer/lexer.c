@@ -6,11 +6,11 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:14:00 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/03/17 18:49:32 by claudia          ###   ########.fr       */
+/*   Updated: 2025/03/25 17:30:20 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 static int	check_builtin(char *cmd)
 {
@@ -54,3 +54,20 @@ void	token_type(t_token *first)
 		token = token->next;
 	}
 }
+
+
+int	if_in_quote(char *str, char quote, char c)
+{
+	char	*fst_quote;
+	char	*scnd_quote;
+	int		flag;
+
+	flag = 0;
+	if ()
+}
+void	process_cmd(t_cmds	*cmd_tbl)
+{
+	if (piped_cmd(cmd_tbl->cmd_line)) && 
+	
+}
+

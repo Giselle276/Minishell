@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:08:41 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/03/22 18:40:04 by claudia          ###   ########.fr       */
+/*   Updated: 2025/03/25 17:14:29 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "./libft/libft.h"
+# include "shell.h"
 
 # define RST	"\033[0m"
 # define G		"\033[1;32m"
@@ -60,9 +61,10 @@ typedef enum e_errcode // codigos de error
 	ECOMMAND,
 	ENUMARG,
 	EALLOC,
-	ECMDNF = 127,
-	SINT = 130,
-	SQUIT = 131,
+	ECMDNF = 127, // command not found
+	SINT = 130, // control c signal interrupt
+	SQUIT = 131, //  ctrl + \ no deberia hacer nada
+	EEOF, 
 	__ERRMAX
 }					t_errcode;
 
@@ -103,7 +105,6 @@ typedef struct s_process // estructura de los procesos
 	struct s_process	*prev;
 }						t_process;
 
-
 typedef struct s_hash_item // estructura de los items
 {
 	char	*key;
@@ -142,5 +143,7 @@ void		execute_command(char *cmd, char **args);
 void		print_error(char *str);
 //void		clean_shell(shell_status);
 t_hash_tab	*load_env(char *envp[]);
+//error
+void		error_exit(t_errcode err_type);
 
 #endif

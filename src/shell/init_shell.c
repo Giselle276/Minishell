@@ -1,42 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell.h                                            :+:      :+:    :+:   */
+/*   init_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/18 13:51:43 by cgil              #+#    #+#             */
+/*   Created: 2025/03/24 18:17:04 by claudia           #+#    #+#             */
 /*   Updated: 2025/03/24 18:54:34 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHELL_H
-#define SHELL_H
+#include "../../minishell.h"
 
-#include "minishell.h"
-
-typedef struct s_status
-{
-	//t_hash_tab	*env;
-	//t_process	*process_lst;
-	char		**envp;
-	char		**child_envp;
-	int			error_code;
-	int			stat;
-	int			std_fd[2];
-}				t_status;
-
-typedef struct s_cmds
+t_status *start_shell(char *envp) // puntero de variables de entorno
 {
 	t_status	*status;
-	char		*cmd_line;
-	char		**cmd_splitted;
-	t_token		**piped_cmd;
-	t_token		*simple_cmd;
-}				t_cmds;
-
-//t_status	*init_shell(char *envp[]);
-void shell_loop(t_status *shell_status);
-t_cmds  *init_cmds_table(t_status *shell_st);
-t_status *start_shell(char *envp);
-#endif
+	
+	status = (t_status *)malloc(sizeof(t_status));
+	if (!status)
+		error_exit(EALLOC);
+	//status->env = load_env(envp); // to do
+	status->envp = envp;
+	status->error_code = 0;
+	status->stat = 0;
+	status->child_envp = NULL;
+	//status->process_lst = NULL;
+	status->std_fd[0] = STDIN_FILENO;
+	status->std_fd[1] = STDOUT_FILENO;
+	return (status);
+}
