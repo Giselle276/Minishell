@@ -12,40 +12,54 @@
 
 #include "../../minishell.h"
 
-void    process_prompt(t_cmds *ct)
-{
-    char        *prompt;
-    t_status    *status;
+static int	just_space(char *input, char c);
 
-    status = ct->status;
-    if (status->error_code == ECMDNF || status-> error_code == SINT
-            || status-> error_code == SQUIT)
-        status->stat = status->error_code = 1; // ante cualquier error, marca errcode en 1
-    prompt = print_prompt();
-	empty_line();
-	ct->cmd_line = readline(prompt);
-	if (!ct->cmd_line)
-		exit_shell(SIGEXIT,ct);
-	else if (not_empy_line())
-
-}
-/*void	exit_shell(t_errcode err, t_cmds *ct)
+void	process_prompt(t_cmds *ct)
 {
 	t_status	*status;
 
-	status = NULL;
-	if (ct != NULL)
+    status = ct->status;
+    if (status->error_code == ECMDNF || status-> error_code == SINT || status-> error_code == SQUIT)
+		status->stat = status->error_code = 1; // ante cualquier error, marca errcode en 1 // ver en donde se maneja
+	printf(USER_M"✨minishell$ "RST);
+	handle_signal_before(); // señales antes de recibir input
+	ct->cmd_line = readline("");
+	if (!ct->cmd_line)
+		exit_shell(SIGEXIT,ct); // to do // ctrl + d
+	if (just_space(ct->cmd_line, '\t') && just_space(ct->cmd_line, ' ')) // si la linea se agrega al historial
 	{
-		status = ct->status;
-		//before_leaving(ct); // to do // liberar memoria entes de poner otro prompt
+		add_history(ct->cmd_line);
+		status->stat = 0;
 	}
-	if (status)
-		//free_status(status); // finish
-	exit(err);
-}*/
-
-void	print_prompt(void)
-{
-	printf("Minishell >");
+	else
+		status->error_code = EMPTYLINE;
+	handle_signal_after(ct, );
 }
 
+void	handle_signal_after(t_cmds *ct)
+{
+	signal(SIGINT, SIG_IGN); // ctrl + c
+	signal(SIGQUIT, SIG_IGN); // ctrl + \
+	if (ct->cmd_line[0] == '\0')
+	{
+		free(ct->cmd_line);
+		ct->cmd_line = NULL;
+	}
+}
+{
+
+}
+
+static int	just_space(char *input, char c)
+{
+	int	i;
+
+	i = 0;
+	while (input[i])
+	{
+		if (input[i] != c)
+			return (1);
+		i++;
+	}
+	return (0);
+}

@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_signals.c                                   :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cgil <cgil@student.42madrid.com>           #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-03-25 17:23:03 by cgil              #+#    #+#             */
-/*   Updated: 2025-03-25 17:23:03 by cgil             ###   ########.fr       */
+/*   Created: 2025-03-26 17:02:45 by cgil              #+#    #+#             */
+/*   Updated: 2025-03-26 17:02:45 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	handle_signal_before(void)
+/*void	exit_shell(t_errcode err, t_cmds *ct)
 {
-	signal(SIGINT, signal_c); // ctrl + c
-	signal(SIGQUIT, SIG_IGN); // ctrl + \ no de segfault
-}
+	t_status	*status;
 
-void	signal_c(int sg)
-{
-	(void)sg;
-	printf("\n");
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
-}
+	status = NULL;
+	if (ct != NULL)
+	{
+		status = ct->status;
+		//before_leaving(ct); // to do // liberar memoria entes de poner otro prompt
+	}
+	if (status)
+		//free_status(status); // finish
+	exit(err);
+}*/

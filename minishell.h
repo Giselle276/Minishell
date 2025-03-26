@@ -57,14 +57,14 @@ typedef enum e_errcode // codigos de error
 	EUSAGE,
 	EPARSE,
 	EUNFQT,
-	EEMPTYLN,
+	EMPTYLINE,
 	ECOMMAND,
 	ENUMARG,
 	EALLOC,
 	ECMDNF = 127, // command not found
 	SINT = 130, // control c signal interrupt
 	SQUIT = 131, //  ctrl + \ no deberia hacer nada
-	EEOF, 
+	EEOF,
 	__ERRMAX
 }					t_errcode;
 
@@ -120,7 +120,7 @@ typedef struct s_double_list
 	struct s_double_list	*prev;
 }	t_double_list;
 
-typedef struct s_hash_tab 
+typedef struct s_hash_tab
 {
 	t_hash_item	**items;
 	t_double_list	**overflow_buckets;

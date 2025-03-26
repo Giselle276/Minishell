@@ -36,7 +36,12 @@ typedef struct s_cmds
 }				t_cmds;
 
 //t_status	*init_shell(char *envp[]);
-void shell_loop(t_status *shell_status);
-t_cmds  *init_cmds_table(t_status *shell_st);
-t_status *start_shell(char *envp);
+void 		shell_loop(t_status *shell_status);
+t_cmds  	*init_cmds_table(t_status *shell_st);
+t_status 	*start_shell(char *envp);
+///////////// prompt
+void		process_prompt(t_cmds *ct);
+//////////// signals
+void		signal_c(int sg);
+void	handle_signal_before(void);
 #endif
