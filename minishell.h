@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:08:41 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/03/25 17:14:29 by claudia          ###   ########.fr       */
+/*   Updated: 2025/03/27 17:11:05 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <fcntl.h>
 # include <stdbool.h>
 # include <pthread.h>
+# include <signal.h>
 # include <sys/time.h>
 # include <limits.h>
 # include <errno.h>
@@ -62,7 +63,7 @@ typedef enum e_errcode // codigos de error
 	ENUMARG,
 	EALLOC,
 	ECMDNF = 127, // command not found
-	SINT = 130, // control c signal interrupt
+	SIGNT = 130, // control c signal interrupt
 	SQUIT = 131, //  ctrl + \ no deberia hacer nada
 	EEOF,
 	__ERRMAX

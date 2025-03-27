@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_prompt.c                                       :+:      :+:    :+:   */
+/*   process_prompt.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgil <cgil@student.42madrid.com>           #+#  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-03-25 16:45:45 by cgil              #+#    #+#             */
-/*   Updated: 2025-03-25 16:45:45 by cgil             ###   ########.fr       */
+/*   Created: 2025/03/25 16:45:45 by cgil              #+#    #+#             */
+/*   Updated: 2025/03/27 17:18:02 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	process_prompt(t_cmds *ct)
 	t_status	*status;
 
     status = ct->status;
-    if (status->error_code == ECMDNF || status-> error_code == SINT || status-> error_code == SQUIT)
-		status->stat = status->error_code = 1; // ante cualquier error, marca errcode en 1 // ver en donde se maneja
+    if (status->error_code == ECMDNF || status-> error_code == SIGNT || status-> error_code == SQUIT)
+		status->stat = status->error_code = 1; // ante cualquier error, marca errcode en 1 // ver en donde se maneja 
 	printf(USER_M"✨minishell$ "RST);
 	handle_signal_before(); // señales antes de recibir input
 	ct->cmd_line = readline("");
@@ -33,21 +33,7 @@ void	process_prompt(t_cmds *ct)
 	}
 	else
 		status->error_code = EMPTYLINE;
-	handle_signal_after(ct, );
-}
-
-void	handle_signal_after(t_cmds *ct)
-{
-	signal(SIGINT, SIG_IGN); // ctrl + c
-	signal(SIGQUIT, SIG_IGN); // ctrl + \
-	if (ct->cmd_line[0] == '\0')
-	{
-		free(ct->cmd_line);
-		ct->cmd_line = NULL;
-	}
-}
-{
-
+	handle_signal_after(ct);
 }
 
 static int	just_space(char *input, char c)

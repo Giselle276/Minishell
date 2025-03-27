@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 13:51:43 by cgil              #+#    #+#             */
-/*   Updated: 2025/03/24 18:54:34 by claudia          ###   ########.fr       */
+/*   Updated: 2025/03/27 17:01:14 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,11 @@ typedef struct s_cmds
 //t_status	*init_shell(char *envp[]);
 void 		shell_loop(t_status *shell_status);
 t_cmds  	*init_cmds_table(t_status *shell_st);
-t_status 	*start_shell(char *envp);
+t_status 	*init_shell(char *envp);
 ///////////// prompt
 void		process_prompt(t_cmds *ct);
 //////////// signals
 void		signal_c(int sg);
-void	handle_signal_before(void);
+void		handle_signal_before(void);
+void		handle_signal_after(t_cmds *ct);
 #endif
