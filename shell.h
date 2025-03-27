@@ -31,18 +31,18 @@ typedef struct s_cmds
 	t_status	*status;
 	char		*cmd_line;
 	char		**cmd_splitted;
-	t_token		**piped_cmd;
-	t_token		*simple_cmd;
+	//t_token		**piped_cmd;
+	//t_token		*simple_cmd;
 }				t_cmds;
 
-//t_status	*init_shell(char *envp[]);
 void 		shell_loop(t_status *shell_status);
 t_cmds  	*init_cmds_table(t_status *shell_st);
-t_status 	*init_shell(char *envp);
+t_status 	*init_shell(char *envp[]);
 ///////////// prompt
 void		process_prompt(t_cmds *ct);
 //////////// signals
 void		signal_c(int sg);
 void		handle_signal_before(void);
 void		handle_signal_after(t_cmds *ct);
+
 #endif

@@ -132,18 +132,17 @@ typedef struct s_hash_tab
 
 
 void		print_header(void);
-void		token_type(t_token *first);
+//void		token_type(t_token *first);
 //t_process	*parser(t_cmd_tab *tb);
 //t_process	*simple_or_piped(t_token **tokens, int flag);
 //t_process	*parse_command(t_token **tokens);
-void 		push_process(t_process **lst, t_process *new_process);
-int 		validate_input(const char *input);
-char		*get_path(char *cmd);
-void		execute_command(char *cmd, char **args);
+//void 		push_process(t_process **lst, t_process *new_process);
+//int 		validate_input(const char *input);
+//char		*get_path(char *cmd);
+//void		execute_command(char *cmd, char **args);
 //void 		parse_input(char *input, char **args);
-void		print_error(char *str);
 //void		clean_shell(shell_status);
-t_hash_tab	*load_env(char *envp[]);
+//t_hash_tab	*load_env(char *envp[]);
 //error
 void		error_exit(t_errcode err_type);
 

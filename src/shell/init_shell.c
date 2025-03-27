@@ -12,10 +12,10 @@
 
 #include "../../minishell.h"
 
-t_status *init_shell(char *envp) // puntero de variables de entorno
+t_status *init_shell(char *envp[]) // puntero de variables de entorno
 {
 	t_status	*status;
-	
+
 	status = (t_status *)malloc(sizeof(t_status));
 	if (!status)
 		error_exit(EALLOC);

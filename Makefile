@@ -1,13 +1,11 @@
 NAME = minishell
 SRC = src/main.c \
-      src/print_header.c \
-      src/parse_command.c \
-      src/validate_input.c \
-      src/exec.c \
-      src/parser.c \
 	  src/handle_errors.c \
+	  src/handle_signals.c \
+      src/print_header.c \
 	  src/shell/shell_loop.c \
 	  src/shell/init_shell.c \
+	  src/prompt/process_prompt.c \
 
 OBJDIR = objs
 OBJ = $(addprefix $(OBJDIR)/, $(notdir $(SRC:.c=.o)))
@@ -22,7 +20,7 @@ INCLUDES = minishell.h
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-$(OBJDIR)/%.o: src/%.c $(INCLUDES)
+$(OBJDIR)/%.o: $(SRC) $(INCLUDES)
 	@mkdir -p $(OBJDIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 

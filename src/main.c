@@ -16,17 +16,17 @@
 {
 	char *input;
 	char *args[100];
-	
+
 	print_header();
-	while (1) 
+	while (1)
 	{
 		input = readline(USER_M"✨minishell$ "RST);
-		if (!input) 
+		if (!input)
 		{
 			printf("\nexiting shell\n"); // ctrl + d
 			break;
 		}
-		if (!validate_input(input)) 
+		if (!validate_input(input))
 		{
 			printf("Invalid input, check correct use of the minishell\n");
 			free(input);
@@ -43,7 +43,6 @@
 
 int main(int ac, char *av[], char *envp[])
 {
-	char		*input;
 	t_status	*shell_status;
 
 	(void)av;

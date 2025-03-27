@@ -20,17 +20,19 @@ t_cmds	*g_ct; // declara un puntero a la estructura t_cmds
 // y no se puede pasar la estructura t_cmds
 // al manejador de señales
 
+static	void	signal_handler(int sgnl);
+
 void	handle_signal_before(void)
 {
-	signal(SIGNT, signal_c); // ctrl + c
-	signal(SQUIT, SIG_IGN); // ctrl + \ no de segfault
+	signal(SIGINT, signal_c); // ctrl + c
+	signal(SIGQUIT, SIG_IGN); // ctrl + \ no de segfault
 }
 
 void	handle_signal_after(t_cmds *ct)
 {
 	g_ct = ct;
-	signal(SIGNT, signal_handler);
-	signal(SQUIT, signal_handler);
+	signal(SIGINT, signal_handler);
+	signal(SIGQUIT, signal_handler);
 }
 
 static void	signal_handler(int sgnl)
@@ -38,15 +40,15 @@ static void	signal_handler(int sgnl)
 	t_status	*last_stat;
 
 	last_stat = g_ct->status;
-	if (sgnl == SIGNT)
+	if (sgnl == SIGINT)
 	{
 		last_stat->error_code = SIGNT;
 		printf("\n");
-		exit(130);
+		return ;
 	}
 	if (sgnl == SIGQUIT)
 	{
-		last_stat->error_code = SIGQUIT;
+		last_stat->error_code = SQUIT;
 		return ;
 	}
 }
