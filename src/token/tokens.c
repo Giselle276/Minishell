@@ -1,0 +1,57 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tokens.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cgil <cgil@student.42madrid.com>           #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-03-28 15:21:25 by cgil              #+#    #+#             */
+/*   Updated: 2025-03-28 15:21:25 by cgil             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../minishell.h"
+
+/*static int	check_builtin(char *cmd)
+{
+	int	flag;
+
+	flag = 0;
+	if (ft_strcmp("echo", cmd) || ft_strcmp("unset", cmd))
+		flag = 1;
+	if (ft_strcmp("exit", cmd) || ft_strcmp("export", cmd))
+		flag = 1;
+	if (ft_strcmp("cd", cmd) || ft_strcmp("env", cmd))
+		flag = 1;
+	if (ft_strcmp("pwd", cmd))
+		flag = 1;
+	return (flag);
+}*/
+
+/*void	token_type(t_token *first)
+{
+	t_token	*token;
+
+	token = first;
+	while (token != NULL)
+	{
+		if (check_builtin(token->value))
+			token->type = BUILTIN;
+		else if (ft_strcmp(">", token->value))
+			token->type = REDIR_OUT;
+		else if (ft_strcmp(">>", token->value))
+			token->type = APPEND;
+		else if (ft_strcmp("<", token->value))
+			token->type = REDIR_IN;
+		else if (ft_strcmp("<<", token->value))
+			token->type = HEREDOC;
+		else if (ft_strcmp(";", token->value))
+			token->type = SEMICOLON;
+		else if (ft_strcmp("|", token->value))
+			token->type = PIPE;
+		else
+			token->type = TEXT;
+		token = token->next;
+	}
+}*/
+

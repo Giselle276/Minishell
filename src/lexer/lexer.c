@@ -12,62 +12,25 @@
 
 #include "../../minishell.h"
 
-static int	check_builtin(char *cmd)
+/*int   check_closed_qt(char *str, char q)
 {
-	int	flag;
+    int    single_q;
+    int    double_q;
+    int    i;
 
-	flag = 0;
-	if (ft_strcmp("echo", cmd) || ft_strcmp("unset", cmd))
-		flag = 1;
-	if (ft_strcmp("exit", cmd) || ft_strcmp("export", cmd))
-		flag = 1;
-	if (ft_strcmp("cd", cmd) || ft_strcmp("env", cmd))
-		flag = 1;
-	if (ft_strcmp("pwd", cmd))
-		flag = 1;
-	return (flag);
-}
-
-void	token_type(t_token *first)
-{
-	t_token	*token;
-
-	token = first;
-	while (token != NULL)
-	{
-		if (check_builtin(token->value))
-			token->type = BUILTIN;
-		else if (ft_strcmp(">", token->value))
-			token->type = REDIR_OUT;
-		else if (ft_strcmp(">>", token->value))
-			token->type = APPEND;
-		else if (ft_strcmp("<", token->value))
-			token->type = REDIR_IN;
-		else if (ft_strcmp("<<", token->value))
-			token->type = HEREDOC;
-		else if (ft_strcmp(";", token->value))
-			token->type = SEMICOLON;
-		else if (ft_strcmp("|", token->value))
-			token->type = PIPE;
-		else
-			token->type = TEXT;
-		token = token->next;
-	}
-}
-
-
-int	if_in_quote(char *str, char quote, char c)
-{
-	char	*fst_quote;
-	char	*scnd_quote;
-	int		flag;
-
-	flag = 0;
-	if ()
-}
-void	process_cmd(t_cmds	*cmd_tbl)
-{
-	if (piped_cmd(cmd_tbl->cmd_line)) && 
-	
-}
+    single_q = 0;
+    double_q = 0;
+    i = 0;
+    while (str[i])
+    {
+        if (str[i] == '\'' && !double_q) // si no es doble
+            single_q = !single_q;
+        else if (str[i] == '\"' && !single_q) // si no es simple
+            double_q = !double_q;
+        if ((single_q || double_q) && str[i] == q)
+            return (1);
+        i++;
+    }
+    return (0);
+}*/
 

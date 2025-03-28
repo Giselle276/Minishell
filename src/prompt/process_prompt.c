@@ -19,8 +19,8 @@ void	process_prompt(t_cmds *ct)
 	t_status	*status;
 	char 		*prompt;
 
-    status = ct->status;
-    if (status->error_code == ECMDNF || status-> error_code == SIGNT || status-> error_code == SQUIT)
+	status = ct->status;
+	if (status->error_code == ECMDNF || status-> error_code == SIGNT || status-> error_code == SQUIT)
 		status->stat = status->error_code = 1; // ante cualquier error, marca errcode en 1 // ver en donde se maneja
 	prompt = USER_M "✨minishell✨>" RST;
 	handle_signal_before();

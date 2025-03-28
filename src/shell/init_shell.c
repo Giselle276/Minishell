@@ -29,3 +29,18 @@ t_status *init_shell(char *envp[]) // puntero de variables de entorno
 	status->std_fd[1] = STDOUT_FILENO;
 	return (status);
 }
+
+t_cmds  *init_cmds_table(t_status *shell_st)
+{
+	t_cmds	*cmds_table;
+
+	cmds_table = (t_cmds *)malloc(sizeof(t_cmds));
+	if (!cmds_table)
+		error_exit(EALLOC);
+	cmds_table->status = shell_st;
+	cmds_table->cmd_line = NULL;
+	cmds_table->cmd_splitted = NULL;
+	//cmds_table->piped_cmd = NULL;
+	//cmds_table->simple_cmd = NULL;
+	return (cmds_table);
+}
