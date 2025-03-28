@@ -8,7 +8,7 @@ SRC = src/main.c \
 	  src/prompt/process_prompt.c \
 
 OBJDIR = objs
-OBJ = $(addprefix $(OBJDIR)/, $(notdir $(SRC:.c=.o)))
+OBJ = $(patsubst src/%.c,$(OBJDIR)/%.o,$(SRC))
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
@@ -20,16 +20,19 @@ INCLUDES = minishell.h
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-$(OBJDIR)/%.o: $(SRC) $(INCLUDES)
+# Modified pattern rule to handle nested directories
+$(OBJDIR)/%.o: src/%.c $(INCLUDES)
 	@mkdir -p $(OBJDIR)
+	@mkdir -p $(OBJDIR)/shell
+	@mkdir -p $(OBJDIR)/prompt
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJ) $(LIBFT)
 	@printf "\033[38;5;147m"
 	@echo "Ｌｏａｄｉｎｇ Ｐｒｅｔｔｙ Ｌｉｔｔｌｅ Ｓｈｅｌｌ"
 	@$(MAKE) -s progreso
-	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME) -lreadline > /dev/null 2>&1
-	@printf "\033[38;2;252;255;166m                     done \n\033[0m"
+	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME) -lreadline
+	@printf "\033[38;5;166m                     done \n\033[0m"
 
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)

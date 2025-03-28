@@ -40,6 +40,7 @@ void	process_prompt(t_cmds *ct)
 	handle_signal_after(ct);
 }
 
+
 static int	just_space(char *input, char c)
 {
 	int	i;

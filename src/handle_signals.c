@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-// global variable
+//global variable
 t_cmds	*g_ct; // declara un puntero a la estructura t_cmds
 
 // se necesita variable global porque los manejadores
@@ -20,7 +20,28 @@ t_cmds	*g_ct; // declara un puntero a la estructura t_cmds
 // y no se puede pasar la estructura t_cmds
 // al manejador de señales
 
-static	void	signal_handler(int sgnl);
+//static	void	signal_handler(int sgnl);
+
+void	signal_handler(int sgnl)
+{
+	t_status	*last_stat;
+
+	last_stat = g_ct->status;
+	if (sgnl == SIGINT)
+	{
+		last_stat->error_code = SIGNT;
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+		return ;
+	}
+	if (sgnl == SIGQUIT)
+	{
+		last_stat->error_code = SQUIT;
+		return ;
+	}
+}
 
 void	handle_signal_before(void)
 {
@@ -35,29 +56,11 @@ void	handle_signal_after(t_cmds *ct)
 	signal(SIGQUIT, signal_handler);
 }
 
-static void	signal_handler(int sgnl)
-{
-	t_status	*last_stat;
-
-	last_stat = g_ct->status;
-	if (sgnl == SIGINT)
-	{
-		last_stat->error_code = SIGNT;
-		printf("\n");
-		return ;
-	}
-	if (sgnl == SIGQUIT)
-	{
-		last_stat->error_code = SQUIT;
-		return ;
-	}
-}
-
 void	signal_c(int sg)
 {
 	(void)sg;
-	printf("\n");
-	rl_replace_line("", 0);
+	write(1, "\n", 1);
 	rl_on_new_line();
+	rl_replace_line("", 0);
 	rl_redisplay();
 }
