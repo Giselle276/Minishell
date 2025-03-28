@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:09:13 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/03/27 16:06:30 by claudia          ###   ########.fr       */
+/*   Updated: 2025/03/28 10:45:35 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ int main(int ac, char *av[], char *envp[])
 	(void)av;
 	if (ac !=  1)
 		error_exit(EUSAGE);
-	print_header();
 	shell_status = init_shell(envp);
+	print_header();
 	shell_loop(shell_status);
 	//free_shell(shell_status);
 	return (EXIT_SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:23:03 by cgil              #+#    #+#             */
-/*   Updated: 2025/03/27 18:22:51 by claudia          ###   ########.fr       */
+/*   Updated: 2025/03/28 12:21:30 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_cmds	*g_ct; // declara un puntero a la estructura t_cmds
 
 //static	void	signal_handler(int sgnl);
 
-void	signal_handler(int sgnl)
+/*void	signal_handler(int sgnl)
 {
 	t_status	*last_stat;
 
@@ -34,6 +34,7 @@ void	signal_handler(int sgnl)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
+		signal(SIGINT, signal_handler);
 		return ;
 	}
 	if (sgnl == SIGQUIT)
@@ -41,19 +42,12 @@ void	signal_handler(int sgnl)
 		last_stat->error_code = SQUIT;
 		return ;
 	}
-}
+}*/
 
 void	handle_signal_before(void)
 {
 	signal(SIGINT, signal_c); // ctrl + c
 	signal(SIGQUIT, SIG_IGN); // ctrl + \ no de segfault
-}
-
-void	handle_signal_after(t_cmds *ct)
-{
-	g_ct = ct;
-	signal(SIGINT, signal_handler);
-	signal(SIGQUIT, signal_handler);
 }
 
 void	signal_c(int sg)
@@ -64,3 +58,4 @@ void	signal_c(int sg)
 	rl_replace_line("", 0);
 	rl_redisplay();
 }
+
