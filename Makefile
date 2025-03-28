@@ -13,14 +13,13 @@ OBJ = $(patsubst src/%.c,$(OBJDIR)/%.o,$(SRC))
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-FUCHSIA = \033[38;2;237;62;247m
+BABY_BLUE = \033[38;2;177;240;247m
 RESET = \033[0m
 MAKE = make --no-print-directory
 INCLUDES = minishell.h
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-# Modified pattern rule to handle nested directories
 $(OBJDIR)/%.o: src/%.c $(INCLUDES)
 	@mkdir -p $(OBJDIR)
 	@mkdir -p $(OBJDIR)/shell
@@ -32,7 +31,7 @@ $(NAME): $(OBJ) $(LIBFT)
 	@echo "Ｌｏａｄｉｎｇ Ｐｒｅｔｔｙ Ｌｉｔｔｌｅ Ｓｈｅｌｌ"
 	@$(MAKE) -s progreso
 	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME) -lreadline
-	@printf "\033[38;5;166m                     done \n\033[0m"
+	@printf "$(BABY_BLUE)                     done \n\033[0m"
 
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
