@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 16:32:04 by claudia           #+#    #+#             */
-/*   Updated: 2025/03/24 18:01:15 by claudia          ###   ########.fr       */
+/*   Updated: 2025/03/29 11:13:54 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	error_exit(t_errcode err_type)
 {
 	if (err_type == EUSAGE)
-		printf("\nRun as: ./minishell\n");
+		printf("Run as: ./minishell\n");
 	else if (err_type == EEOF)
 	{
 		printf("\nExiting shell\n");

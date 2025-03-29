@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 16:45:45 by cgil              #+#    #+#             */
-/*   Updated: 2025/03/28 12:11:20 by claudia          ###   ########.fr       */
+/*   Updated: 2025/03/29 11:20:17 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	process_prompt(t_cmds *ct)
 	status = ct->status;
 	if (status->error_code == ECMDNF || status-> error_code == SIGNT || status-> error_code == SQUIT)
 		status->stat = status->error_code = 1; // ante cualquier error, marca errcode en 1 // ver en donde se maneja
-	prompt = USER_M "✨minishell✨>" RST;
+	prompt = USER_M "minishell>" RST;
 	handle_signal_before();
 	ct->cmd_line = readline(prompt);
 	if (!ct->cmd_line)
