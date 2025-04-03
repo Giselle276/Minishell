@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 16:45:45 by cgil              #+#    #+#             */
-/*   Updated: 2025/03/29 11:20:17 by claudia          ###   ########.fr       */
+/*   Updated: 2025/03/31 15:34:01 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	process_prompt(t_cmds *ct)
 	{
 		exit (EXIT_SUCCESS);
 	}
-	if (just_space(ct->cmd_line, '\t') || just_space(ct->cmd_line, ' ')) // si la linea se agrega al historial
+	if (just_space(ct->cmd_line, '\t') || just_space(ct->cmd_line, ' ')) // si la linea es valida se agrega al historial
 	{
 		add_history(ct->cmd_line);
 		status->error_code = 0;

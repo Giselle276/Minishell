@@ -6,13 +6,13 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 18:17:04 by claudia           #+#    #+#             */
-/*   Updated: 2025/03/27 16:06:38 by claudia          ###   ########.fr       */
+/*   Updated: 2025/03/31 15:47:17 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-t_status *init_shell(char *envp[]) // puntero de variables de entorno
+t_status	*init_shell(char *envp[]) // puntero de variables de entorno
 {
 	t_status	*status;
 
@@ -30,7 +30,7 @@ t_status *init_shell(char *envp[]) // puntero de variables de entorno
 	return (status);
 }
 
-t_cmds  *init_cmds_table(t_status *shell_st)
+t_cmds	*init_cmds_table(t_status *shell_st)
 {
 	t_cmds	*cmds_table;
 

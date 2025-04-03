@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:08:41 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/03/27 17:11:05 by claudia          ###   ########.fr       */
+/*   Updated: 2025/04/02 16:43:29 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # include <readline/history.h>
 # include "./libft/libft.h"
 # include "shell.h"
+# include "tokens.h"
 
 # define RST	"\033[0m"
 # define G		"\033[1;32m"
@@ -41,6 +42,15 @@
 # define S      "\033[38;5;147m"
 #define USER_M		"\033[38;2;193;255;215m"
 #define BABY_BLUE		"\033[38;2;177;240;247m"
+
+# define T_SQUOTE	'\''
+# define T_DQUOTE	'"'
+# define T_ESCAPE	'\\'
+# define T_PIPE		'|'
+# define T_LESS		'<'
+# define T_GREATER	'>'
+# define T_SMCOLON	';'
+# define T_SPACE	' '
 
 # define RED "\033[0;31m"
 #define DARK_PINK "\033[38;2;189;30;30m"
@@ -69,24 +79,6 @@ typedef enum e_errcode // codigos de error
 	__ERRMAX
 }					t_errcode;
 
-typedef enum e_type // tipo de token
-{
-	TEXT,
-	BUILTIN,
-	PIPE,
-	REDIR_IN,
-	REDIR_OUT,
-	APPEND, // >> -> si no existe lo crea y si existe lo agrega al final
-	HEREDOC,
-	SEMICOLON,
-}			t_type;
-
-typedef struct s_token // clasificacion de los tokens
-{
-	char *value;
-	t_type type;
-	struct s_token	*next;
-}				t_token;
 // flags [2: O_RDONLY |1: WRONLY CREAT APPEND| 0: WRONLY CREAT TRUNC]
 typedef struct s_file // estructura de los archivos
 {
@@ -106,44 +98,13 @@ typedef struct s_process // estructura de los procesos
 	struct s_process	*prev;
 }						t_process;
 
-typedef struct s_hash_item // estructura de los items
-{
-	char	*key;
-	char	*value;
-	bool	is_env;
-}	t_hash_item;
-
-//  Double linked list
-typedef struct s_double_list
-{
-	t_hash_item				*item;
-	struct s_double_list	*next;
-	struct s_double_list	*prev;
-}	t_double_list;
-
-typedef struct s_hash_tab
-{
-	t_hash_item	**items;
-	t_double_list	**overflow_buckets;
-	int			size;
-	int			count;
-}	t_hash_tab;
-
-
-
 void		print_header(void);
-//void		token_type(t_token *first);
-//t_process	*parser(t_cmd_tab *tb);
 //t_process	*simple_or_piped(t_token **tokens, int flag);
-//t_process	*parse_command(t_token **tokens);
-//void 		push_process(t_process **lst, t_process *new_process);
 //int 		validate_input(const char *input);
 //char		*get_path(char *cmd);
-//void		execute_command(char *cmd, char **args);
-//void 		parse_input(char *input, char **args);
 //void		clean_shell(shell_status);
-//t_hash_tab	*load_env(char *envp[]);
-//error
+
+///////////////////error
 void		error_exit(t_errcode err_type);
 
 #endif

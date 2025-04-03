@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 13:51:43 by cgil              #+#    #+#             */
-/*   Updated: 2025/03/28 11:57:55 by claudia          ###   ########.fr       */
+/*   Updated: 2025/04/02 11:57:46 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 
 typedef struct s_status
 {
-	//t_hash_tab	*env;
 	//t_process	*process_lst;
 	char		**envp;
 	char		**child_envp;
@@ -30,16 +29,19 @@ typedef struct s_cmds
 {
 	t_status	*status;
 	char		*cmd_line;
+	t_token		*token_lst;
 	char		**cmd_splitted;
-	//t_token		**piped_cmd;
-	//t_token		*simple_cmd;
+	t_token		**piped_cmd;
+	t_token		*not_piped_cmd;
 }				t_cmds;
 
 void 		shell_loop(t_status *shell_status);
 t_cmds  	*init_cmds_table(t_status *shell_st);
 t_status 	*init_shell(char *envp[]);
+
 ///////////// prompt
 void		process_prompt(t_cmds *ct);
+
 //////////// signals
 void		signal_c(int sg);
 void		handle_signal_before(void);
