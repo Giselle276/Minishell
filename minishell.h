@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:08:41 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/02 16:43:29 by claudia          ###   ########.fr       */
+/*   Updated: 2025/04/05 17:05:51 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,20 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "./libft/libft.h"
-# include "shell.h"
-# include "tokens.h"
+# include "./structs.h"
+# include "./shell.h"
+# include "./tokens.h"
 
 # define RST	"\033[0m"
 # define G		"\033[1;32m"
-#define  Y		"\033[38;2;252;255;166m"
+# define  Y		"\033[38;2;252;255;166m"
 # define B		"\033[1;34m"
 # define M		"\033[1;35m"
 # define C		"\033[1;36m"
 # define W		"\033[1;37m"
 # define S      "\033[38;5;147m"
-#define USER_M		"\033[38;2;193;255;215m"
-#define BABY_BLUE		"\033[38;2;177;240;247m"
+# define USER_M		"\033[38;2;193;255;215m"
+# define BABY_BLUE		"\033[38;2;177;240;247m"
 
 # define T_SQUOTE	'\''
 # define T_DQUOTE	'"'
@@ -61,7 +62,7 @@
 # define END "\033[0m"
 # define CYAN "\033[1;36m"
 
-typedef enum e_errcode // codigos de error
+/*typedef enum e_errcode // codigos de error
 {
 	SIGEXIT,
 	ESYNTAX,
@@ -96,15 +97,12 @@ typedef struct s_process // estructura de los procesos
 	t_file				*output_file[16];
 	struct s_process	*next;
 	struct s_process	*prev;
-}						t_process;
+}						t_process;*/
 
 void		print_header(void);
 //t_process	*simple_or_piped(t_token **tokens, int flag);
 //int 		validate_input(const char *input);
 //char		*get_path(char *cmd);
 //void		clean_shell(shell_status);
-
-///////////////////error
-void		error_exit(t_errcode err_type);
 
 #endif

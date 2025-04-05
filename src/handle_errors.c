@@ -3,25 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   handle_errors.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 16:32:04 by claudia           #+#    #+#             */
-/*   Updated: 2025/03/31 15:43:28 by claudia          ###   ########.fr       */
+/*   Updated: 2025/04/05 17:08:23 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	error_exit(t_errcode err_type)
+int	validate_error(t_errcode err_code, char *err, t_cmds *ct)
 {
-	if (err_type == EUSAGE)
-		printf("Run as: ./minishell\n");
-	else if (err_type == EEOF)
+	(void)ct;
+	if (err_code == EUSAGE || err_code == EALLOC)
 	{
-		printf("\nExiting shell\n");
-		exit(EXIT_SUCCESS);
+		print_err(err, err_code);
 	}
-	else if (err_type == EEOF)
-		printf("\nError while allocating memory with malloc\n");
-	exit(EXIT_FAILURE);
+	else if (err_code > 0)
+	{
+		print_err(err, 0);
+		ft_putchar_fd('\n', STDERR_FILENO);
+	}
+	return (err_code);
+}
+
+void	print_err(char *err, int err_code)
+{
+	if (err)
+		ft_putstr_fd(err, STDERR_FILENO);
+	if (err_code)
+		exit(err_code);
 }

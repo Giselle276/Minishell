@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 17:18:26 by claudia           #+#    #+#             */
-/*   Updated: 2025/04/02 19:07:56 by claudia          ###   ########.fr       */
+/*   Updated: 2025/04/05 17:04:46 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef TOKENS_H
 # define TOKENS_H
 
-#include "minishell.h"
+# include "./minishell.h"
 
-typedef enum e_token_type // tipo de token
+/*typedef enum e_token_type // tipo de token
 {
 	TEXT,
 	BUILTIN,
@@ -44,7 +43,8 @@ typedef struct s_positions
 	size_t	k;
 	int		len;
 	char	*stemp;
-}	t_positions;
+}	t_positions;*/
 
-//void		token_type(t_token *first);
+void	tokenizing(t_cmds *ct);
+// error
 #endif

@@ -6,12 +6,13 @@ SRC = src/main.c \
 	  src/shell/shell_loop.c \
 	  src/shell/init_shell.c \
 	  src/prompt/process_prompt.c \
-
+	  src/token/tokens.c \
+	  
 OBJDIR = objs
 OBJ = $(patsubst src/%.c,$(OBJDIR)/%.o,$(SRC))
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -I. -g
 
 BABY_BLUE = \033[38;2;177;240;247m
 RESET = \033[0m
@@ -24,6 +25,7 @@ $(OBJDIR)/%.o: src/%.c $(INCLUDES)
 	@mkdir -p $(OBJDIR)
 	@mkdir -p $(OBJDIR)/shell
 	@mkdir -p $(OBJDIR)/prompt
+	@mkdir -p $(OBJDIR)/token
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJ) $(LIBFT)

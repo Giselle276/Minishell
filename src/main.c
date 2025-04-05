@@ -3,43 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:09:13 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/03/28 10:45:35 by claudia          ###   ########.fr       */
+/*   Updated: 2025/04/05 17:28:11 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-/*int main(void)
-{
-	char *input;
-	char *args[100];
-
-	print_header();
-	while (1)
-	{
-		input = readline(USER_M"✨minishell$ "RST);
-		if (!input)
-		{
-			printf("\nexiting shell\n"); // ctrl + d
-			break;
-		}
-		if (!validate_input(input))
-		{
-			printf("Invalid input, check correct use of the minishell\n");
-			free(input);
-			continue;
-		}
-		if (*input)
-			add_history(input);
-		//parse_input(input, args);
-		if (args[0])
-			execute_command(args[0], args);
-		free(input);
-	}
-}*/
 
 int main(int ac, char *av[], char *envp[])
 {
@@ -47,7 +18,7 @@ int main(int ac, char *av[], char *envp[])
 
 	(void)av;
 	if (ac !=  1)
-		error_exit(EUSAGE);
+		validate_error(EUSAGE, "Run as: ./minishell\n", NULL);
 	shell_status = init_shell(envp);
 	print_header();
 	shell_loop(shell_status);
