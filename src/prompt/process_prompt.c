@@ -21,7 +21,7 @@ void	process_prompt(t_cmds *ct)
 
 	status = ct->status;
 	if (status->error_code == ECMDNF || status-> error_code == SIGNT || status-> error_code == SQUIT)
-		status->stat = status->error_code = 1; // ante cualquier error, marca errcode en 1 // ver en donde se maneja
+		status->stat = status->error_code = 1;
 	prompt = USER_M "minishell>" RST;
 	handle_signal_before();
 	ct->cmd_line = readline(prompt);
@@ -29,7 +29,7 @@ void	process_prompt(t_cmds *ct)
 	{
 		exit (EXIT_SUCCESS);
 	}
-	if (just_space(ct->cmd_line, '\t') || just_space(ct->cmd_line, ' ')) // si la linea es valida se agrega al historial
+	if (just_space(ct->cmd_line, '\t') || just_space(ct->cmd_line, ' '))
 	{
 		add_history(ct->cmd_line);
 		status->error_code = 0;

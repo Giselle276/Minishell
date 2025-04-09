@@ -12,8 +12,6 @@
 
 #include "../../tokens.h"
 
-//static int	ft_is_space(char c);
-
 int	check_only_char(char *str, char look)
 {
 	while (*str)
@@ -32,21 +30,21 @@ int	validate_piped_cmd(char *line)
 	if (!ft_strchr(line, T_PIPE))
 		return (0);
 	pipe = ft_strchr(line, T_PIPE); // posicion del primer pipe
-	if (ft_strlen(pipe) <= 1) // ver si el pipe es el ultimo caracter
+	if (ft_strlen(pipe) <= 1) // ver si el pipe es el ultimo caracter // que deberia hacer
 		return (0);
 	if ((*(pipe + 2) == '|' || *(pipe  + 1) == '|' || !check_only_char(pipe + 1, ' ')))
 		return (0);
 	return (1);
 }
 
-/*void	tokenizing(t_cmds *ct)
+void	tokenizing(t_cmds *ct)
 {
 	//if (validate_piped_cmd(ct->cmd_line))
 		//ct->piped_cmd = piped_cmd(ct->cmd_line);
 	//else 
-		//ct->not_piped_cmd = split_tk(ct->cmd_line, T_SPACE, ct);
+	ct->not_piped_cmd = split_tk(ct->cmd_line, T_SPACE, ct);
 	return ; 
-}*/
+}
 
 t_token	*split_tk(char *cmd, char delimiter, t_cmds *ct)
 {

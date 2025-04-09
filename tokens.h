@@ -46,5 +46,8 @@ typedef struct s_positions
 }	t_positions;*/
 
 void	tokenizing(t_cmds *ct);
+int		validate_piped_cmd(char *line);
+
+
 // error
 #endif

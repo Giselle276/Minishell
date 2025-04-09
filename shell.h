@@ -50,4 +50,6 @@ void		handle_signal_before(void);
 int		validate_error(t_errcode err_code, char *err, t_cmds *ct);
 void	print_err(char *err, int err_code);
 
+
+
 #endif
