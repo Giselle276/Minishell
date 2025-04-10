@@ -15,26 +15,6 @@
 
 # include "./minishell.h"
 
-/*typedef struct s_status
-{
-	//t_process	*process_lst;
-	char		**envp;
-	char		**child_envp;
-	int			error_code;
-	int			stat;
-	int			std_fd[2];
-}				t_status;
-
-typedef struct s_cmds
-{
-	t_status	*status;
-	char		*cmd_line;
-	//t_token	*token_lst;
-	char		**cmd_splitted;
-	//t_token	**piped_cmd;
-	t_token		*not_piped_cmd;
-}				t_cmds;*/
-
 void		shell_loop(t_status *shell_status);
 t_cmds		*init_cmds_table(t_status *shell_st);
 t_status	*init_shell(char *envp[]);

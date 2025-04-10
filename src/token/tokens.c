@@ -12,7 +12,7 @@
 
 #include "../../tokens.h"
 
-int	check_only_char(char *str, char look)
+/*int	check_only_char(char *str, char look)
 {
 	while (*str)
 	{
@@ -23,7 +23,7 @@ int	check_only_char(char *str, char look)
 	return (0); // solo habia look
 }
 
-int	validate_piped_cmd(char *line)
+/*int	validate_piped_cmd(char *line)
 {
 	char	*pipe;
 
@@ -71,4 +71,72 @@ char *clean_line(char *line, t_cmds *ct)
 	char	*tmp;
 
 	ct->status->error_code = 
+}*/
+
+void	tokenizing(t_cmds *ct)
+{
+	char **args;
+	int		i;
+
+	i = 0;
+	if (!ct || !ct->cmd_line || ct->cmd_line[0] == '\0')
+		return ;
+	args = split_by_space(ct->cmd_line); // falta
+	if (!args)
+	{
+		error_code = 1;
+		ct->status = error_code;
+		return ;
+	}
+	ct->token_lst = make_tokens(args); // falta
+	while (args[i])
+	{
+		free(args[i]);
+		i++;
+	}
+	free(args);
+}
+
+char update_quote(char quote, char c) // solo cierra al ser iguales
+{
+	if ((c == '\'' || c == "\"") && quote == 0)
+		return (c); // abre comilla
+	else if (c == quote)
+		return (0); // si es ' '
+	return (quote);
+}
+
+char	**split_by_space(char *line)
+{
+	char *args;
+	char  quote;
+	int	 i;
+	int  start;
+	int  count;
+	int  end;
+	int	 len;
+
+	i = 0;
+	count = 0;
+	start = 0;
+	quote = 0;
+	end = 0;
+	len = 0;
+
+	if (!line)
+		return (NULL);
+	args = malloc(sizeof(char *)* ft_strlen(line) + 1);
+	if (!args)
+		return (NULL);
+	while (line[i])
+	{	quote = update_quote_state(quote, line[i]);
+		if ((line[i] == ' ' && quote == 0) || line[i + 1] == '\0')
+		{
+			if (line[i] == ' ')
+				end = i;
+			else
+				end = i + 1;
+			len = end - start;
+		}
+	}
 }

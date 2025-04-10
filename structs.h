@@ -42,8 +42,6 @@ typedef enum e_token_type // tipo de token
 	REDIR_OUT,
 	APPEND, // >> -> si no existe lo crea y si existe lo agrega al final
 	HEREDOC,
-	SEMICOLON,
-	TOKEN_END
 }			t_token_type;
 
 
@@ -80,8 +78,8 @@ typedef struct s_status
 typedef struct s_token // clasificacion de los tokens
 {
 	char 			*value;
-	//t_token_type 	type;
-    struct s_token	*prev;
+	t_token_type 	type;
+    //struct s_token	*prev;
 	struct s_token	*next;
 }				t_token;
 
@@ -89,7 +87,7 @@ typedef struct s_cmds
 {
 	t_status	*status;
 	char		*cmd_line;
-	//t_token	*token_lst;
+	t_token		*token_lst;
 	char		**cmd_splitted;
 	//t_token	**piped_cmd;
 	t_token		*not_piped_cmd;

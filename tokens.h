@@ -15,27 +15,6 @@
 
 # include "./minishell.h"
 
-/*typedef enum e_token_type // tipo de token
-{
-	TEXT,
-	BUILTIN,
-	PIPE,
-	REDIR_IN,
-	REDIR_OUT,
-	APPEND, // >> -> si no existe lo crea y si existe lo agrega al final
-	HEREDOC,
-	SEMICOLON,
-	TOKEN_END
-}			t_token_type;
-
-typedef struct s_token // clasificacion de los tokens
-{
-	char 			*value;
-	t_token_type 	type;
-    struct s_token	*prev;
-	struct s_token	*next;
-}				t_token;
-
 typedef struct s_positions
 {
 	size_t	i;
@@ -43,7 +22,7 @@ typedef struct s_positions
 	size_t	k;
 	int		len;
 	char	*stemp;
-}	t_positions;*/
+}	t_positions;
 
 void	tokenizing(t_cmds *ct);
 int		validate_piped_cmd(char *line);
