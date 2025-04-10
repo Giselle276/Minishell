@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 15:21:25 by cgil              #+#    #+#             */
-/*   Updated: 2025/04/05 17:39:36 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/10 20:01:42 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../tokens.h"
+
+static char update_quote(char quote, char c);
 
 /*int	check_only_char(char *str, char look)
 {
@@ -73,6 +75,113 @@ char *clean_line(char *line, t_cmds *ct)
 	ct->status->error_code = 
 }*/
 
+t_token_type get_token_type(char *str)
+{
+	if (!str)
+		return (TEXT);
+	if (ft_strncmp(str, "|", 2) == 0)
+		return (PIPE);
+	if (ft_strncmp(str, "<", 2) == 0)
+		return (REDIR_IN);
+	if (ft_strncmp(str, ">", 2) == 0)
+		return (REDIR_OUT);
+	if (ft_strncmp(str, "<<", 3) == 0)
+		return (APPEND);
+	if (ft_strncmp(str, ">>", 3) == 0)
+		return (HEREDOC);
+	return (TEXT);
+}
+
+t_token	*alloc_token(char *value)
+{
+	t_token	*new;
+
+	new = malloc(sizeof(t_token));
+	if (!new)
+		return (NULL);
+	new->value = ft_strdup(value);
+	if (!new->value)
+	{
+		free(new);
+		return (NULL);
+	}
+	new->type = get_token_type(value);
+	new->next = NULL;
+	return (new);
+}
+
+t_token	*make_tokens(t_cmds *ct, char **args)
+{
+	(void)ct; // ??
+	t_token	*head;
+	t_token	*current;
+	t_token	*new;
+	int		i;
+
+	i = 0;
+	head = NULL;
+	current = NULL;
+	while (args[i])
+	{
+		new = alloc_token(args[i]);
+		if (!new)
+			return (NULL);
+		if (!head)
+			head = new;
+		else
+			current->next = new;
+		current = new;
+		i++;
+	}
+	return (head);
+}
+
+char	**split_by_space(char *line)
+{
+	char	**args;
+	char	quote;
+	int		i;
+	int  	start;
+	int  	count;
+	int  	end;
+	int	 	len;
+
+	i = 0;
+	count = 0;
+	start = 0;
+	quote = 0;
+	end = 0;
+	len = 0;
+
+	if (!line)
+		return (NULL);
+	args = malloc(sizeof(char *)* (ft_strlen(line) + 1));
+	if (!args)
+		return (NULL);
+	while (line[i])
+	{	quote = update_quote_state(quote, line[i]); // dentro o fuera de comillas
+		if ((line[i] == ' ' && quote == 0) || line[i + 1] == '\0')
+		{	// cortar el token
+			if (line[i] == ' ')
+				end = i;
+			else
+				end = i + 1; // incluir ultimo caracter
+			len = end - start; // longitud total del token
+			if (len > 0)
+			{
+				args[count] = ft_substr(line, start, len); /// copio la linea
+				if (!args[count])
+					return (NULL);
+				count++;
+			}
+			start = i + 1;
+		}
+		i++;
+	}
+	args[count] = NULL;
+	return (args);
+}
+
 void	tokenizing(t_cmds *ct)
 {
 	char **args;
@@ -84,11 +193,10 @@ void	tokenizing(t_cmds *ct)
 	args = split_by_space(ct->cmd_line); // falta
 	if (!args)
 	{
-		error_code = 1;
-		ct->status = error_code;
+		ct->status->error_code = 1;
 		return ;
 	}
-	ct->token_lst = make_tokens(args); // falta
+	ct->token_lst = make_tokens(ct, args); // falta
 	while (args[i])
 	{
 		free(args[i]);
@@ -99,44 +207,9 @@ void	tokenizing(t_cmds *ct)
 
 char update_quote(char quote, char c) // solo cierra al ser iguales
 {
-	if ((c == '\'' || c == "\"") && quote == 0)
+	if ((c == '\'' || c == '\"') && quote == 0)
 		return (c); // abre comilla
 	else if (c == quote)
 		return (0); // si es ' '
 	return (quote);
-}
-
-char	**split_by_space(char *line)
-{
-	char *args;
-	char  quote;
-	int	 i;
-	int  start;
-	int  count;
-	int  end;
-	int	 len;
-
-	i = 0;
-	count = 0;
-	start = 0;
-	quote = 0;
-	end = 0;
-	len = 0;
-
-	if (!line)
-		return (NULL);
-	args = malloc(sizeof(char *)* ft_strlen(line) + 1);
-	if (!args)
-		return (NULL);
-	while (line[i])
-	{	quote = update_quote_state(quote, line[i]);
-		if ((line[i] == ' ' && quote == 0) || line[i + 1] == '\0')
-		{
-			if (line[i] == ' ')
-				end = i;
-			else
-				end = i + 1;
-			len = end - start;
-		}
-	}
 }

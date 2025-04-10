@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 17:18:26 by claudia           #+#    #+#             */
-/*   Updated: 2025/04/05 17:04:46 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/10 20:01:25 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ typedef struct s_positions
 }	t_positions;
 
 void	tokenizing(t_cmds *ct);
-int		validate_piped_cmd(char *line);
-
+t_token_type get_token_type(char *str);
+t_token	*alloc_token(char *value);
+t_token	*make_tokens(t_cmds *ct, char **args);
+char	**split_by_space(char *line);
 
 // error
 #endif
