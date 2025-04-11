@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_prompt.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 16:45:45 by cgil              #+#    #+#             */
-/*   Updated: 2025/03/31 15:34:01 by claudia          ###   ########.fr       */
+/*   Updated: 2025/04/11 11:52:38 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,15 @@ static int	just_space(char *input, char c);
 void	process_prompt(t_cmds *ct)
 {
 	t_status	*status;
-	char 		*prompt;
+	char		*prompt;
 
 	status = ct->status;
-	if (status->error_code == ECMDNF || status-> error_code == SIGNT || status-> error_code == SQUIT)
-		status->stat = status->error_code = 1;
+	if (status->error_code == ECMDNF || status-> error_code == SIGNT
+		|| status-> error_code == SQUIT)
+	{
+		status->error_code = 1;
+		status->stat = 1;
+	}
 	prompt = USER_M "minishell>" RST;
 	handle_signal_before();
 	ct->cmd_line = readline(prompt);
@@ -37,6 +41,7 @@ void	process_prompt(t_cmds *ct)
 	else
 		status->error_code = EMPTYLINE;
 }
+
 
 static int	just_space(char *input, char c)
 {

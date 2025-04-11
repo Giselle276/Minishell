@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 16:57:28 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/10 19:27:46 by claudia          ###   ########.fr       */
+/*   Updated: 2025/04/11 11:13:36 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef struct s_process // estructura de los procesos
 	t_file				*output_file[16];
 	struct s_process	*next;
 	struct s_process	*prev;
-}		                t_process;
+}						t_process;
 
 typedef struct s_status
 {
@@ -77,9 +77,9 @@ typedef struct s_status
 
 typedef struct s_token // clasificacion de los tokens
 {
-	char 			*value;
-	t_token_type 	type;
-    //struct s_token	*prev;
+	char			*value;
+	t_token_type	type;
+	//struct s_token	*prev;
 	struct s_token	*next;
 }				t_token;
 

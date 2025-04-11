@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:08:41 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/05 17:05:51 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/11 10:47:56 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 
 # define RST	"\033[0m"
 # define G		"\033[1;32m"
-# define  Y		"\033[38;2;252;255;166m"
+# define Y		"\033[38;2;252;255;166m"
 # define B		"\033[1;34m"
 # define M		"\033[1;35m"
 # define C		"\033[1;36m"
@@ -54,8 +54,8 @@
 # define T_SPACE	' '
 
 # define RED "\033[0;31m"
-#define DARK_PINK "\033[38;2;189;30;30m"
-#define LIGHT_PINK "\033[38;2;216;131;115m"
+# define DARK_PINK "\033[38;2;189;30;30m"
+# define LIGHT_PINK "\033[38;2;216;131;115m"
 # define GREEN "\033[1;32m"
 # define YELLOW "\033[0;33m"
 # define BLUE "\033[1;34m"

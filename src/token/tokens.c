@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 15:21:25 by cgil              #+#    #+#             */
-/*   Updated: 2025/04/10 20:01:42 by claudia          ###   ########.fr       */
+/*   Updated: 2025/04/11 13:40:45 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../tokens.h"
 
-static char update_quote(char quote, char c);
+static	char	update_quote(char quote, char c);
 
 /*int	check_only_char(char *str, char look)
 {
@@ -25,7 +25,7 @@ static char update_quote(char quote, char c);
 	return (0); // solo habia look
 }
 
-/*int	validate_piped_cmd(char *line)
+int	validate_piped_cmd(char *line)
 {
 	char	*pipe;
 
@@ -75,7 +75,7 @@ char *clean_line(char *line, t_cmds *ct)
 	ct->status->error_code = 
 }*/
 
-t_token_type get_token_type(char *str)
+t_token_type	get_token_type(char *str)
 {
 	if (!str)
 		return (TEXT);
@@ -110,9 +110,8 @@ t_token	*alloc_token(char *value)
 	return (new);
 }
 
-t_token	*make_tokens(t_cmds *ct, char **args)
+t_token	*make_tokens(t_cmds *ct, char **cmds)
 {
-	(void)ct; // ??
 	t_token	*head;
 	t_token	*current;
 	t_token	*new;
@@ -121,9 +120,11 @@ t_token	*make_tokens(t_cmds *ct, char **args)
 	i = 0;
 	head = NULL;
 	current = NULL;
-	while (args[i])
+	if (!cmds)
+		return (NULL);
+	while (cmds[i])
 	{
-		new = alloc_token(args[i]);
+		new = alloc_token(cmds[i]);
 		if (!new)
 			return (NULL);
 		if (!head)
@@ -133,6 +134,7 @@ t_token	*make_tokens(t_cmds *ct, char **args)
 		current = new;
 		i++;
 	}
+	ct->token_lst = head;
 	return (head);
 }
 
@@ -141,12 +143,14 @@ char	**split_by_space(char *line)
 	char	**args;
 	char	quote;
 	int		i;
-	int  	start;
-	int  	count;
-	int  	end;
-	int	 	len;
+	int		start;
+	int		count;
+	int		end;
+	int		len;
+	int		j;
 
 	i = 0;
+	j = 0;
 	count = 0;
 	start = 0;
 	quote = 0;
@@ -155,11 +159,12 @@ char	**split_by_space(char *line)
 
 	if (!line)
 		return (NULL);
-	args = malloc(sizeof(char *)* (ft_strlen(line) + 1));
+	args = malloc(sizeof(char *) * (ft_strlen(line) + 1));
 	if (!args)
 		return (NULL);
 	while (line[i])
-	{	quote = update_quote_state(quote, line[i]); // dentro o fuera de comillas
+	{
+		quote = update_quote(quote, line[i]); // dentro o fuera de comillas
 		if ((line[i] == ' ' && quote == 0) || line[i + 1] == '\0')
 		{	// cortar el token
 			if (line[i] == ' ')
@@ -171,7 +176,15 @@ char	**split_by_space(char *line)
 			{
 				args[count] = ft_substr(line, start, len); /// copio la linea
 				if (!args[count])
+				{
+					while (j < count)
+					{
+						free(args[j]);
+						j++;
+					}
+					free(args);
 					return (NULL);
+				}
 				count++;
 			}
 			start = i + 1;
@@ -184,12 +197,14 @@ char	**split_by_space(char *line)
 
 void	tokenizing(t_cmds *ct)
 {
-	char **args;
+	char	**args;
+	char	**cmds;
 	int		i;
 
 	i = 0;
 	if (!ct || !ct->cmd_line || ct->cmd_line[0] == '\0')
 		return ;
+	   //printf("Tokenizing: %s\n", ct->cmd_line); // para prueba
 	args = split_by_space(ct->cmd_line); // falta
 	if (!args)
 	{
@@ -199,6 +214,7 @@ void	tokenizing(t_cmds *ct)
 	ct->token_lst = make_tokens(ct, args); // falta
 	while (args[i])
 	{
+		// printf("Token[%d]: %s\n", i, args[i]);//para prueba
 		free(args[i]);
 		i++;
 	}
@@ -211,5 +227,7 @@ char update_quote(char quote, char c) // solo cierra al ser iguales
 		return (c); // abre comilla
 	else if (c == quote)
 		return (0); // si es ' '
+	else if (c == '\\')
+		return (quote);
 	return (quote);
 }
