@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 13:51:43 by cgil              #+#    #+#             */
-/*   Updated: 2025/04/05 17:04:55 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/12 14:16:32 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ void		handle_signal_before(void);
 // error
 int		validate_error(t_errcode err_code, char *err, t_cmds *ct);
 void	print_err(char *err, int err_code);
-
+t_token	**split_by_pipe(char *line);
+int     get_pipe_count(char *line);
+void print_tokens(t_token **piped_cmds);
+t_token *make_token_for_pipe(char *line, int start, int end);
 
 
 #endif

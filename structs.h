@@ -6,7 +6,7 @@
 /*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 16:57:28 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/11 11:13:36 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/12 12:48:48 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ typedef struct s_cmds
 	char		*cmd_line;
 	t_token		*token_lst;
 	char		**cmd_splitted;
-	//t_token	**piped_cmd;
+	t_token		**piped_cmd;
 	t_token		*not_piped_cmd;
 }				t_cmds;
 
