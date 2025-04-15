@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 16:57:28 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/15 14:13:33 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/15 16:23:51 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,10 @@ typedef struct s_cmds
 	t_status	*status;
 	char		*cmd_line;
 	t_token		*token_lst;
-	t_token		**piped_cmd;
+	t_token		**piped_cmd; // comandos 
 	t_token		*not_piped_cmd;
-	t_cmd		**parsed_cmds; // nuevo
-	t_cmd		*parsed_simple; // nuevo
+	t_cmd		**parsed_cmds; // listo para ejecucion
+	t_cmd		*parsed_simple;
 }				t_cmds;
-
-
 
 #endif

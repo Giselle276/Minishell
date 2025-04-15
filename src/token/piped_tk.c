@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   piped_tk.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 11:13:27 by claudia           #+#    #+#             */
-/*   Updated: 2025/04/15 13:19:18 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/15 18:06:26 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	count_pipes(t_token *lst)
 	}
 	return (count);
 }
-
 
 t_token	**group_piped_cmd(t_token *token_lst) 
 {
@@ -71,7 +70,6 @@ t_token	**group_piped_cmd(t_token *token_lst)
 	piped_cmds[i] = NULL;
 	return (piped_cmds);
 }
-
 
 bool	is_valid_pipe_syntax(t_token *lst)
 {

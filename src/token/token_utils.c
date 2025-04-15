@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 11:12:45 by claudia           #+#    #+#             */
-/*   Updated: 2025/04/15 14:01:47 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/15 15:37:32 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_token_type	get_token_type(char *str)
 {
-	printf("DEBUG get_token_type: '%s'\n", str);
+	//printf("DEBUG get_token_type: '%s'\n", str);
 	if (!str)
 		return (T_INVALID);
 	if (ft_strncmp(str, "||", 3) == 0)
