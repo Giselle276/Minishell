@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 16:57:28 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/12 12:48:48 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/13 20:58:33 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,39 +35,16 @@ typedef enum e_errcode // codigos de error
 
 typedef enum e_token_type // tipo de token
 {
-	TEXT,
-	BUILTIN,
-	PIPE,
-	REDIR_IN,
-	REDIR_OUT,
-	APPEND, // >> -> si no existe lo crea y si existe lo agrega al final
-	HEREDOC,
+	T_WORD,
+	T_BUILTIN,
+	T_PIPE,
+	T_REDIR_IN,
+	T_REDIR_OUT,
+	T_APPEND, // >> -> si no existe lo crea y si existe lo agrega al final
+	T_HEREDOC,
 }			t_token_type;
-
-
-// flags [2: O_RDONLY |1: WRONLY CREAT APPEND| 0: WRONLY CREAT TRUNC]
-
-typedef struct s_file // estructura de los archivos
-{
-	char				*path;
-	int					flags;
-	int					fd;
-}						t_file;
-
-typedef struct s_process // estructura de los procesos
-{
-	char				*local_env[32];
-	char				*command;
-	char				*argv[64];
-	t_file				*input_file[16];
-	t_file				*output_file[16];
-	struct s_process	*next;
-	struct s_process	*prev;
-}						t_process;
-
 typedef struct s_status
 {
-	//t_process	*process_lst;
 	char		**envp;
 	char		**child_envp;
 	int			error_code;
@@ -79,7 +56,6 @@ typedef struct s_token // clasificacion de los tokens
 {
 	char			*value;
 	t_token_type	type;
-	//struct s_token	*prev;
 	struct s_token	*next;
 }				t_token;
 
@@ -88,7 +64,6 @@ typedef struct s_cmds
 	t_status	*status;
 	char		*cmd_line;
 	t_token		*token_lst;
-	char		**cmd_splitted;
 	t_token		**piped_cmd;
 	t_token		*not_piped_cmd;
 }				t_cmds;

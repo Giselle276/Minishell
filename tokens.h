@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 17:18:26 by claudia           #+#    #+#             */
-/*   Updated: 2025/04/10 20:01:25 by claudia          ###   ########.fr       */
+/*   Updated: 2025/04/15 11:18:36 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,18 @@ typedef struct s_positions
 	char	*stemp;
 }	t_positions;
 
-void	tokenizing(t_cmds *ct);
-t_token_type get_token_type(char *str);
-t_token	*alloc_token(char *value);
-t_token	*make_tokens(t_cmds *ct, char **args);
-char	**split_by_space(char *line);
-
+char			*get_token(char *line, int *i);
+char			update_quote(char quote, char c);
+t_token			*tokenize_line(char *cmd_line);
+void 			print_tokens(t_token *token_lst);
+void 			print_piped_cmds(t_token **piped_cmds);
+void			tokenizing(t_cmds *ct);
+t_token_type	get_token_type(char *str);
+t_token 		*create_token(char *str);
+void			add_token(t_token **tk_list, t_token *new_token);
+void			free_tokens(t_token *list);
+bool			has_pipe(t_token *lst);
+int 			count_pipes(t_token *lst);
+t_token 		**group_piped_cmd(t_token *token_lst);
 // error
 #endif

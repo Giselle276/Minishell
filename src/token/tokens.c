@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 15:21:25 by cgil              #+#    #+#             */
-/*   Updated: 2025/04/12 14:32:15 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/15 11:11:21 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char *clean_line(char *line, t_cmds *ct)
 	ct->status->error_code = 
 }*/
 
-t_token_type	get_token_type(char *str)
+/*t_token_type	get_token_type(char *str)
 {
 	if (!str)
 		return (TEXT);
@@ -305,7 +305,7 @@ void	tokenizing(t_cmds *ct)
 				ct->status->error_code = 1;
 				return ;
 			}
-		/*// 🧪 DEBUG
+		 🧪 DEBUG
 			printf("Comando separado: %s\n", cmds[i]);
 			int k = 0;
 			while (args[k])
@@ -314,7 +314,6 @@ void	tokenizing(t_cmds *ct)
 				k++;
 			}
 		// 🧪 FIN DEBUG	
-		*/
 		
 			//ct->token_lst = make_tokens(ct, args); // falta
 			ct->piped_cmd[i] = make_tokens(ct, args);
@@ -331,7 +330,6 @@ void	tokenizing(t_cmds *ct)
 	print_tokens(ct->piped_cmd);
 
 }
-/*
 void	tokenizing(t_cmds *ct)
 {
 	char	**args;
@@ -359,7 +357,7 @@ void	tokenizing(t_cmds *ct)
 }
 */
 
-char update_quote(char quote, char c) // solo cierra al ser iguales
+/*char update_quote(char quote, char c) // solo cierra al ser iguales
 {
 	if ((c == '\'' || c == '\"') && quote == 0)
 		return (c); // abre comilla
@@ -409,4 +407,4 @@ t_token *make_token_for_pipe(char *line, int start, int end)
 	t_token *new_token = alloc_token(sub_str);
 	free(sub_str);
 	return new_token;
-}
+}*/

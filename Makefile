@@ -6,7 +6,9 @@ SRC = src/main.c \
 	  src/shell/shell_loop.c \
 	  src/shell/init_shell.c \
 	  src/prompt/process_prompt.c \
-	  src/token/tokens.c \
+	  src/token/piped_tk.c \
+	  src/token/token_prueba.c \
+	  src/token/token_utils.c \
 	  
 OBJDIR = objs
 OBJ = $(patsubst src/%.c,$(OBJDIR)/%.o,$(SRC))
