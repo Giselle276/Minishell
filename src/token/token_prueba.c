@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 20:39:05 by claudia           #+#    #+#             */
-/*   Updated: 2025/04/15 18:41:36 by claudia          ###   ########.fr       */
+/*   Updated: 2025/04/15 19:09:31 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,15 +175,30 @@ void	tokenizing(t_cmds *ct)
 		ct->token_lst = NULL;
 		return ;
 	}
+}
+
+/*void	tokenizing(t_cmds *ct)
+{
+	ct->token_lst = tokenize_line(ct->cmd_line);
+	if (!ct->token_lst)
+		return ;
+	if (!is_valid_pipe_syntax(ct->token_lst))
+	{
+		printf("🚫 Error de sintaxis con pipes\n");
+		free_tokens(ct->token_lst);
+		ct->token_lst = NULL;
+		return ;
+	}
 	if (has_pipe(ct->token_lst))
 	{
 		ct->piped_cmd = group_piped_cmd(ct->token_lst);
-		ct->parsed_cmds = parse_all_cmds(ct->piped_cmd);
-		print_all_parsed_cmds(ct->parsed_cmds);
+		//ct->parsed_cmds = parse_all_cmds(ct->piped_cmd);
+		//print_all_parsed_cmds(ct->parsed_cmds);
 	}
 	else
 	{
 		ct->parsed_simple = parse_cmd_tokens(ct->token_lst);
 		print_cmd(ct->parsed_simple);
 	}
-}
+}*/
+

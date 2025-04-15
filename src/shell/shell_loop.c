@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_loop.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 16:28:05 by claudia           #+#    #+#             */
-/*   Updated: 2025/04/11 12:11:18 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/15 19:11:28 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ void	shell_loop(t_status *shell_status)
 		if (shell_status->error_code == 0)
 			tokenizing(cmds_table); // to do
 		//if (shell_status->error_code == 0 && !(token_error(cmds_table))) // -> to do
+		if (shell_status->error_code == 0)
 		{
-			//shell_status->process_lst = parser(cmds_table);
+			parser(cmds_table);
 			// execute_root(shell_status, cmds_table); // to do
 		}
 	// free_shell(cmds_table); // to do

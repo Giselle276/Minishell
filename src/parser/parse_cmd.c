@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:07:52 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/15 17:59:48 by claudia          ###   ########.fr       */
+/*   Updated: 2025/04/15 19:19:05 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ t_cmd	*parse_cmd_tokens(t_token *tokens)
 	return (cmd);
 }
 
-// 
 t_cmd	**parse_all_cmds(t_token **piped_cmds)
 {
 	int		i;
@@ -123,4 +122,22 @@ t_cmd	**parse_all_cmds(t_token **piped_cmds)
 	}
 	cmd_array[i] = NULL;
 	return (cmd_array);
+}
+
+void	parser(t_cmds *ct)
+{
+	if (!ct->token_lst)
+		return ;
+
+	if (has_pipe(ct->token_lst))
+	{
+		ct->piped_cmd = group_piped_cmd(ct->token_lst);
+		ct->parsed_cmds = parse_all_cmds(ct->piped_cmd);
+		print_all_parsed_cmds(ct->parsed_cmds);
+	}
+	else
+	{
+		ct->parsed_simple = parse_cmd_tokens(ct->token_lst);
+		print_cmd(ct->parsed_simple);
+	}
 }

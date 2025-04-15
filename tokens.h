@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 17:18:26 by claudia           #+#    #+#             */
-/*   Updated: 2025/04/15 11:18:36 by claudia          ###   ########.fr       */
+/*   Updated: 2025/04/15 19:18:08 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,8 @@ void			free_tokens(t_token *list);
 bool			has_pipe(t_token *lst);
 int 			count_pipes(t_token *lst);
 t_token 		**group_piped_cmd(t_token *token_lst);
+void			parser(t_cmds *ct);
+void 			print_piped_cmds(t_token **piped_cmds);
+void 			print_all_parsed_cmds(t_cmd **cmds);
 // error
 #endif
