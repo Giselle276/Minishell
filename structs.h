@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 16:57:28 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/13 20:58:33 by claudia          ###   ########.fr       */
+/*   Updated: 2025/04/15 14:13:33 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef enum e_token_type // tipo de token
 	T_REDIR_OUT,
 	T_APPEND, // >> -> si no existe lo crea y si existe lo agrega al final
 	T_HEREDOC,
+	T_INVALID,
 }			t_token_type;
 typedef struct s_status
 {
@@ -59,6 +60,13 @@ typedef struct s_token // clasificacion de los tokens
 	struct s_token	*next;
 }				t_token;
 
+typedef struct s_cmd
+{
+	t_token *args;       // Argumentos del comando
+	t_token *redir_in;   // Redirecciones de entrada (<, <<)
+	t_token *redir_out;  // Redirecciones de salida (>, >>)
+} t_cmd;
+
 typedef struct s_cmds
 {
 	t_status	*status;
@@ -66,7 +74,10 @@ typedef struct s_cmds
 	t_token		*token_lst;
 	t_token		**piped_cmd;
 	t_token		*not_piped_cmd;
+	t_cmd		**parsed_cmds; // nuevo
+	t_cmd		*parsed_simple; // nuevo
 }				t_cmds;
+
 
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 11:12:45 by claudia           #+#    #+#             */
-/*   Updated: 2025/04/15 11:13:03 by claudia          ###   ########.fr       */
+/*   Updated: 2025/04/15 14:01:47 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,12 @@ t_token_type	get_token_type(char *str)
 {
 	printf("DEBUG get_token_type: '%s'\n", str);
 	if (!str)
-		return (T_WORD);
+		return (T_INVALID);
+	if (ft_strncmp(str, "||", 3) == 0)
+	{
+		printf("🚫 Error: doble pipe '||' no permitido\n");
+		return (T_INVALID);
+	}
 	if (ft_strncmp(str, "|", 2) == 0)
 		return (T_PIPE);
 	if (ft_strncmp(str, "<<", 3) == 0)
@@ -29,11 +34,13 @@ t_token_type	get_token_type(char *str)
 		return (T_REDIR_OUT);
 	return (T_WORD);
 }
-//asigna memoria para el token
-t_token *create_token(char *str)
-{
-	t_token *new = malloc(sizeof(t_token));
 
+//asigna memoria para el token
+t_token	*create_token(char *str)
+{
+	t_token	*new;
+
+	new = malloc(sizeof(t_token));
 	if (!new)
 		return (NULL);
 	new->value = ft_strdup(str);
@@ -41,10 +48,11 @@ t_token *create_token(char *str)
 	new->next = NULL;
 	return (new);
 }
+
 // agrega el token al final de la lista
-void	add_token(t_token **tk_list, t_token * new_token)
+void	add_token(t_token **tk_list, t_token *new_token)
 {
-	t_token *tmp;
+	t_token	*tmp;
 
 	if (!*tk_list)
 	{
@@ -59,7 +67,7 @@ void	add_token(t_token **tk_list, t_token * new_token)
 
 void	free_tokens(t_token *list)
 {
-	t_token *tmp;
+	t_token	*tmp;
 
 	while (list)
 	{

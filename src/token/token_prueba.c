@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_prueba.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 20:39:05 by claudia           #+#    #+#             */
-/*   Updated: 2025/04/15 11:13:21 by claudia          ###   ########.fr       */
+/*   Updated: 2025/04/15 14:13:45 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,13 +103,27 @@ t_token	*tokenize_line(char *cmd_line)
 	while (cmd_line[i])
 	{
 		tk_str = get_token(cmd_line, &i);
-		printf("DEBUG token string: '%s'\n", tk_str);
 		if (!tk_str)
 		{
 			free_tokens(tk_lst);
 			return (NULL);
 		}
-		add_token(&tk_lst, create_token(tk_str));
+		
+		t_token *new_token = create_token(tk_str);
+		
+		// Verifica si el token es inválido (en este caso si es -1)
+		if (new_token->type == T_INVALID) 
+		{
+			printf("🚫 Token inválido detectado: '%s'\n", tk_str);
+			free(tk_str); // Libera el string del token
+			free_tokens(tk_lst); // Libera los tokens que ya estaban
+			free(new_token); // Libera el token inválido
+			return (NULL); // Detiene la tokenización y devuelve NULL
+		}
+		// Si el token es válido, lo agregamos a la lista
+		add_token(&tk_lst, new_token);
+		
+		
 		free(tk_str);
 	}
 	return (tk_lst);
@@ -147,17 +161,84 @@ void print_token_list(t_token *lst)
 
 void	tokenizing(t_cmds *ct)
 {
+	// Paso 1: Tokenizar la línea de comandos
 	ct->token_lst = tokenize_line(ct->cmd_line);
-	print_token_list(ct->token_lst);
+	//print_token_list(ct->token_lst);
+	print_pipes_only(ct->token_lst); // imprime solo los pipes
 	if (!ct->token_lst)
 		return ;
 	//print_tokens(ct->token_lst);
+	
+	// Paso 2: Verificación de sintaxis de pipes
+
+	if (!is_valid_pipe_syntax(ct->token_lst))
+	{
+		printf("🚫 Error de sintaxis con pipes\n");
+		free_tokens(ct->token_lst); // libera la memoria
+		ct->token_lst = NULL;
+		return ;
+	}
+		// Paso 3: Verifica si hay pipes
 	if (has_pipe(ct->token_lst))
 	{
 		ct->piped_cmd = group_piped_cmd(ct->token_lst);
 		print_piped_cmds(ct->piped_cmd);
+		ct->parsed_cmds = parse_all_cmds(ct->piped_cmd);
+		
+		int i = 0;
+		while (ct->parsed_cmds && ct->parsed_cmds[i])
+		{
+			printf("\nParsed Command #%d:\n", i + 1);
+			print_cmd(ct->parsed_cmds[i]);
+			i++;
+		}
 	}
 	else
-		printf("COMANDO SIMPLE NO HAGO NADA AUN\n");
+	{
+		//printf("COMANDO SIMPLE NO HAGO NADA AUN\n");
 		//ct->not_piped_cmd = handle_simple_cmd(ct->token_lst); // ver
+		ct->parsed_simple = parse_cmd_tokens(ct->token_lst);
+		
+		printf("\nParsed Simple Command:\n");
+		print_cmd(ct->parsed_simple);
+	}
+}
+
+void print_cmd(t_cmd *cmd)
+{
+	t_token *tmp;
+
+	printf("Args:\n");
+	tmp = cmd->args;
+	while (tmp)
+	{
+		printf("  %s\n", tmp->value);
+		tmp = tmp->next;
+	}
+
+	printf("Redir In:\n");
+	tmp = cmd->redir_in;
+	while (tmp)
+	{
+		printf("  %s\n", tmp->value);
+		tmp = tmp->next;
+	}
+
+	printf("Redir Out:\n");
+	tmp = cmd->redir_out;
+	while (tmp)
+	{
+		printf("  %s\n", tmp->value);
+		tmp = tmp->next;
+	}
+}
+
+void print_pipes_only(t_token *lst)
+{
+	while (lst)
+	{
+		if (lst->type == T_PIPE)
+			printf("Found PIPE token: '%s'\n", lst->value);
+		lst = lst->next;
+	}
 }

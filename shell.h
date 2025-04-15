@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 13:51:43 by cgil              #+#    #+#             */
-/*   Updated: 2025/04/15 11:19:12 by claudia          ###   ########.fr       */
+/*   Updated: 2025/04/15 12:36:08 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,15 @@ void		signal_c(int sg);
 void		handle_signal_before(void);
 
 // error
-void	print_err(char *err, int err_code);
+int			validate_error(t_errcode err_code, char *err, t_cmds *ct);
+void		print_err(char *err, int err_code);
+
+//parse
+
+t_cmd *parse_cmd_tokens(t_token *tokens);
+t_cmd **parse_all_cmds(t_token **piped_cmds);
+void print_cmd(t_cmd *cmd);
+void print_pipes_only(t_token *lst);
+bool	is_valid_pipe_syntax(t_token *lst);
 
 #endif

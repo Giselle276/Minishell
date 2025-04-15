@@ -6,7 +6,7 @@
 /*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 18:17:04 by claudia           #+#    #+#             */
-/*   Updated: 2025/04/11 11:29:41 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/15 11:47:31 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_cmds	*init_cmds_table(t_status *shell_st)
 			cmds_table);
 	cmds_table->status = shell_st;
 	cmds_table->cmd_line = NULL;
-	cmds_table->cmd_splitted = NULL;
+	//cmds_table->cmd_splitted = NULL;
 	//cmds_table->piped_cmd = NULL;
 	//cmds_table->simple_cmd = NULL;
 	return (cmds_table);
