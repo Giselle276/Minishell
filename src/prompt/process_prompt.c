@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_prompt.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 16:45:45 by cgil              #+#    #+#             */
-/*   Updated: 2025/04/11 11:52:38 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/15 23:47:24 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,14 @@ static int	just_space(char *input, char c);
 
 void	process_prompt(t_cmds *ct)
 {
-	t_status	*status;
 	char		*prompt;
 
-	status = ct->status;
-	if (status->error_code == ECMDNF || status-> error_code == SIGNT
-		|| status-> error_code == SQUIT)
+	if (g_shell_status->error_code == ECMDNF
+		|| g_shell_status->error_code == SIGNT
+		|| g_shell_status->error_code == SQUIT)
 	{
-		status->error_code = 1;
-		status->stat = 1;
+		g_shell_status->error_code = 1;
+		g_shell_status->stat = 1;
 	}
 	prompt = USER_M "minishell>" RST;
 	handle_signal_before();
@@ -36,10 +35,10 @@ void	process_prompt(t_cmds *ct)
 	if (just_space(ct->cmd_line, '\t') || just_space(ct->cmd_line, ' '))
 	{
 		add_history(ct->cmd_line);
-		status->error_code = 0;
+		g_shell_status->error_code = 0;
 	}
 	else
-		status->error_code = EMPTYLINE;
+		g_shell_status->error_code = EMPTYLINE;
 }
 
 

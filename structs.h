@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 16:57:28 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/15 16:23:51 by claudia          ###   ########.fr       */
+/*   Updated: 2025/04/15 23:53:47 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef enum e_token_type // tipo de token
 	T_HEREDOC,
 	T_INVALID,
 }			t_token_type;
+
 typedef struct s_status
 {
 	char		**envp;

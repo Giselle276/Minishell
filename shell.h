@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 13:51:43 by cgil              #+#    #+#             */
-/*   Updated: 2025/04/15 12:36:08 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/15 23:48:55 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 
 # include "./minishell.h"
 
-void		shell_loop(t_status *shell_status);
+extern t_status    *g_shell_status;
+
+void		shell_loop(void);
 t_cmds		*init_cmds_table(t_status *shell_st);
 t_status	*init_shell(char *envp[]);
 

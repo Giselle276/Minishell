@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 18:17:04 by claudia           #+#    #+#             */
-/*   Updated: 2025/04/15 11:47:31 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/15 23:58:04 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_status	*init_shell(char *envp[]) // puntero de variables de entorno
 	if (!status)
 		validate_error(EALLOC, "Error while allocating memory with malloc",
 			NULL);
-	//status->env = load_env(envp); // to do
+	//status->env = load_env(envp); // to do !!!!! antes de ejecutar
 	status->envp = envp;
 	status->error_code = 0;
 	status->stat = 0;
@@ -43,8 +43,9 @@ t_cmds	*init_cmds_table(t_status *shell_st)
 			cmds_table);
 	cmds_table->status = shell_st;
 	cmds_table->cmd_line = NULL;
-	//cmds_table->cmd_splitted = NULL;
-	//cmds_table->piped_cmd = NULL;
-	//cmds_table->simple_cmd = NULL;
+	cmds_table->piped_cmd = NULL;
+	cmds_table->not_piped_cmd = NULL;
+	cmds_table->parsed_cmds = NULL;
+	cmds_table->parsed_simple = NULL;
 	return (cmds_table);
 }
