@@ -9,7 +9,10 @@ SRC = src/main.c \
 	  src/token/piped_tk.c \
 	  src/token/token_prueba.c \
 	  src/token/token_utils.c \
-	  src/parser/parse_cmd.c
+	  src/parser/parse_cmd.c \
+	  src/free.c \
+	  src/exec/exec.c \
+	  src/exec/exec_builtin.c
 	  
 OBJDIR = objs
 OBJ = $(patsubst src/%.c,$(OBJDIR)/%.o,$(SRC))
@@ -30,6 +33,7 @@ $(OBJDIR)/%.o: src/%.c $(INCLUDES)
 	@mkdir -p $(OBJDIR)/prompt
 	@mkdir -p $(OBJDIR)/token
 	@mkdir -p $(OBJDIR)/parser
+	@mkdir -p $(OBJDIR)/exec
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJ) $(LIBFT)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_signals.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:23:03 by cgil              #+#    #+#             */
-/*   Updated: 2025/03/31 15:40:57 by claudia          ###   ########.fr       */
+/*   Updated: 2025/04/16 11:27:01 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	handle_signal_before(void)
 {
-	signal(SIGINT, signal_c); // ctrl + c
-	signal(SIGQUIT, SIG_IGN); // ctrl + \ no de segfault
+	signal(SIGINT, signal_c);// ctrl + c
+	signal(SIGQUIT, SIG_IGN);// ctrl + \ no de segfault
 }
 
 void	signal_c(int sg)

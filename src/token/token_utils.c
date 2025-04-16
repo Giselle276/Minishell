@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 11:12:45 by claudia           #+#    #+#             */
-/*   Updated: 2025/04/15 15:37:32 by claudia          ###   ########.fr       */
+/*   Updated: 2025/04/16 14:20:43 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,15 @@ void	add_token(t_token **tk_list, t_token *new_token)
 	tmp->next = new_token;
 }
 
-void	free_tokens(t_token *list)
+void free_tokens(t_token *token)
 {
-	t_token	*tmp;
-
-	while (list)
-	{
-		tmp = list->next;
-		free(list->value);
-		free(list);
-		list = tmp;
-	}
+    t_token *tmp;
+    
+    while (token)
+    {
+        tmp = token;
+        token = token->next;
+        free(tmp->value);  // Liberar cada valor del token
+        free(tmp);         // Liberar el token mismo
+    }
 }

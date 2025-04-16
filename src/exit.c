@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgil <cgil@student.42madrid.com>           #+#  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-03-26 17:02:45 by cgil              #+#    #+#             */
-/*   Updated: 2025-03-26 17:02:45 by cgil             ###   ########.fr       */
+/*   Created: 2025/03/26 17:02:45 by cgil              #+#    #+#             */
+/*   Updated: 2025/04/16 11:02:13 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../minishell.h"
 
 /*void	exit_shell(t_errcode err, t_cmds *ct)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 16:57:28 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/15 23:53:47 by claudia          ###   ########.fr       */
+/*   Updated: 2025/04/16 11:22:58 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@ typedef struct s_token // clasificacion de los tokens
 
 typedef struct s_cmd
 {
-	t_token *args;       // Argumentos del comando
-	t_token *redir_in;   // Redirecciones de entrada (<, <<)
-	t_token *redir_out;  // Redirecciones de salida (>, >>)
-} t_cmd;
+	t_token	*args;// Argumentos del comando
+	t_token	*redir_in;// Redirecciones de entrada (<, <<)
+	t_token	*redir_out;// Redirecciones de salida (>, >>)
+}	t_cmd;
 
 typedef struct s_cmds
 {
