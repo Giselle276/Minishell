@@ -6,7 +6,7 @@
 /*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:58:53 by cgil              #+#    #+#             */
-/*   Updated: 2025/04/17 16:59:05 by cgil             ###   ########.fr       */
+/*   Updated: 2025/04/17 19:34:47 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ bool	is_builtin(const char *cmd)
 		ft_strcmp(cmd, "echo") == 0 ||
 		ft_strcmp(cmd, "exit") == 0 ||
 		ft_strcmp(cmd, "pwd") == 0 ||
-		ft_strcmp(cmd, "env") == 0
+		ft_strcmp(cmd, "env") == 0 ||
+		ft_strcmp(cmd, "unset") == 0 ||
+		ft_strcmp(cmd, "export") == 0
 	);
 }
 int	exec_builtin(char **argv, t_status *status)

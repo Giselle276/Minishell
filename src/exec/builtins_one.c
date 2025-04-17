@@ -6,7 +6,7 @@
 /*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:39:39 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/17 17:14:28 by cgil             ###   ########.fr       */
+/*   Updated: 2025/04/17 19:35:51 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,11 @@ int	builtin_env(char **envp)
 
   if (!envp)
   {
-        fprintf(stderr, "envp is NULL\n");
+        fprintf(stderr, "envp is NULL\n"); // no se puede usar
         return 1;
     } 
 	if (!envp[0]) {
-        fprintf(stderr, "envp[0] is NULL\n");
+        fprintf(stderr, "envp[0] is NULL\n"); // no se puede usar
         return 1;
     }
 
