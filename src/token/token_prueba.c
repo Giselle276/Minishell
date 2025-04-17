@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_prueba.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 20:39:05 by claudia           #+#    #+#             */
-/*   Updated: 2025/04/15 19:09:31 by claudia          ###   ########.fr       */
+/*   Updated: 2025/04/17 18:27:58 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 ///////////////////////////printfs/////////////////////////////////////////7
 
-void print_pipes_only(t_token *lst)
+void	print_pipes_only(t_token *lst)
 {
 	while (lst)
 	{
@@ -26,7 +26,7 @@ void print_pipes_only(t_token *lst)
 	}
 }
 
-void print_cmd(t_cmd *cmd)
+void	print_cmd(t_cmd *cmd)
 {
 	t_token *tmp;
 
@@ -37,7 +37,6 @@ void print_cmd(t_cmd *cmd)
 		printf("  %s\n", tmp->value);
 		tmp = tmp->next;
 	}
-
 	printf("Redir In:\n");
 	tmp = cmd->redir_in;
 	while (tmp)
@@ -104,19 +103,19 @@ char	*get_token(char *line, int *i)
 
 	start = 0;
 	qt = 0;
-	while(line[*i] && line[*i] == ' ')
+	while (line[*i] && line[*i] == ' ')
 		(*i)++;
 	start = *i;
 	while (line[*i])
 	{
 		qt = update_quote(qt, line[*i]);
 		if (!qt && line[*i] == ' ')
-			break; //cortar token
+			break ;
 		(*i)++;
 	}
 	if (qt)
 		return (NULL); // comillas no cerradas
-	return (ft_substr(line, start, *i -start)); // retorna tokens cortados 
+	return (ft_substr(line, start, *i - start)); // retorna tokens cortados 
 }
 
 char	update_quote(char quote, char c) // solo cierra al ser iguales
@@ -125,8 +124,6 @@ char	update_quote(char quote, char c) // solo cierra al ser iguales
 		return (c); // abre comilla
 	else if (c == quote)
 		return (0); // si es ' '
-	/*else if (c == '\\')
-		return (quote);*/
 	return (quote);
 }
 
@@ -134,7 +131,8 @@ char	update_quote(char quote, char c) // solo cierra al ser iguales
 
 t_token	*tokenize_line(char *cmd_line)
 {
-	t_token *tk_lst;
+	t_token	*tk_lst;
+	t_token	*new_token;
 	char	*tk_str;
 	int		i;
 
@@ -148,8 +146,8 @@ t_token	*tokenize_line(char *cmd_line)
 			free_tokens(tk_lst);
 			return (NULL);
 		}
-		t_token *new_token = create_token(tk_str);
-		if (new_token->type == T_INVALID) 
+		new_token = create_token(tk_str);
+		if (new_token->type == T_INVALID)
 		{
 			printf("🚫 Token inválido detectado: '%s'\n", tk_str);
 			free(tk_str); // Libera el string del token
@@ -176,29 +174,3 @@ void	tokenizing(t_cmds *ct)
 		return ;
 	}
 }
-
-/*void	tokenizing(t_cmds *ct)
-{
-	ct->token_lst = tokenize_line(ct->cmd_line);
-	if (!ct->token_lst)
-		return ;
-	if (!is_valid_pipe_syntax(ct->token_lst))
-	{
-		printf("🚫 Error de sintaxis con pipes\n");
-		free_tokens(ct->token_lst);
-		ct->token_lst = NULL;
-		return ;
-	}
-	if (has_pipe(ct->token_lst))
-	{
-		ct->piped_cmd = group_piped_cmd(ct->token_lst);
-		//ct->parsed_cmds = parse_all_cmds(ct->piped_cmd);
-		//print_all_parsed_cmds(ct->parsed_cmds);
-	}
-	else
-	{
-		ct->parsed_simple = parse_cmd_tokens(ct->token_lst);
-		print_cmd(ct->parsed_simple);
-	}
-}*/
-

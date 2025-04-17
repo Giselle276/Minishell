@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   piped_tk.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 11:13:27 by claudia           #+#    #+#             */
-/*   Updated: 2025/04/15 18:06:26 by claudia          ###   ########.fr       */
+/*   Updated: 2025/04/17 17:32:36 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
 // obtiene token por token revisando el estado de las comillas
+
 bool	has_pipe(t_token *lst)
 {
 	while (lst)
@@ -38,7 +39,7 @@ int	count_pipes(t_token *lst)
 	return (count);
 }
 
-t_token	**group_piped_cmd(t_token *token_lst) 
+t_token	**group_piped_cmd(t_token *token_lst)
 {
 	int		i;
 	int		cmd_count;
@@ -78,7 +79,6 @@ bool	is_valid_pipe_syntax(t_token *lst)
 	prev = NULL;
 	if (!lst)
 		return (false);
-
 	while (lst)
 	{
 		if (lst->type == T_PIPE)

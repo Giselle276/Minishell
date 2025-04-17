@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell_loop.c                                       :+:      :+:    :+:   */
+/*   builtins_two.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/24 16:28:05 by claudia           #+#    #+#             */
-/*   Updated: 2025/04/17 17:09:14 by cgil             ###   ########.fr       */
+/*   Created: 2025/04/17 16:57:22 by cgil              #+#    #+#             */
+/*   Updated: 2025/04/17 16:58:40 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../shell.h"
 
-void	shell_loop(void)
+int	builtin_pwd(void)
 {
-	t_cmds	*cmds_table;
+	char cwd[1024];
 
-	while (1)
+	if (getcwd(cwd, sizeof(cwd)))
 	{
-		cmds_table = init_cmds_table(g_shell_status);
-		process_prompt(cmds_table);
-		if (g_shell_status->error_code == 0)
-			tokenizing(cmds_table);
-		if (g_shell_status->error_code == 0)
-		{
-			parser(cmds_table);
-			execute_root(g_shell_status, cmds_table); // ver
-		}
-		free_cmds_table(cmds_table);
+		printf("%s\n", cwd);
+		return 0;
 	}
+	perror("pwd");
+	return 1;
 }

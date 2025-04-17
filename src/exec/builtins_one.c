@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_builtin.c                                     :+:      :+:    :+:   */
+/*   builtins_one.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:39:39 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/16 13:50:55 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/17 17:14:28 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,18 +90,6 @@ int	builtin_exit(char **argv)
 	exit(code);
 }
 
-int	builtin_pwd(void)
-{
-	char cwd[1024];
-
-	if (getcwd(cwd, sizeof(cwd)))
-	{
-		printf("%s\n", cwd);
-		return 0;
-	}
-	perror("pwd");
-	return 1;
-}
 int	builtin_env(char **envp)
 {
 	int	i = 0;
@@ -135,8 +123,7 @@ char **load_env(char **envp)
 		return NULL;
 
 	for (int i = 0; i < count; i++)
-		copy[i] = strdup(envp[i]);
+		copy[i] = ft_strdup(envp[i]);
 	copy[count] = NULL;
-
 	return copy;
 }

@@ -10,9 +10,12 @@ SRC = src/main.c \
 	  src/token/token_prueba.c \
 	  src/token/token_utils.c \
 	  src/parser/parse_cmd.c \
-	  src/free.c \
+	  src/free/free.c \
+	  src/free/free_two.c \
 	  src/exec/exec.c \
-	  src/exec/exec_builtin.c
+	  src/exec/check_builtins.c \
+	  src/exec/builtins_one.c \
+	  src/exec/builtins_two.c \
 	  
 OBJDIR = objs
 OBJ = $(patsubst src/%.c,$(OBJDIR)/%.o,$(SRC))
@@ -34,6 +37,7 @@ $(OBJDIR)/%.o: src/%.c $(INCLUDES)
 	@mkdir -p $(OBJDIR)/token
 	@mkdir -p $(OBJDIR)/parser
 	@mkdir -p $(OBJDIR)/exec
+	@mkdir -p $(OBJDIR)/free
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJ) $(LIBFT)
@@ -48,9 +52,11 @@ $(LIBFT):
 
 progreso:
 	@echo -n ""
-	@for i in $(shell seq 1 10); do \
+	@i=1; \
+	while [ $$i -le 10 ]; do \
 		echo -n "█████"; \
 		sleep 0.15; \
+		i=`expr $$i + 1`; \
 	done
 	@echo ""
 

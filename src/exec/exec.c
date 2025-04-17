@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 11:08:03 by cgil              #+#    #+#             */
-/*   Updated: 2025/04/16 14:38:39 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/17 19:13:20 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,17 @@ void	execute_root(t_status *st, t_cmds *ct)
 		exec_pipeline(ct);
 }
 
-int exec_simple_command(t_cmds *ct)
+/*int exec_simple_command(t_cmds *ct)
 {
-	t_cmd *cmd = ct->parsed_simple;
+	t_cmd 	*cmd = ct->parsed_simple;
 	t_token *arg_token = cmd->args;
-	char *argv[256];
-	int i = 0;
+	char 	*argv[256];
+	int 	i;
 
-	while (arg_token && i < 255) {
-		argv[i++] = strdup(arg_token->value);
+	i = 0;
+	while (arg_token && i < 255)
+	{
+		argv[i++] = ft_strdup(arg_token->value);
 		arg_token = arg_token->next;
 	}
 	argv[i] = NULL;
@@ -55,8 +57,6 @@ int exec_simple_command(t_cmds *ct)
 			free(argv[j++]);
 		return (ct->status->stat);
 	}
-
-	
 	pid_t pid = fork();
 	if (pid == 0) {
 		handle_redirections(cmd);
@@ -68,6 +68,7 @@ int exec_simple_command(t_cmds *ct)
 	{
 		int	status;
 		waitpid(pid, &status, 0);
+		free_argv(argv);
 		ct->status->stat = WEXITSTATUS(status);
 	} 
 	else
@@ -75,8 +76,7 @@ int exec_simple_command(t_cmds *ct)
 		perror("fork");
 	}
 	return (0);
-}
-
+}*/
 
 int	exec_pipeline(t_cmds *ct)
 {
@@ -169,7 +169,6 @@ void	handle_redirections(t_cmd *cmd)
 		close(fd);
 		redir = redir->next;
 	}
-
 	// Redirecciones de salida
 	redir = cmd->redir_out;
 	while (redir) {
@@ -189,31 +188,4 @@ void	handle_redirections(t_cmd *cmd)
 		close(fd);
 		redir = redir->next;
 	}
-}
-
-bool	is_builtin(const char *cmd)
-{
-	if (!cmd)
-		return (false);
-	return (
-		ft_strcmp(cmd, "cd") == 0 ||
-		ft_strcmp(cmd, "echo") == 0 ||
-		ft_strcmp(cmd, "exit") == 0 ||
-		ft_strcmp(cmd, "pwd") == 0 ||
-		ft_strcmp(cmd, "env") == 0
-	);
-}
-int	exec_builtin(char **argv, t_status *status)
-{
-	if (ft_strcmp(argv[0], "cd") == 0)
-		return (builtin_cd(argv, status));
-	else if (ft_strcmp(argv[0], "echo") == 0)
-		return (builtin_echo(argv));
-	else if (ft_strcmp(argv[0], "exit") == 0)
-		return (builtin_exit(argv));
-	else if (ft_strcmp(argv[0], "pwd") == 0)
-		return (builtin_pwd());
-	else if (ft_strcmp(argv[0], "env") == 0)
-		return (builtin_env(status->envp));
-	return (1);
 }

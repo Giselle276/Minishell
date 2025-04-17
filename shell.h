@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 13:51:43 by cgil              #+#    #+#             */
-/*   Updated: 2025/04/16 14:04:07 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/17 17:21:23 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void		free_cmds_array(t_cmd **cmds);
 void		free_shell(t_status *shell_st);
 void		free_str_array(char **arr);
 void		free_envp(char **envp);
+void	    free_argv(char **argv);
 
 //built-in
 int			builtin_cd(char **argv, t_status *status);

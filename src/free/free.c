@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:21:22 by cgil              #+#    #+#             */
-/*   Updated: 2025/04/16 14:37:26 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/17 17:24:39 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../shell.h"
 
 void	free_str_array(char **arr)
 {
@@ -35,7 +35,6 @@ void	free_shell(t_status *shell_st)
 	free_envp(shell_st->envp);
 	free(shell_st);
 }
-
 
 void	free_cmd(t_cmd *cmd)
 {
@@ -89,17 +88,4 @@ void	free_cmds_table(t_cmds *cmds_table)
 	if (cmds_table->parsed_simple)
 		free_cmd(cmds_table->parsed_simple);
 	free(cmds_table);
-}
-
-void	free_envp(char **envp)
-{
-	int i = 0;
-	if (!envp)
-		return;
-	while (envp[i])
-	{
-		free(envp[i]);
-		i++;
-	}
-	free(envp);
 }

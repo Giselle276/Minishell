@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell_loop.c                                       :+:      :+:    :+:   */
+/*   free_two.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/24 16:28:05 by claudia           #+#    #+#             */
-/*   Updated: 2025/04/17 17:09:14 by cgil             ###   ########.fr       */
+/*   Created: 2025/04/17 17:19:44 by cgil              #+#    #+#             */
+/*   Updated: 2025/04/17 17:25:57 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../shell.h"
 
-void	shell_loop(void)
+void	free_argv(char **argv)
 {
-	t_cmds	*cmds_table;
+	int	i;
 
-	while (1)
+	i = 0;
+	while (argv[i])
+		free(argv[i++]);
+}
+
+void	free_envp(char **envp)
+{
+	int	i;
+
+	i = 0;
+	if (!envp)
+		return ;
+	while (envp[i])
 	{
-		cmds_table = init_cmds_table(g_shell_status);
-		process_prompt(cmds_table);
-		if (g_shell_status->error_code == 0)
-			tokenizing(cmds_table);
-		if (g_shell_status->error_code == 0)
-		{
-			parser(cmds_table);
-			execute_root(g_shell_status, cmds_table); // ver
-		}
-		free_cmds_table(cmds_table);
+		free(envp[i]);
+		i++;
 	}
+	free(envp);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 18:17:04 by claudia           #+#    #+#             */
-/*   Updated: 2025/04/16 13:46:19 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/17 16:50:31 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,10 @@ t_status	*init_shell(char *envp[]) // puntero de variables de entorno
 	if (!status)
 		validate_error(EALLOC, "Error while allocating memory with malloc",
 			NULL);
-	status->envp = load_env(envp); // to do !!!!! antes de ejecutar
-	//status->envp = envp;
+	status->envp = load_env(envp);
 	status->error_code = 0;
 	status->stat = 0;
 	status->child_envp = NULL;
-	//status->process_lst = NULL; // to do
 	status->std_fd[0] = STDIN_FILENO;
 	status->std_fd[1] = STDOUT_FILENO;
 	return (status);
