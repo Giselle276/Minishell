@@ -3,12 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgil <cgil@student.42madrid.com>           +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 11:37:24 by cgil              #+#    #+#             */
-/*   Updated: 2024/10/01 11:47:29 by cgil             ###   ########.fr       */
+/*   Updated: 2025/04/19 20:39:12 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
+
 
 void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {

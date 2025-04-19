@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell_loop.c                                       :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/24 16:28:05 by claudia           #+#    #+#             */
-/*   Updated: 2025/04/19 19:55:22 by gmaccha-         ###   ########.fr       */
+/*   Created: 2025/04/19 20:48:36 by gmaccha-          #+#    #+#             */
+/*   Updated: 2025/04/19 20:53:20 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../shell.h"
+#include "libft.h"
 
-void	shell_loop(void)
+char	*ft_strcpy(char *s1, const char *s2)
 {
-	t_cmds	*cmds_table;
+	int	i;
 
-	while (1)
+	i = 0;
+	while (s2[i] != '\0')
 	{
-		cmds_table = init_cmds_table(g_shell_status);
-		process_prompt(cmds_table);
-		if (g_shell_status->error_code == 0)
-			tokenizing(cmds_table);
-		if (g_shell_status->error_code == 0)
-		{
-			parser(cmds_table);
-			execute_root(g_shell_status, cmds_table); // ver
-		}
-		free_cmds_table(cmds_table);
+		s1[i] = s2[i];
+		i++;
 	}
+	s1[i] = '\0';
+	return (s1);
 }

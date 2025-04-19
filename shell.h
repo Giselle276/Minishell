@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 13:51:43 by cgil              #+#    #+#             */
-/*   Updated: 2025/04/17 17:21:23 by cgil             ###   ########.fr       */
+/*   Updated: 2025/04/19 21:31:38 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,14 @@ int			builtin_cd(char **argv, t_status *status);
 int			builtin_echo(char **argv);
 int			builtin_exit(char **argv);
 int			builtin_pwd(void);
-int			builtin_env(char **envp);
+int         builtin_env(t_status *status);
 char		**load_env(char **envp);
+int         builtin_export(char **argv, t_status *status);
+int         builtin_unset(char **argv, t_status *status);
+
+// get, set unset env value
+char        *get_env_value(char **envp, const char *name);
+char        **set_env_value(char **envp, const char *name, const char *value);
+char        **unset_env_value(char **envp, const char *name);
 
 #endif

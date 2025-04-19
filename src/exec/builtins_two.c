@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_two.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:57:22 by cgil              #+#    #+#             */
-/*   Updated: 2025/04/17 16:58:40 by cgil             ###   ########.fr       */
+/*   Updated: 2025/04/19 22:21:38 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,3 +24,48 @@ int	builtin_pwd(void)
 	perror("pwd");
 	return 1;
 }
+
+int	builtin_export(char **argv, t_status *status)
+{
+	int		i;
+	char	*sep;
+	char	*key;
+	char	*value;
+
+	if (!argv[1])
+		return (builtin_env(status)); // Mostrar todas si no hay args
+
+	i = 1;
+	while (argv[i])
+	{
+		sep = ft_strchr(argv[i], '=');
+		if (sep)
+		{
+			*sep = '\0';
+			key = argv[i];
+			value = sep + 1;
+			status->envp = set_env_value(status->envp, key, value);
+			*sep = '='; // Restaurar la cadena original
+		}
+		else
+			status->envp = set_env_value(status->envp, argv[i], ""); // Asignar variable vacía
+		i++;
+	}
+	return (0);
+}
+
+int	builtin_unset(char **argv, t_status *status)
+{
+	int	i;
+
+	if (!argv[1])
+		return (0);
+	i = 1;
+	while (argv[i])
+	{
+		status->envp = unset_env_value(status->envp, argv[i]);
+		i++;
+	}
+	return (0);
+}
+

@@ -33,6 +33,8 @@ SRC = ft_isalpha.c \
       ft_strmapi.c \
       ft_striteri.c \
       ft_split.c \
+      ft_strjoin_free.c \
+      ft_strcpy.c \
 
 NAME = libft.a
 

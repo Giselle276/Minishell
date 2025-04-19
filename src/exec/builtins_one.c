@@ -6,7 +6,7 @@
 /*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:39:39 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/19 18:19:01 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/19 21:30:46 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 int	builtin_cd(char **args, t_status *status)
 {
-	if (!args[1])
-		return (chdir(getenv("HOME")));
+	char	*home;
+
+	home = get_env_value(status->envp, "HOME");
+	if (!args[1] && home)
+		return (chdir(home));
 	if (chdir(args[1]) != 0)
 	{
 		perror("cd");
@@ -90,19 +93,20 @@ int	builtin_exit(char **argv)
 	exit(code);
 }
 
-int	builtin_env(char **envp)
+int	builtin_env(t_status *status)
 {
-	int	i;
+	int	i = 0;
 
-	i = 0;
-	if (!envp || !envp[0])
+	printf(">> Entrando a builtin_env()\n");
+	if (!status->envp || !status->envp[0])
 	{
 		write(2, "env: environment not set\n", 26);
 		return (1);
 	}
-	while (envp[i])
+	while (status->envp[i])
 	{
-		printf("%s\n", envp[i]);
+		if (ft_strchr(status->envp[i], '=')) // solo imprime si hay '='
+			printf("%s\n", status->envp[i]);
 		i++;
 	}
 	return (0);

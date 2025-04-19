@@ -1,32 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell_loop.c                                       :+:      :+:    :+:   */
+/*   ft_strjoin_free.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/24 16:28:05 by claudia           #+#    #+#             */
-/*   Updated: 2025/04/19 19:55:22 by gmaccha-         ###   ########.fr       */
+/*   Created: 2025/04/19 20:38:41 by gmaccha-          #+#    #+#             */
+/*   Updated: 2025/04/19 20:50:28 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../shell.h"
+#include "libft.h"
 
-void	shell_loop(void)
+char	*ft_strjoin_free(char *s1, const char *s2)
 {
-	t_cmds	*cmds_table;
+	char	*joined;
+	size_t	len1;
+	size_t	len2;
 
-	while (1)
+	len1 = 0;
+	len2 = 0;
+	if (s1)
+		len1 = ft_strlen(s1);
+	if (s2)
+		len2 = ft_strlen(s2);
+	joined = malloc(len1 + len2 + 1);
+	if (!joined)
 	{
-		cmds_table = init_cmds_table(g_shell_status);
-		process_prompt(cmds_table);
-		if (g_shell_status->error_code == 0)
-			tokenizing(cmds_table);
-		if (g_shell_status->error_code == 0)
-		{
-			parser(cmds_table);
-			execute_root(g_shell_status, cmds_table); // ver
-		}
-		free_cmds_table(cmds_table);
+		free(s1);
+		return (NULL);
 	}
+	if (s1)
+		ft_strcpy(joined, s1);
+	if (s2)
+		ft_strcpy(joined + len1, s2);
+	joined[len1 + len2] = '\0';
+	free(s1);
+	return (joined);
 }
