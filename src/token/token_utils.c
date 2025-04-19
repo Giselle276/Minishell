@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 11:12:45 by claudia           #+#    #+#             */
-/*   Updated: 2025/04/16 14:20:43 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/19 18:31:01 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
+//printf("DEBUG get_token_type: '%s'\n", str);
 t_token_type	get_token_type(char *str)
 {
-	//printf("DEBUG get_token_type: '%s'\n", str);
 	if (!str)
 		return (T_INVALID);
 	if (ft_strncmp(str, "||", 3) == 0)
@@ -65,15 +65,15 @@ void	add_token(t_token **tk_list, t_token *new_token)
 	tmp->next = new_token;
 }
 
-void free_tokens(t_token *token)
+void	free_tokens(t_token *token)
 {
-    t_token *tmp;
-    
-    while (token)
-    {
-        tmp = token;
-        token = token->next;
-        free(tmp->value);  // Liberar cada valor del token
-        free(tmp);         // Liberar el token mismo
-    }
+	t_token	*tmp;
+
+	while (token)
+	{
+		tmp = token;
+		token = token->next;
+		free(tmp->value);
+		free(tmp);
+	}
 }

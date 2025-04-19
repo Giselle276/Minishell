@@ -6,11 +6,12 @@
 /*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 17:03:54 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/19 17:54:56 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/19 18:20:48 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
 static void	build_argv(char **argv, t_token *arg)
 {
 	int	j;

@@ -3,27 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_one.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:39:39 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/17 19:35:51 by cgil             ###   ########.fr       */
+/*   Updated: 2025/04/19 18:19:01 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-
-int builtin_cd(char **args, t_status *status)
+int	builtin_cd(char **args, t_status *status)
 {
 	if (!args[1])
-		return chdir(getenv("HOME"));
+		return (chdir(getenv("HOME")));
 	if (chdir(args[1]) != 0)
 	{
 		perror("cd");
 		status->stat = 1;
-		return 1;
+		return (1);
 	}
-	return 0;
+	return (0);
 }
 /*
 int	builtin_echo(char **argv)
@@ -83,8 +82,9 @@ int	builtin_echo(char **argv)
 
 int	builtin_exit(char **argv)
 {
-	int	code = 0;
+	int	code;
 
+	code = 0;
 	if (argv[1])
 		code = ft_atoi(argv[1]);
 	exit(code);
@@ -92,19 +92,15 @@ int	builtin_exit(char **argv)
 
 int	builtin_env(char **envp)
 {
-	int	i = 0;
+	int	i;
 
-  if (!envp)
-  {
-        fprintf(stderr, "envp is NULL\n"); // no se puede usar
-        return 1;
-    } 
-	if (!envp[0]) {
-        fprintf(stderr, "envp[0] is NULL\n"); // no se puede usar
-        return 1;
-    }
-
-	while (envp[i]!= NULL)
+	i = 0;
+	if (!envp || !envp[0])
+	{
+		write(2, "env: environment not set\n", 26);
+		return (1);
+	}
+	while (envp[i])
 	{
 		printf("%s\n", envp[i]);
 		i++;
@@ -112,18 +108,31 @@ int	builtin_env(char **envp)
 	return (0);
 }
 
-char **load_env(char **envp)
+char	**load_env(char **envp)
 {
-	int count = 0;
+	char	**copy;
+	int		count;
+	int		i;
+
+	count = 0;
 	while (envp[count])
 		count++;
-
-	char **copy = malloc(sizeof(char *) * (count + 1));
+	copy = malloc(sizeof(char *) * (count + 1));
 	if (!copy)
-		return NULL;
-
-	for (int i = 0; i < count; i++)
+		return (NULL);
+	i = 0;
+	while (i < count)
+	{
 		copy[i] = ft_strdup(envp[i]);
+		if (!copy[i])
+		{
+			while (--i >= 0)
+				free(copy[i]);
+			free(copy);
+			return (NULL);
+		}
+		i++;
+	}
 	copy[count] = NULL;
-	return copy;
+	return (copy);
 }

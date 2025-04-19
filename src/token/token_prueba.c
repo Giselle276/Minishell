@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_prueba.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 20:39:05 by claudia           #+#    #+#             */
-/*   Updated: 2025/04/17 18:27:58 by cgil             ###   ########.fr       */
+/*   Updated: 2025/04/19 18:32:28 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	print_pipes_only(t_token *lst)
 
 void	print_cmd(t_cmd *cmd)
 {
-	t_token *tmp;
+	t_token	*tmp;
 
 	printf("Args:\n");
 	tmp = cmd->args;
@@ -54,28 +54,29 @@ void	print_cmd(t_cmd *cmd)
 	}
 }
 
-void print_tokens(t_token *token_lst)
+void	print_tokens(t_token *token_lst)
 {
-    while (token_lst)
-    {
-        printf("Token: %s Type: %d\n", token_lst->value, token_lst->type);
-        token_lst = token_lst->next;
-    }
+	while (token_lst)
+	{
+		printf("Token: %s Type: %d\n", token_lst->value, token_lst->type);
+		token_lst = token_lst->next;
+	}
 }
 
-void print_piped_cmds(t_token **piped_cmds)
+void	print_piped_cmds(t_token **piped_cmds)
 {
-    int i = 0;
+    int	i;
 
-    while (piped_cmds[i])  // Recorrer cada grupo de comandos
-    {
-        printf("Piped Command %d:\n", i + 1);
-        print_tokens(piped_cmds[i]);  // Imprime los tokens de cada comando
-        i++;
-    }
+	i = 0;
+	while (piped_cmds[i])  // Recorrer cada grupo de comandos
+	{
+		printf("Piped Command %d:\n", i + 1);
+		print_tokens(piped_cmds[i]);// Imprime los tokens de cada comando
+		i++;
+	}
 }
 
-void print_token_list(t_token *lst)
+void	print_token_list(t_token *lst)
 {
 	while (lst)
 	{
@@ -83,10 +84,12 @@ void print_token_list(t_token *lst)
 		lst = lst->next;
 	}
 }
-void print_all_parsed_cmds(t_cmd **cmds)
-{
-	int i = 0;
 
+void	print_all_parsed_cmds(t_cmd **cmds)
+{
+	int	i;
+
+	i = 0;
 	while (cmds[i])
 	{
 		printf("\n🧩 Comando %d:\n", i + 1);
@@ -94,7 +97,6 @@ void print_all_parsed_cmds(t_cmd **cmds)
 		i++;
 	}
 }
-///////////////////////////printfs////////////////////////////////////
 
 char	*get_token(char *line, int *i)
 {
