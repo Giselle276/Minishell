@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_simple_cmd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 16:51:58 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/19 16:59:33 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/21 12:46:41 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	exec_external_cmd(char **argv, t_cmd *cmd, t_status *status)
 	if (pid == 0)
 	{
 		handle_redirections(cmd);
-		execvp(argv[0], argv);
+		execvp(argv[0], argv); // no se pude usar
 		perror("execvp");
 		exit(127);
 	}
@@ -75,9 +75,10 @@ int	exec_simple_command(t_cmds *ct)
 	char	*argv[256];
 
 	cmd = ct->parsed_simple;
-	fill_argv(argv, cmd->args);
+	fill_argv(argv, cmd->args); // se hace la copia porque  execv espera un array
 	if (!argv[0])
 		return (0);
+	//printf("is_builtin(\"%s\") = %d\n", argv[0], is_builtin(argv[0]));
 	if (is_builtin(argv[0]))
 	{
 		ct->status->stat = exec_builtin_cmd(argv, cmd, ct->status);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:09:13 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/19 21:13:04 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/21 11:58:39 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,11 @@ int	main(int ac, char *av[], char *envp[])
 		validate_error(EUSAGE, "Run as: ./minishell\n", NULL);
 	
 	// Debug: Imprimir el contenido de envp al principio
-    int i = 0;
-    while (envp[i]) {
+   // int i = 0;
+   /*while (envp[i]) {
         printf("envp[%d]: %s\n", i, envp[i]);
         i++;
-    }
-	
+    }*/
 	g_shell_status = init_shell(envp);
 	print_header();
 	shell_loop();

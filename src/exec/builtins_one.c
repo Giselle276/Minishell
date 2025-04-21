@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_one.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:39:39 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/19 21:30:46 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/21 12:01:52 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	builtin_cd(char **args, t_status *status)
 		return (chdir(home));
 	if (chdir(args[1]) != 0)
 	{
-		perror("cd");
+		printf("De aqui viene el error\n");
+		//perror("cd");
 		status->stat = 1;
 		return (1);
 	}

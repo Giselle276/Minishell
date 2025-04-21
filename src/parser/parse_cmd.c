@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:07:52 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/19 22:51:24 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/21 12:00:20 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,11 +94,11 @@ void	parser(t_cmds *ct)
 	{
 		ct->piped_cmd = group_piped_cmd(ct->token_lst);
 		ct->parsed_cmds = parse_all_cmds(ct->piped_cmd);
-		print_all_parsed_cmds(ct->parsed_cmds);
+		//print_all_parsed_cmds(ct->parsed_cmds);
 	}
 	else
 	{
 		ct->parsed_simple = parse_cmd_tokens(ct->token_lst);
-		print_cmd(ct->parsed_simple);
+		//print_cmd(ct->parsed_simple);
 	}
 }
