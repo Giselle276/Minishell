@@ -6,7 +6,7 @@
 /*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 16:51:58 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/22 12:41:51 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/22 13:49:11 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static void	exec_external_cmd(char **argv, t_cmd *cmd, t_status *status)
 		handle_redirections(cmd);
 		path = find_command_path(argv[0]);
 		validate_path(path, &argv[0]);
-		execve(path, argv, environ);
+		execve(path, argv, status->envp);
 		perror("execve");
 		exit(127);
 	}

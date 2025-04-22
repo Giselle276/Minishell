@@ -6,7 +6,7 @@
 /*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 13:51:43 by cgil              #+#    #+#             */
-/*   Updated: 2025/04/22 13:07:32 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/22 14:11:51 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 # include "./minishell.h"
 
 extern	t_status	*g_shell_status;
-extern char			**environ;
-
 
 void		shell_loop(void);
 t_cmds		*init_cmds_table(t_status *shell_st);

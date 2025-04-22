@@ -6,7 +6,7 @@
 /*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:39:39 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/22 10:48:11 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/22 14:21:22 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,31 +29,6 @@ int	builtin_cd(char **args, t_status *status)
 	return (0);
 }
 /*
-int	builtin_echo(char **argv)
-{
-	int i = 1;
-	int newline = 1;
-
-	if (argv[i] && strcmp(argv[i], "-n") == 0)
-	{
-		newline = 0;
-		i++;
-	}
-
-	while (argv[i])
-	{
-		printf("%s", argv[i]);
-		if (argv[i + 1])
-			printf(" ");
-		i++;
-	}
-	if (newline)
-		printf("\n");
-
-	return (0);
-}
-*/
-
 int	builtin_echo(char **argv)
 {
 	int i = 1;
@@ -82,6 +57,50 @@ int	builtin_echo(char **argv)
 		write(1, "\n", 1);
 
 	return (0);
+}
+*/
+
+static int	is_n_flag(const char *str)
+{
+	int i;
+
+	if (!str || str[0] != '-')
+		return 0;
+
+	i = 1;
+	while (str[i])
+	{
+		if (str[i] != 'n')
+			return 0;
+		i++;
+	}
+	return (i > 1); // Asegura que hay al menos una 'n' después del '-'
+}
+
+int builtin_echo(char **argv)
+{
+	int i;
+	int newline;
+
+	i = 1;
+	newline = 1;
+	// Soporte para múltiples flags -n como -n, -nn, -nnnn
+	while (argv[i] && is_n_flag(argv[i]))
+	{
+		newline = 0;
+		i++;
+	}
+	
+	while (argv[i])
+	{
+		write(1, argv[i], strlen(argv[i]));
+		if (argv[i + 1])
+			write(1, " ", 1);
+		i++;
+	}
+	if (newline)
+		write(1, "\n", 1);
+	return 0;
 }
 
 int	builtin_exit(char **argv)

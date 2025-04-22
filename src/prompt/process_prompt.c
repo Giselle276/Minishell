@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_prompt.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 16:45:45 by cgil              #+#    #+#             */
-/*   Updated: 2025/04/17 17:29:13 by cgil             ###   ########.fr       */
+/*   Updated: 2025/04/22 14:23:03 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	process_prompt(t_cmds *ct)
 		g_shell_status->stat = 1;
 	}
 	prompt = USER_M "minishell>" RST;
+
 	handle_signal_before();
 	ct->cmd_line = readline(prompt);
 	if (!ct->cmd_line)

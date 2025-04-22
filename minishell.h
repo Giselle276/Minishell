@@ -6,7 +6,7 @@
 /*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:08:41 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/16 11:40:49 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/22 14:11:20 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@
 # include "./structs.h"
 # include "./shell.h"
 # include "./tokens.h"
-
 
 # define RST	"\033[0m"
 # define G		"\033[1;32m"

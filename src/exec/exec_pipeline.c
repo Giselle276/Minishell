@@ -6,7 +6,7 @@
 /*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 17:03:54 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/22 11:46:41 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/22 13:53:23 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	execute_child(t_cmd *cmd, int prev_fd, int *pipefd, int is_last)
 		perror(argv[0]);
 		exit(127);
 	}
-	execve(path, argv, environ);
+	execve(path, argv, g_shell_status->envp);
 	perror("execve");
 	exit(127);
 }
