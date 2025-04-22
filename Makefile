@@ -19,6 +19,8 @@ SRC = src/main.c \
 	  src/exec/check_builtins.c \
 	  src/exec/builtins_one.c \
 	  src/exec/builtins_two.c \
+	  src/exec/exec_utils.c \
+	  src/exec/expand_var.c \
 	  
 OBJDIR = objs
 OBJ = $(patsubst src/%.c,$(OBJDIR)/%.o,$(SRC))

@@ -3,14 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   exec_simple_cmd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 16:51:58 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/21 12:46:41 by cgil             ###   ########.fr       */
+/*   Updated: 2025/04/22 12:41:51 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+char	*find_command_path(char *cmd)
+{
+	char	**paths;
+	char	*path;
+	char	*full;
+	int		i;
+
+	if (ft_strchr(cmd, '/'))
+		return (ft_strdup(cmd));
+	path = getenv("PATH");
+	if (!path)
+		return (NULL);
+	paths = ft_split(path, ':');
+	if (!paths)
+		return (NULL);
+	i = -1;
+	while (paths[++i])
+	{
+		full = ft_strjoin(paths[i], "/");
+		full = ft_strjoin_free(full, cmd);
+		if (access(full, X_OK) == 0)
+			return (free_split(paths), full);
+		free(full);
+	}
+	return (free_split(paths), NULL);
+}
 
 static void	fill_argv(char **argv, t_token *arg_token)
 {
@@ -50,13 +77,16 @@ static void	exec_external_cmd(char **argv, t_cmd *cmd, t_status *status)
 {
 	pid_t	pid;
 	int		code;
+	char	*path;
 
 	pid = fork();
 	if (pid == 0)
 	{
 		handle_redirections(cmd);
-		execvp(argv[0], argv); // no se pude usar
-		perror("execvp");
+		path = find_command_path(argv[0]);
+		validate_path(path, &argv[0]);
+		execve(path, argv, environ);
+		perror("execve");
 		exit(127);
 	}
 	else if (pid > 0)
@@ -69,16 +99,16 @@ static void	exec_external_cmd(char **argv, t_cmd *cmd, t_status *status)
 		perror("fork");
 }
 
+
 int	exec_simple_command(t_cmds *ct)
 {
 	t_cmd	*cmd;
 	char	*argv[256];
 
 	cmd = ct->parsed_simple;
-	fill_argv(argv, cmd->args); // se hace la copia porque  execv espera un array
+	fill_argv(argv, cmd->args);
 	if (!argv[0])
 		return (0);
-	//printf("is_builtin(\"%s\") = %d\n", argv[0], is_builtin(argv[0]));
 	if (is_builtin(argv[0]))
 	{
 		ct->status->stat = exec_builtin_cmd(argv, cmd, ct->status);
