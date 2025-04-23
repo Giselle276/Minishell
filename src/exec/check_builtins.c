@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_builtins.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:58:53 by cgil              #+#    #+#             */
-/*   Updated: 2025/04/23 13:03:59 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/23 13:06:51 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	exec_builtin(char **argv, t_status *status)
 	else if (ft_strcmp(argv[0], "pwd") == 0)
 		return (builtin_pwd());
 	else if (ft_strcmp(argv[0], "env") == 0)
-		return (builtin_env(status));
+		return (builtin_env(argv, status));
 	else if (ft_strcmp(argv[0], "export") == 0)
 		return (builtin_export(argv, status));
 	else if (ft_strcmp(argv[0], "unset") == 0)

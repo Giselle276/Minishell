@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_one.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:39:39 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/23 13:01:27 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/23 13:51:12 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ int	builtin_cd(char **args, t_status *status)
 		return (chdir(home));
 	if (chdir(args[1]) != 0)
 	{
-		printf("De aqui viene el error\n");
-		//perror("cd");
+		perror("cd");
 		status->stat = 1;
 		return (1);
 	}
@@ -80,11 +79,11 @@ int	builtin_exit(char **argv)
 		code = ft_atoi(argv[1]);
 	exit(code);
 }
-
+/*
 int	builtin_env(t_status *status)
 {
 	int	i;
-
+  
 	i = 0;
 	printf(">> Entrando a builtin_env()\n");
 	if (!status->envp || !status->envp[0])
@@ -99,4 +98,42 @@ int	builtin_env(t_status *status)
 		i++;
 	}
 	return (0);
+}*/
+
+int	handle_env_and_exec(char **args, t_status *status)
+{
+	char 	*new_env_var;
+	
+	if (strchr(args[1], '=')!= NULL)
+	{
+		new_env_var = args[1];
+		//set_env_value(&(status->envp), new_env_var);
+		if (args[2] != NULL)
+		{
+			exec_external_cmd(args + 2, NULL, status);
+			return (0);
+		}
+	}
+	else
+	{
+		write(2, "ENV: Incorrect use of arguments", 32);
+		return (1);
+	}
+}
+
+int	builtin_env(char **args,t_status *status)
+{
+	char	**env;
+	
+	if (args[1] == NULL) // sin argumentos
+	{
+		env = status->envp;
+		while (*env)
+		{
+			printf("%s\n", *env);
+			env++;
+		}
+		return (0);
+	}
+	return (handle_env_and_exec(args, status));
 }

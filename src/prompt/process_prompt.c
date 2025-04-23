@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   process_prompt.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 16:45:45 by cgil              #+#    #+#             */
-/*   Updated: 2025/04/22 14:23:03 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/23 12:36:22 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-static int	just_space(char *input, char c);
+static int	is_empty_line(char *input);
 
 void	process_prompt(t_cmds *ct)
 {
@@ -25,33 +25,30 @@ void	process_prompt(t_cmds *ct)
 		g_shell_status->error_code = 1;
 		g_shell_status->stat = 1;
 	}
-	prompt = USER_M "minishell>" RST;
-
+	prompt = USER_M "minishell> " RST;
 	handle_signal_before();
 	ct->cmd_line = readline(prompt);
 	if (!ct->cmd_line)
 	{
+		printf("exit\n");
 		exit (EXIT_SUCCESS);
 	}
-	if (just_space(ct->cmd_line, '\t') || just_space(ct->cmd_line, ' '))
+	if (is_empty_line(ct->cmd_line))
 	{
-		add_history(ct->cmd_line);
-		g_shell_status->error_code = 0;
-	}
-	else
 		g_shell_status->error_code = EMPTYLINE;
+		//ct->cmd_line = NULL;
+	}
+	add_history(ct->cmd_line);
+	g_shell_status->error_code = 0;
 }
 
-static int	just_space(char *input, char c)
+static int	is_empty_line(char *input)
 {
-	int	i;
-
-	i = 0;
-	while (input[i])
+	while (*input)
 	{
-		if (input[i] != c)
-			return (1);
-		i++;
+		if (*input != ' ' && *input != '\t')
+			return (0);
+		input++;
 	}
-	return (0);
+	return (1);
 }
