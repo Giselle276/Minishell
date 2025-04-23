@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_builtins.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:58:53 by cgil              #+#    #+#             */
-/*   Updated: 2025/04/19 22:48:47 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/23 13:06:51 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ bool	is_builtin(const char *cmd)
 	if (!cmd)
 		return (false);
 	return (
-		ft_strcmp(cmd, "cd") == 0 ||
-		ft_strcmp(cmd, "echo") == 0 ||
-		ft_strcmp(cmd, "exit") == 0 ||
-		ft_strcmp(cmd, "pwd") == 0 ||
-		ft_strcmp(cmd, "env") == 0 ||
-		ft_strcmp(cmd, "unset") == 0 ||
-		ft_strcmp(cmd, "export") == 0
+		ft_strcmp(cmd, "cd") == 0
+		|| ft_strcmp(cmd, "echo") == 0
+		|| ft_strcmp(cmd, "exit") == 0
+		|| ft_strcmp(cmd, "pwd") == 0
+		|| ft_strcmp(cmd, "env") == 0
+		|| ft_strcmp(cmd, "unset") == 0
+		|| ft_strcmp(cmd, "export") == 0
 	);
 }
 
@@ -38,7 +38,7 @@ int	exec_builtin(char **argv, t_status *status)
 	else if (ft_strcmp(argv[0], "pwd") == 0)
 		return (builtin_pwd());
 	else if (ft_strcmp(argv[0], "env") == 0)
-		return (builtin_env(status));
+		return (builtin_env(argv, status));
 	else if (ft_strcmp(argv[0], "export") == 0)
 		return (builtin_export(argv, status));
 	else if (ft_strcmp(argv[0], "unset") == 0)

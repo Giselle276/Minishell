@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_simple_cmd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 16:51:58 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/22 13:49:11 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/23 11:35:49 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ static void	exec_external_cmd(char **argv, t_cmd *cmd, t_status *status)
 		path = find_command_path(argv[0]);
 		validate_path(path, &argv[0]);
 		execve(path, argv, status->envp);
-		perror("execve");
+		printf("error de ejecucion de comando externo\n");
+		//perror("execve");
 		exit(127);
 	}
 	else if (pid > 0)
