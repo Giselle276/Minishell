@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 17:18:26 by claudia           #+#    #+#             */
-/*   Updated: 2025/04/16 11:22:10 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/23 18:34:39 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ t_token_type	get_token_type(char *str);
 t_token			*create_token(char *str);
 void			add_token(t_token **tk_list, t_token *new_token);
 //void			free_tokens(t_token *list);
+t_token			*create_and_validate_tk(char *tk_str);
+int				missmatched_quotes(char *str);
 bool			has_pipe(t_token *lst);
 int				count_pipes(t_token *lst);
 t_token			**group_piped_cmd(t_token *token_lst);

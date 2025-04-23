@@ -6,7 +6,7 @@
 /*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 13:51:43 by cgil              #+#    #+#             */
-/*   Updated: 2025/04/23 12:31:08 by cgil             ###   ########.fr       *
+/*   Updated: 2025/04/23 19:18:47 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ void		free_argv(char **argv);
 void		free_split(char **split);
 
 //built-in
-int			builtin_cd(char **argv, t_status *status);
+int			builtin_cd(char **argvs, t_status *status);
 int			builtin_echo(char **argv);
 int			builtin_exit(char **argv);
 int			builtin_pwd(void);
-int			builtin_env(t_status *status);
+int			builtin_env(char **args, t_status *t_status);
 char		**load_env(char **envp);
 int			builtin_export(char **argv, t_status *status);
 int			builtin_unset(char **argv, t_status *status);
@@ -75,14 +75,5 @@ char		**unset_env_value(char **envp, const char *name);
 char		*find_command_path(char *cmd);
 void		expand_env_vars(t_token *tokens, t_status *status);
 char		*expand_var(const char *str, t_status *status);
-int			env_len(char **envp);
-
-//utils pipeline
-void		execute_child(t_cmd *cmd, int prev_fd, int *pipefd, int is_last);
-bool		ignore_builtin_in_pipeline(const char *cmd);
-void		build_argv(char **argv, t_token *arg);
-void		setup_fds(t_cmd *cmd, int prev_fd, int *pipefd, int is_last);
-void		exec_builtin_or_exit(char **argv);
-void		exec_external(char **argv);
 
 #endif

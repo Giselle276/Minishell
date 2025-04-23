@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 16:57:28 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/22 14:01:18 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/23 19:34:19 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,13 @@ typedef struct s_status
 	char		**child_envp;
 	int			error_code;
 	int			stat;
-	int			std_fd[2];
+	//int			std_fd[2];
 }				t_status;
+
+/*typedef struct s_status
+{
+	int			stat;
+}				t_status;*/
 
 typedef struct s_token // clasificacion de los tokens
 {

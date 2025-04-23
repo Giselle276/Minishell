@@ -21,7 +21,8 @@ SRC = src/main.c \
 	  src/exec/builtins_two.c \
 	  src/exec/exec_utils.c \
 	  src/exec/expand_var.c \
-	  src/exec/exec_child_utils.c \
+	  src/exec/builtin_echo.c \
+	  src/token/printfs_borrar.c \
 	  
 OBJDIR = objs
 OBJ = $(patsubst src/%.c,$(OBJDIR)/%.o,$(SRC))

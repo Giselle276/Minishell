@@ -6,7 +6,7 @@
 /*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 13:06:18 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/23 13:04:45 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/22 13:11:04 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static char	*extract_suffix(char *str)
 	suffix = ft_strdup(str + i);
 	return (suffix);
 }
+
 
 static char	*get_prefix(const char *str, char *var)
 {

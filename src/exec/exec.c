@@ -6,7 +6,7 @@
 /*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 11:08:03 by cgil              #+#    #+#             */
-/*   Updated: 2025/04/23 12:41:28 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/22 12:18:05 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,3 @@ void	handle_redirections(t_cmd *cmd)
 	handle_redir_out(cmd->redir_out);
 }
 
-int	env_len(char **envp)
-{
-	int	i;
-
-	i = 0;
-	while (envp && envp[i])
-		i++;
-	return (i);
-}

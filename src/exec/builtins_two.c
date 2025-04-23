@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_two.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:57:22 by cgil              #+#    #+#             */
-/*   Updated: 2025/04/23 14:01:38 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/23 19:19:36 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 int	builtin_pwd(void)
 {
-	char	cwd[1024];
+	char cwd[1024];
 
 	if (getcwd(cwd, sizeof(cwd)))
 	{
 		printf("%s\n", cwd);
-		return (0);
+		return 0;
 	}
 	perror("pwd");
-	return (1);
+	return 1;
 }
 
 int	builtin_export(char **argv, t_status *status)
@@ -33,7 +33,8 @@ int	builtin_export(char **argv, t_status *status)
 	char	*value;
 
 	if (!argv[1])
-		return (builtin_env(status));
+		return (builtin_env(argv, status)); // Mostrar todas si no hay args
+
 	i = 1;
 	while (argv[i])
 	{
@@ -44,10 +45,10 @@ int	builtin_export(char **argv, t_status *status)
 			key = argv[i];
 			value = sep + 1;
 			status->envp = set_env_value(status->envp, key, value);
-			*sep = '=';
+			*sep = '='; // Restaurar la cadena original
 		}
 		else
-			status->envp = set_env_value(status->envp, argv[i], "");
+			status->envp = set_env_value(status->envp, argv[i], ""); // Asignar variable vacía
 		i++;
 	}
 	return (0);
@@ -68,32 +69,3 @@ int	builtin_unset(char **argv, t_status *status)
 	return (0);
 }
 
-
-char	**load_env(char **envp)
-{
-	char	**copy;
-	int		count;
-	int		i;
-
-	count = 0;
-	while (envp[count])
-		count++;
-	copy = malloc(sizeof(char *) * (count + 1));
-	if (!copy)
-		return (NULL);
-	i = 0;
-	while (i < count)
-	{
-		copy[i] = ft_strdup(envp[i]);
-		if (!copy[i])
-		{
-			while (--i >= 0)
-				free(copy[i]);
-			free(copy);
-			return (NULL);
-		}
-		i++;
-	}
-	copy[count] = NULL;
-	return (copy);
-}

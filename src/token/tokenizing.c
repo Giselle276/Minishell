@@ -1,102 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizing.c                                       :+:      :+:    :+:   */
+/*   token_prueba.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/23 13:08:12 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/23 13:08:16 by gmaccha-         ###   ########.fr       */
+/*   Created: 2025/04/13 20:39:05 by claudia           #+#    #+#             */
+/*   Updated: 2025/04/23 18:45:55 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
 // obtiene token por token revisando el estado de las comillas
-
-///////////////////////////printfs/////////////////////////////////////////7
-
-void	print_pipes_only(t_token *lst)
-{
-	while (lst)
-	{
-		if (lst->type == T_PIPE)
-			printf("Found PIPE token: '%s'\n", lst->value);
-		lst = lst->next;
-	}
-}
-
-void	print_cmd(t_cmd *cmd)
-{
-	t_token	*tmp;
-
-	printf("Args:\n");
-	tmp = cmd->args;
-	while (tmp)
-	{
-		printf("  %s\n", tmp->value);
-		tmp = tmp->next;
-	}
-	printf("Redir In:\n");
-	tmp = cmd->redir_in;
-	while (tmp)
-	{
-		printf("  %s\n", tmp->value);
-		tmp = tmp->next;
-	}
-
-	printf("Redir Out:\n");
-	tmp = cmd->redir_out;
-	while (tmp)
-	{
-		printf("  %s\n", tmp->value);
-		tmp = tmp->next;
-	}
-}
-
-void	print_tokens(t_token *token_lst)
-{
-	while (token_lst)
-	{
-		printf("Token: %s Type: %d\n", token_lst->value, token_lst->type);
-		token_lst = token_lst->next;
-	}
-}
-
-void	print_piped_cmds(t_token **piped_cmds)
-{
-    int	i;
-
-	i = 0;
-	while (piped_cmds[i])  // Recorrer cada grupo de comandos
-	{
-		printf("Piped Command %d:\n", i + 1);
-		print_tokens(piped_cmds[i]);// Imprime los tokens de cada comando
-		i++;
-	}
-}
-
-void	print_token_list(t_token *lst)
-{
-	while (lst)
-	{
-		printf("Token: '%s' Type: %d\n", lst->value, lst->type);
-		lst = lst->next;
-	}
-}
-
-void	print_all_parsed_cmds(t_cmd **cmds)
-{
-	int	i;
-
-	i = 0;
-	while (cmds[i])
-	{
-		printf("\n🧩 Comando %d:\n", i + 1);
-		print_cmd(cmds[i]);
-		i++;
-	}
-}
 
 char	*get_token(char *line, int *i)
 {
@@ -131,6 +47,23 @@ char	update_quote(char quote, char c) // solo cierra al ser iguales
 
 // dirige a que se obtenga el token, se le asigne memoria y se incluya a la lista
 
+
+t_token	*create_and_validate_tk(char *tk_str)
+{
+	t_token	*new_token;
+
+	new_token = create_token(tk_str);
+	if (new_token->type == T_INVALID)
+	{
+		ft_putstr_fd("Minishell: syntax error\n", 2);
+		g_shell_status->error_code = 2;
+		free(new_token->value);
+		free(new_token);
+		return (NULL);
+	}
+	return (new_token);
+}
+
 t_token	*tokenize_line(char *cmd_line)
 {
 	t_token	*tk_lst;
@@ -148,17 +81,14 @@ t_token	*tokenize_line(char *cmd_line)
 			free_tokens(tk_lst);
 			return (NULL);
 		}
-		new_token = create_token(tk_str);
-		if (new_token->type == T_INVALID)
+		new_token = create_and_validate_tk(tk_str);
+		free(tk_str);
+		if (!new_token)
 		{
-			printf("🚫 Token inválido detectado: '%s'\n", tk_str);
-			free(tk_str); // Libera el string del token
-			free_tokens(tk_lst); // Libera los tokens que ya estaban
-			free(new_token); // Libera el token inválido
-			return (NULL); // Detiene la tokenización y devuelve NULL
+			free_tokens(tk_lst);
+			return (NULL);
 		}
 		add_token(&tk_lst, new_token);
-		free(tk_str);
 	}
 	return (tk_lst);
 }
@@ -170,7 +100,7 @@ void	tokenizing(t_cmds *ct)
 		return ;
 	if (!is_valid_pipe_syntax(ct->token_lst))
 	{
-		printf("🚫 Error de sintaxis con pipes\n");
+		ft_putstr_fd("minishell: syntax error near pipe\n", 2);
 		free_tokens(ct->token_lst);
 		ct->token_lst = NULL;
 		return ;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_value.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 19:39:48 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/23 12:35:49 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/19 20:29:35 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	env_var_exists(char **envp, const char *name)
 	}
 	return (-1);
 }
-/*
+
 char	**set_env_value(char **envp, const char *name, const char *value)
 {
 	int		i;
@@ -74,50 +74,6 @@ char	**set_env_value(char **envp, const char *name, const char *value)
 	new_envp[i + 1] = NULL;
 	free(envp);
 	return (new_envp);
-}
-*/
-
-static char	**append_env_var(char **envp, char *new_var, int len)
-{
-	char	**new_envp;
-	int		i;
-
-	i = 0;
-	new_envp = malloc(sizeof(char *) * (len + 2));
-	if (!new_envp)
-		return (NULL);
-	while (i < len)
-	{
-		new_envp[i] = envp[i];
-		i++;
-	}
-	new_envp[i++] = new_var;
-	new_envp[i] = NULL;
-	free(envp);
-	return (new_envp);
-}
-
-char	**set_env_value(char **envp, const char *name, const char *value)
-{
-	int		index;
-	int		len;
-	char	*new_var;
-
-	new_var = ft_strjoin(name, "=");
-	if (!new_var)
-		return (NULL);
-	new_var = ft_strjoin_free(new_var, value);
-	if (!new_var)
-		return (NULL);
-	index = env_var_exists(envp, name);
-	if (index >= 0)
-	{
-		free(envp[index]);
-		envp[index] = new_var;
-		return (envp);
-	}
-	len = env_len(envp);
-	return (append_env_var(envp, new_var, len));
 }
 
 char	**unset_env_value(char **envp, const char *name)

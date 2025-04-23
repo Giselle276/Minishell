@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 18:17:04 by claudia           #+#    #+#             */
-/*   Updated: 2025/04/22 14:10:24 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/23 19:25:06 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ t_status	*init_shell(char *envp[]) // puntero de variables de entorno
 	status->error_code = 0;
 	status->stat = 0;
 	status->child_envp = NULL;
-	status->std_fd[0] = STDIN_FILENO;
-	status->std_fd[1] = STDOUT_FILENO;
+	/*status->std_fd[0] = STDIN_FILENO;
+	status->std_fd[1] = STDOUT_FILENO;*/
 	return (status);
 }
 

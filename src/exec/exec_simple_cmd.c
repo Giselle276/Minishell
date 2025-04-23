@@ -6,7 +6,7 @@
 /*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 16:51:58 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/23 11:35:49 by cgil             ###   ########.fr       */
+/*   Updated: 2025/04/23 19:14:27 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,11 @@ static void	exec_external_cmd(char **argv, t_cmd *cmd, t_status *status)
 	{
 		waitpid(pid, &code, 0);
 		free_argv(argv);
-		status->stat = WEXITSTATUS(code);
+		g_shell_status->stat = WEXITSTATUS(code);
 	}
 	else
 		perror("fork");
 }
-
 
 int	exec_simple_command(t_cmds *ct)
 {
@@ -112,8 +111,8 @@ int	exec_simple_command(t_cmds *ct)
 		return (0);
 	if (is_builtin(argv[0]))
 	{
-		ct->status->stat = exec_builtin_cmd(argv, cmd, ct->status);
-		return (ct->status->stat);
+		g_shell_status->stat = exec_builtin_cmd(argv, cmd, ct->status);
+		return (g_shell_status->stat);
 	}
 	exec_external_cmd(argv, cmd, ct->status);
 	return (0);

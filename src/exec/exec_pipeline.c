@@ -6,13 +6,25 @@
 /*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 17:03:54 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/23 13:04:21 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/22 13:53:23 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-/*
+static void	build_argv(char **argv, t_token *arg)
+{
+	int	j;
+
+	j = 0;
+	while (arg && j < 255)
+	{
+		argv[j++] = ft_strdup(arg->value);
+		arg = arg->next;
+	}
+	argv[j] = NULL;
+}
+
 static void	execute_child(t_cmd *cmd, int prev_fd, int *pipefd, int is_last)
 {
 	char	*argv[256];
@@ -29,13 +41,6 @@ static void	execute_child(t_cmd *cmd, int prev_fd, int *pipefd, int is_last)
 	close(pipefd[0]);
 	close(pipefd[1]);
 	build_argv(argv, cmd->args);
-	if (is_builtin(argv[0]))
-	{
-		if (ignore_builtin_in_pipeline(argv[0]))
-			exit(0);
-		exec_builtin(argv, g_shell_status);
-		exit(0);
-	}
 	path = find_command_path(argv[0]);
 	if (!path)
 	{
@@ -45,17 +50,6 @@ static void	execute_child(t_cmd *cmd, int prev_fd, int *pipefd, int is_last)
 	execve(path, argv, g_shell_status->envp);
 	perror("execve");
 	exit(127);
-}
-*/
-void	execute_child(t_cmd *cmd, int prev_fd, int *pipefd, int is_last)
-{
-	char	*argv[256];
-
-	setup_fds(cmd, prev_fd, pipefd, is_last);
-	build_argv(argv, cmd->args);
-	if (is_builtin(argv[0]))
-		exec_builtin_or_exit(argv);
-	exec_external(argv);
 }
 
 static void	handle_parent(int *prev_fd, int *pipefd)

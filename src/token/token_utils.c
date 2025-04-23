@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 11:12:45 by claudia           #+#    #+#             */
-/*   Updated: 2025/04/19 18:31:01 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/23 18:26:21 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ t_token_type	get_token_type(char *str)
 	if (!str)
 		return (T_INVALID);
 	if (ft_strncmp(str, "||", 3) == 0)
-	{
-		printf("🚫 Error: doble pipe '||' no permitido\n");
 		return (T_INVALID);
-	}
 	if (ft_strncmp(str, "|", 2) == 0)
 		return (T_PIPE);
 	if (ft_strncmp(str, "<<", 3) == 0)
