@@ -6,7 +6,7 @@
 /*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:39:39 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/22 14:21:22 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/23 13:01:27 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,69 +28,37 @@ int	builtin_cd(char **args, t_status *status)
 	}
 	return (0);
 }
-/*
-int	builtin_echo(char **argv)
-{
-	int i = 1;
-	int newline = 1;
-
-	// Verificar si el primer argumento es '-n' para evitar el salto de línea
-	if (argv[i] && strcmp(argv[i], "-n") == 0)
-	{
-		newline = 0;
-		i++; // Saltar el '-n'
-	}
-	// Imprimir los argumentos con espacio entre ellos
-	while (argv[i])
-	{
-		// Imprimir el argumento sin salto de línea
-		write(1, argv[i], strlen(argv[i]));
-		
-		// Si no es el último argumento, agregar un espacio
-		if (argv[i + 1])
-			write(1, " ", 1);
-
-		i++;
-	}
-	// Si no se pasó '-n', agregar un salto de línea al final
-	if (newline)
-		write(1, "\n", 1);
-
-	return (0);
-}
-*/
 
 static int	is_n_flag(const char *str)
 {
-	int i;
+	int	i;
 
 	if (!str || str[0] != '-')
-		return 0;
+		return (0);
 
 	i = 1;
 	while (str[i])
 	{
 		if (str[i] != 'n')
-			return 0;
+			return (0);
 		i++;
 	}
-	return (i > 1); // Asegura que hay al menos una 'n' después del '-'
+	return (i > 1);
 }
 
-int builtin_echo(char **argv)
+int	builtin_echo(char **argv)
 {
-	int i;
-	int newline;
+	int	i;
+	int	newline;
 
 	i = 1;
 	newline = 1;
-	// Soporte para múltiples flags -n como -n, -nn, -nnnn
 	while (argv[i] && is_n_flag(argv[i]))
 	{
 		newline = 0;
 		i++;
 	}
-	
+
 	while (argv[i])
 	{
 		write(1, argv[i], strlen(argv[i]));
@@ -100,7 +68,7 @@ int builtin_echo(char **argv)
 	}
 	if (newline)
 		write(1, "\n", 1);
-	return 0;
+	return (0);
 }
 
 int	builtin_exit(char **argv)
@@ -115,8 +83,9 @@ int	builtin_exit(char **argv)
 
 int	builtin_env(t_status *status)
 {
-	int	i = 0;
+	int	i;
 
+	i = 0;
 	printf(">> Entrando a builtin_env()\n");
 	if (!status->envp || !status->envp[0])
 	{
@@ -125,38 +94,9 @@ int	builtin_env(t_status *status)
 	}
 	while (status->envp[i])
 	{
-		if (ft_strchr(status->envp[i], '=')) // solo imprime si hay '='
+		if (ft_strchr(status->envp[i], '='))
 			printf("%s\n", status->envp[i]);
 		i++;
 	}
 	return (0);
-}
-
-char	**load_env(char **envp)
-{
-	char	**copy;
-	int		count;
-	int		i;
-
-	count = 0;
-	while (envp[count])
-		count++;
-	copy = malloc(sizeof(char *) * (count + 1));
-	if (!copy)
-		return (NULL);
-	i = 0;
-	while (i < count)
-	{
-		copy[i] = ft_strdup(envp[i]);
-		if (!copy[i])
-		{
-			while (--i >= 0)
-				free(copy[i]);
-			free(copy);
-			return (NULL);
-		}
-		i++;
-	}
-	copy[count] = NULL;
-	return (copy);
 }

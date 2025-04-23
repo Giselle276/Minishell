@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_builtins.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:58:53 by cgil              #+#    #+#             */
-/*   Updated: 2025/04/19 22:48:47 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/23 13:03:59 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ bool	is_builtin(const char *cmd)
 	if (!cmd)
 		return (false);
 	return (
-		ft_strcmp(cmd, "cd") == 0 ||
-		ft_strcmp(cmd, "echo") == 0 ||
-		ft_strcmp(cmd, "exit") == 0 ||
-		ft_strcmp(cmd, "pwd") == 0 ||
-		ft_strcmp(cmd, "env") == 0 ||
-		ft_strcmp(cmd, "unset") == 0 ||
-		ft_strcmp(cmd, "export") == 0
+		ft_strcmp(cmd, "cd") == 0
+		|| ft_strcmp(cmd, "echo") == 0
+		|| ft_strcmp(cmd, "exit") == 0
+		|| ft_strcmp(cmd, "pwd") == 0
+		|| ft_strcmp(cmd, "env") == 0
+		|| ft_strcmp(cmd, "unset") == 0
+		|| ft_strcmp(cmd, "export") == 0
 	);
 }
 
