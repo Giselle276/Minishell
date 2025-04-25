@@ -6,7 +6,7 @@
 /*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 11:12:45 by claudia           #+#    #+#             */
-/*   Updated: 2025/04/23 18:26:21 by cgil             ###   ########.fr       */
+/*   Updated: 2025/04/25 12:59:42 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,13 @@ void	free_tokens(t_token *token)
 		free(tmp->value);
 		free(tmp);
 	}
+}
+
+char	update_quote(char quote, char c) // solo cierra al ser iguales
+{
+	if ((c == '\'' || c == '\"') && quote == 0)
+		return (c);
+	else if (c == quote)
+		return (0);
+	return (quote);
 }

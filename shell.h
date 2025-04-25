@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 13:51:43 by cgil              #+#    #+#             */
-/*   Updated: 2025/04/24 13:09:55 by claudia          ###   ########.fr       */
+/*   Updated: 2025/04/25 13:06:12 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "./minishell.h"
 
-extern	t_status	*g_shell_status;
+extern t_status	*g_shell_status;
 
 void		shell_loop(void);
 t_cmds		*init_cmds_table(t_status *shell_st);
@@ -42,7 +42,7 @@ void		print_pipes_only(t_token *lst);
 bool		is_valid_pipe_syntax(t_token *lst);
 void		execute_root(t_status *st, t_cmds *ct);
 int			exec_simple_command(t_cmds *ct);
-int 	    exec_pipeline(t_cmds *ct, t_status *status);
+int			exec_pipeline(t_cmds *ct, t_status *status);
 void		handle_redirections(t_cmd *cmd);
 bool		is_builtin(const char *cmd);
 int			exec_builtin(char **argv, t_status *status);
@@ -72,7 +72,7 @@ int			builtin_unset(char **argv, t_status *status);
 char		*get_env_value(char **envp, const char *name);
 char		**set_env_value(char **envp, const char *name, const char *value);
 char		**unset_env_value(char **envp, const char *name);
-char        *find_command_path(char *cmd, char **envp);
+char		*find_command_path(char *cmd, char **envp);
 void		expand_env_vars(t_token *tokens, t_status *status);
 char		*expand_var(const char *str, t_status *status);
 

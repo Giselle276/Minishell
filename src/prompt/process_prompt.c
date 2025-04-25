@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_prompt.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 16:45:45 by cgil              #+#    #+#             */
-/*   Updated: 2025/04/25 11:44:27 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/25 13:23:19 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	process_prompt(t_cmds *ct)
 	if (is_empty_line(ct->cmd_line))
 	{
 		g_shell_status->error_code = EMPTYLINE;
-		printf("line is empty and im here\n");
+		free(ct->cmd_line);
 		ct->cmd_line = NULL;
 	}
 	add_history(ct->cmd_line);

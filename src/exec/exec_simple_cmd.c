@@ -101,7 +101,16 @@ static void	exec_child_process(char **argv, t_cmd *cmd, t_status *status)
 		free_argv(argv);
 		exit(127);
 	}
-	if (access(path, X_OK) != 0)
+	if (access(path, F_OK) != 0)  // Si el archivo no existe
+    {
+        free(path);
+        ft_putstr_fd("zsh: no such file or directory: ", 2);
+        ft_putstr_fd(argv[0], 2);
+        ft_putstr_fd("\n", 2);
+        free_argv(argv);
+        exit(127);  // Código de error para archivo no encontrado
+    }
+	else if (access(path, X_OK) != 0)
 	{
 		free(path);
 		error_denied(argv);

@@ -6,7 +6,7 @@
 /*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:39:39 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/23 19:16:10 by cgil             ###   ########.fr       */
+/*   Updated: 2025/04/25 13:08:15 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,16 @@ int	builtin_exit(char **argv)
 
 int	builtin_env(char **args, t_status *status)
 {
-	int	i = 0;
-
+	int	i;
+	
+	i = 0;
 	if (args[1])
 	{
 		ft_putstr_fd("env: '", 2);
 		ft_putstr_fd(args[1], 2);
 		ft_putstr_fd("':No such file or directory\n", 2);
 		g_shell_status->error_code = 127;
-		return(127);
+		return (127);
 	}
 	if (!status->envp || !status->envp[0])
 	{

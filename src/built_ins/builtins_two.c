@@ -6,7 +6,7 @@
 /*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:57:22 by cgil              #+#    #+#             */
-/*   Updated: 2025/04/23 19:19:36 by cgil             ###   ########.fr       */
+/*   Updated: 2025/04/25 13:08:51 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ int	builtin_pwd(void)
 	if (getcwd(cwd, sizeof(cwd)))
 	{
 		printf("%s\n", cwd);
-		return 0;
+		return (0);
 	}
 	perror("pwd");
-	return 1;
+	return (1);
 }
 
 int	builtin_export(char **argv, t_status *status)
