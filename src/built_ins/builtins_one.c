@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_one.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:39:39 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/25 13:08:15 by cgil             ###   ########.fr       */
+/*   Updated: 2025/04/30 17:35:18 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,15 @@ int	builtin_cd(char **args, t_status *status)
 
 	home = get_env_value(status->envp, "HOME");
 	if (!args[1] && home)
-		return (chdir(home));
+	{
+		if (chdir(home) == 0)
+			return (0);
+		else
+			return (1);
+	}
 	if (chdir(args[1]) != 0)
 	{
 		perror("cd");
-		status->stat = 1;
 		return (1);
 	}
 	return (0);
@@ -48,13 +52,13 @@ int	builtin_env(char **args, t_status *status)
 		ft_putstr_fd("env: '", 2);
 		ft_putstr_fd(args[1], 2);
 		ft_putstr_fd("':No such file or directory\n", 2);
-		g_shell_status->error_code = 127;
+		status->error_code = 127;
 		return (127);
 	}
 	if (!status->envp || !status->envp[0])
 	{
 		write(2, "env: environment not set\n", 26);
-		g_shell_status->error_code = 1;
+		status->error_code = 1;
 		return (1);
 	}
 	while (status->envp[i])
@@ -63,7 +67,7 @@ int	builtin_env(char **args, t_status *status)
 			printf("%s\n", status->envp[i]);
 		i++;
 	}
-	g_shell_status->error_code = 0;
+	status->error_code = 0;
 	return (0);
 }
 

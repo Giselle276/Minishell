@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 12:17:48 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/25 11:59:56 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/30 12:48:23 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,11 @@ void	free_split(char **split)
 	free(split);
 }
 
-void	validate_path(char	*path, char **argv)
-{
-	(void) path;
-		ft_putstr_fd("zsh: command not found: ", 2);
-		ft_putstr_fd(*argv, 2);
-		ft_putstr_fd("\n", 2);
-		//exit (127);
-}
-
 static int	is_expandable_token(t_token *token)
 {
-	return (token->type == T_WORD && ft_strchr(token->value, '$'));
+	return (token->type == T_WORD &&
+			ft_strchr(token->value, '$') &&
+			token->quote_type != '\''); // no expandir si es comilla simple
 }
 
 static void	expand_token_value(t_token *token, t_status *status)

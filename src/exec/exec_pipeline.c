@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 17:03:54 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/24 18:39:56 by claudia          ###   ########.fr       */
+/*   Updated: 2025/04/30 16:07:00 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,33 +24,6 @@ static void	build_argv(char **argv, t_token *arg)
 	}
 	argv[j] = NULL;
 }
-
-/*static void	execute_child(t_cmd *cmd, int prev_fd, int *pipefd, int is_last)
-{
-	char	*argv[256];
-	char	*path;
-
-	if (prev_fd != -1)
-	{
-		dup2(prev_fd, STDIN_FILENO);
-		close(prev_fd);
-	}
-	handle_redirections(cmd);
-	if (!is_last && cmd->redir_out == NULL)
-		dup2(pipefd[1], STDOUT_FILENO);
-	close(pipefd[0]);
-	close(pipefd[1]);
-	build_argv(argv, cmd->args);
-	path = find_command_path(argv[0]);
-	if (!path)
-	{
-		perror(argv[0]);
-		exit(127);
-	}
-	execve(path, argv, g_shell_status->envp);
-	perror("execve");
-	exit(127);
-}*/
 
 static int	exec_builtin_cmd(char **argv, t_cmd *cmd, t_status *status)
 {
@@ -92,8 +65,8 @@ static void	exec_child(t_cmd *cmd, int prev_fd,
 	build_argv(argv, cmd->args);
 	if (is_builtin(argv[0]))
 	{
-		g_shell_status->error_code = exec_builtin_cmd(argv, cmd, status);
-		exit(g_shell_status->error_code);
+		status->error_code = exec_builtin_cmd(argv, cmd, status);
+		exit(status->error_code);
 	}
 	path = find_command_path(argv[0], status->envp);
 	if (!path)

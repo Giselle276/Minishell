@@ -6,7 +6,7 @@
 /*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 13:06:18 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/22 13:11:04 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/28 13:16:33 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*get_var_value(char *var_start, t_status *status)
 		&& (ft_isalnum(var_start[var_len]) || var_start[var_len] == '_'))
 		var_len++;
 	var_name = ft_substr(var_start, 0, var_len);
-	value = getenv(var_name);
+	value = get_env_value(status->envp, var_name);
 	free(var_name);
 	if (!value)
 		return (ft_strdup(""));

@@ -23,6 +23,8 @@ SRC = src/main.c \
 	  src/exec/exec_utils.c \
 	  src/exec/redirections.c \
 	  src/exec/expand_var.c \
+	  src/exec/exec_error.c \
+	  src/exec/expand_var_utils.c \
 	  src/token/printfs_borrar.c \
 	  
 OBJDIR = objs

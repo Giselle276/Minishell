@@ -6,7 +6,7 @@
 /*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:58:53 by cgil              #+#    #+#             */
-/*   Updated: 2025/04/23 19:19:52 by cgil             ###   ########.fr       */
+/*   Updated: 2025/04/30 16:08:22 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	exec_builtin(char **argv, t_status *status)
 	if (ft_strcmp(argv[0], "cd") == 0)
 		return (builtin_cd(argv, status));
 	else if (ft_strcmp(argv[0], "echo") == 0)
-		return (builtin_echo(argv));
+		return (builtin_echo(argv, status));
 	else if (ft_strcmp(argv[0], "exit") == 0)
 		return (builtin_exit(argv));
 	else if (ft_strcmp(argv[0], "pwd") == 0)

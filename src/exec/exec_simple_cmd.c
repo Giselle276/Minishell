@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_simple_cmd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 16:51:58 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/25 12:51:48 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/04/30 18:54:14 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ char	*find_command_path(char *cmd, char **envp)
 	return (free_split(paths), NULL);
 }
 
-
 static void	fill_argv(char **argv, t_token *arg_token)
 {
 	int	i;
@@ -48,9 +47,8 @@ static void	fill_argv(char **argv, t_token *arg_token)
 	while (arg_token && i < 255)
 	{
 		argv[i] = ft_strdup(arg_token->value);
-		if (!argv[i])  // Aseguramos que strdup no falle.
+		if (!argv[i])
 		{
-			// En caso de error, liberamos lo que ya hemos asignado
 			while (i > 0)
 				free(argv[--i]);
 			return ;
@@ -58,7 +56,7 @@ static void	fill_argv(char **argv, t_token *arg_token)
 		arg_token = arg_token->next;
 		i++;
 	}
-	argv[i] = NULL; // Aseguramos que argv termina en NULL
+	argv[i] = NULL;
 }
 
 static int	exec_builtin_cmd(char **argv, t_cmd *cmd, t_status *status)
@@ -82,14 +80,7 @@ static int	exec_builtin_cmd(char **argv, t_cmd *cmd, t_status *status)
 	return (ret);
 }
 
-static void	error_denied(char **argv)
-{
-	ft_putstr_fd("zsh: permission denied: ", 2);
-	ft_putstr_fd(*argv, 2);
-	ft_putstr_fd("\n", 2);
-}
-
-static void	exec_child_process(char **argv, t_cmd *cmd, t_status *status)
+void	exec_child_process(char **argv, t_cmd *cmd, t_status *status)
 {
 	char	*path;
 
@@ -101,15 +92,15 @@ static void	exec_child_process(char **argv, t_cmd *cmd, t_status *status)
 		free_argv(argv);
 		exit(127);
 	}
-	if (access(path, F_OK) != 0)  // Si el archivo no existe
-    {
-        free(path);
-        ft_putstr_fd("zsh: no such file or directory: ", 2);
-        ft_putstr_fd(argv[0], 2);
-        ft_putstr_fd("\n", 2);
-        free_argv(argv);
-        exit(127);  // Código de error para archivo no encontrado
-    }
+	if (access(path, F_OK) != 0)
+	{
+		free(path);
+		ft_putstr_fd("zsh: no such file or directory: ", 2);
+		ft_putstr_fd(argv[0], 2);
+		ft_putstr_fd("\n", 2);
+		free_argv(argv);
+		exit(127);
+	}
 	else if (access(path, X_OK) != 0)
 	{
 		free(path);
@@ -124,30 +115,7 @@ static void	exec_child_process(char **argv, t_cmd *cmd, t_status *status)
 	exit(127);
 }
 
-static void	exec_parent_process(pid_t pid, char **argv)
-{
-	int	code;
-
-	waitpid(pid, &code, 0);
-	free_argv(argv);
-	g_shell_status->stat = WEXITSTATUS(code);
-}
-
-static void	exec_external_cmd(char **argv, t_cmd *cmd, t_status *status)
-{
-	pid_t	pid;
-
-	pid = fork();
-	if (pid == 0)
-		exec_child_process(argv, cmd, status);
-	else if (pid > 0)
-		exec_parent_process(pid, argv);
-	else
-		perror("fork");
-}
-
-
-int	exec_simple_command(t_cmds *ct)
+int	exec_simple_command(t_cmds *ct, t_status *status)
 {
 	t_cmd	*cmd;
 	char	*argv[256];
@@ -159,12 +127,18 @@ int	exec_simple_command(t_cmds *ct)
 		free_argv(argv);
 		return (0);
 	}
+	if (is_assignment(argv[0]))
+	{
+		handle_assignment(argv[0], status);
+		free_argv(argv);
+		return (0);
+	}
 	if (is_builtin(argv[0]))
 	{
-		g_shell_status->stat = exec_builtin_cmd(argv, cmd, ct->status);
-		return (g_shell_status->stat);
+		status->stat = exec_builtin_cmd(argv, cmd, status);
+		return (status->stat);
 	}
-	exec_external_cmd(argv, cmd, ct->status);
+	exec_external_cmd(argv, cmd, status);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 16:45:45 by cgil              #+#    #+#             */
-/*   Updated: 2025/04/25 13:23:19 by cgil             ###   ########.fr       */
+/*   Updated: 2025/04/30 15:58:11 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 static int	is_empty_line(char *input);
 
-void	process_prompt(t_cmds *ct)
+void	process_prompt(t_cmds *ct, t_status *status)
 {
 	char		*prompt;
 
-	if (g_shell_status->error_code == ECMDNF
-		|| g_shell_status->error_code == SIGNT
-		|| g_shell_status->error_code == SQUIT)
+	if (status->error_code == ECMDNF
+		||status->error_code == SIGNT
+		|| status->error_code == SQUIT)
 	{
-		g_shell_status->error_code = 1;
-		g_shell_status->stat = 1;
+		status->error_code = 1;
+		status->stat = 1;
 	}
 	prompt = USER_M "minishell> " RST;
 	handle_signal_before();
@@ -35,12 +35,12 @@ void	process_prompt(t_cmds *ct)
 	}
 	if (is_empty_line(ct->cmd_line))
 	{
-		g_shell_status->error_code = EMPTYLINE;
+		status->error_code = EMPTYLINE;
 		free(ct->cmd_line);
 		ct->cmd_line = NULL;
 	}
 	add_history(ct->cmd_line);
-	g_shell_status->error_code = 0;
+	status->error_code = 0;
 }
 
 static int	is_empty_line(char *input)

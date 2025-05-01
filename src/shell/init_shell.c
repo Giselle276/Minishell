@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 18:17:04 by claudia           #+#    #+#             */
-/*   Updated: 2025/04/24 19:15:42 by claudia          ###   ########.fr       */
+/*   Updated: 2025/04/30 19:00:09 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_status	*init_shell(char *envp[]) // puntero de variables de entorno
 	return (status);
 }
 
-t_cmds	*init_cmds_table(t_status *shell_st)
+t_cmds	*init_cmds_table(void)
 {
 	t_cmds	*cmds_table;
 
@@ -37,7 +37,6 @@ t_cmds	*init_cmds_table(t_status *shell_st)
 	if (!cmds_table)
 		validate_error(EALLOC, "Error while allocating memory with malloc",
 			cmds_table);
-	cmds_table->status = shell_st;
 	cmds_table->cmd_line = NULL;
 	cmds_table->piped_cmd = NULL;
 	cmds_table->not_piped_cmd = NULL;

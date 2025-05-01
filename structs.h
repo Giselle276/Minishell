@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 16:57:28 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/23 19:34:19 by cgil             ###   ########.fr       */
+/*   Updated: 2025/04/30 18:55:37 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_token // clasificacion de los tokens
 	char			*value;
 	t_token_type	type;
 	struct s_token	*next;
+	char			quote_type;
 }				t_token;
 
 typedef struct s_cmd
@@ -75,7 +76,6 @@ typedef struct s_cmd
 
 typedef struct s_cmds
 {
-	t_status	*status;
 	char		*cmd_line;
 	t_token		*token_lst;
 	t_token		**piped_cmd; // comandos 
