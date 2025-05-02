@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:57:22 by cgil              #+#    #+#             */
-/*   Updated: 2025/05/02 14:47:34 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/02 17:21:06 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	builtin_pwd(void)
 {
-	char cwd[1024];
+	char	cwd[1024];
 
 	if (getcwd(cwd, sizeof(cwd)))
 	{
@@ -24,34 +24,6 @@ int	builtin_pwd(void)
 	perror("pwd");
 	return (1);
 }
-
-/*int	builtin_export(char **argv, t_status *status)
-{
-	int		i;
-	char	*sep;
-	char	*key;
-	char	*value;
-
-	if (!argv[1])
-		return (builtin_env(argv, status)); // Mostrar todas si no hay args
-	i = 1;
-	while (argv[i])
-	{
-		sep = ft_strchr(argv[i], '=');
-		if (sep)
-		{
-			*sep = '\0';
-			key = argv[i];
-			value = sep + 1;
-			status->envp = set_env_value(status->envp, key, value);
-			*sep = '='; // Restaurar la cadena original
-		}
-		else
-			status->envp = set_env_value(status->envp, argv[i], ""); // Asignar variable vacía
-		i++;
-	}
-	return (0);
-}*/
 //perfecta pero muy larga
 /*int	builtin_export(char **argv, t_status *status)
 {
@@ -89,7 +61,6 @@ int	builtin_pwd(void)
 	return (0);
 }*/
 
-// Función para imprimir las variables de entorno precedidas de declare -x
 void	print_exported_env(t_status *status)
 {
 	int	i;
@@ -102,7 +73,6 @@ void	print_exported_env(t_status *status)
 	}
 }
 
-// Función para procesar cada argumento y asignar variables de entorno
 void	process_export_argument(char *arg, t_status *status)
 {
 	char	*sep;
@@ -115,14 +85,15 @@ void	process_export_argument(char *arg, t_status *status)
 		*sep = '\0';
 		key = arg;
 		value = sep + 1;
+		if (value[0] == '\0')
+			value = "\"\"";
 		status->envp = set_env_value(status->envp, key, value);
-		*sep = '='; // Restaurar la cadena original
+		*sep = '=';
 	}
 	else
-		 status->envp = set_env_value(status->envp, arg, ""); // Asignar variable vacía
+		status->envp = set_env_value(status->envp, arg, NULL);
 }
 
-// Función principal para exportar las variables
 int	builtin_export(char **argv, t_status *status)
 {
 	int	i;

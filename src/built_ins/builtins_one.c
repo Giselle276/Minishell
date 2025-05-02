@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:39:39 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/05/02 14:29:18 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/02 17:31:16 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ int	builtin_exit(char **argv)
 
 int	builtin_env(char **args, t_status *status)
 {
-	int	i;
+	int		i;
+	char	*equal_sign;
+	char	*value;
 
 	i = 0;
 	if (args[1])
@@ -63,8 +65,14 @@ int	builtin_env(char **args, t_status *status)
 	}
 	while (status->envp[i])
 	{
-		if (ft_strchr(status->envp[i], '=')) // solo imprime si hay '='
-			printf("%s\n", status->envp[i]);
+		equal_sign = ft_strchr(status->envp[i], '=');
+		if (equal_sign)
+		{
+			value = equal_sign + 1;
+			if (value[0] != '\0' && !(value[0] == '"'
+					&& value[1] == '"' && value[2] == '\0'))
+				printf("%s\n", status->envp[i]);
+		}
 		i++;
 	}
 	status->error_code = 0;

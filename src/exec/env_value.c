@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_value.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 19:39:48 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/19 20:29:35 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/02 17:18:53 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,13 @@ char	**set_env_value(char **envp, const char *name, const char *value)
 	char	*new_var;
 	int		exists;
 
-	new_var = ft_strjoin(name, "=");
-	new_var = ft_strjoin_free(new_var, value);
+	if (value == NULL)
+		new_var = ft_strdup(name);
+	else
+	{
+		new_var = ft_strjoin(name, "=");
+		new_var = ft_strjoin_free(new_var, value);
+	}
 	exists = env_var_exists(envp, name);
 	if (exists >= 0)
 	{
