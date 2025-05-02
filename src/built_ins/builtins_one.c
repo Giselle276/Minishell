@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:39:39 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/05/02 17:31:16 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/02 17:39:52 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,31 @@ int	builtin_exit(char **argv)
 	exit(code);
 }
 
-int	builtin_env(char **args, t_status *status)
+static int	should_print_env_var(const char *env_var)
 {
-	int		i;
 	char	*equal_sign;
 	char	*value;
 
-	i = 0;
+	equal_sign = ft_strchr(env_var, '=');
+	if (!equal_sign)
+		return (0);
+	value = equal_sign + 1;
+	if (value[0] == '\0')
+		return (0);
+	if (value[0] == '"' && value[1] == '"' && value[2] == '\0')
+		return (0);
+	return (1);
+}
+
+int	builtin_env(char **args, t_status *status)
+{
+	int	i;
+
 	if (args[1])
 	{
 		ft_putstr_fd("env: '", 2);
 		ft_putstr_fd(args[1], 2);
-		ft_putstr_fd("':No such file or directory\n", 2);
+		ft_putstr_fd("': No such file or directory\n", 2);
 		status->error_code = 127;
 		return (127);
 	}
@@ -63,16 +76,11 @@ int	builtin_env(char **args, t_status *status)
 		status->error_code = 1;
 		return (1);
 	}
+	i = 0;
 	while (status->envp[i])
 	{
-		equal_sign = ft_strchr(status->envp[i], '=');
-		if (equal_sign)
-		{
-			value = equal_sign + 1;
-			if (value[0] != '\0' && !(value[0] == '"'
-					&& value[1] == '"' && value[2] == '\0'))
-				printf("%s\n", status->envp[i]);
-		}
+		if (should_print_env_var(status->envp[i]))
+			printf("%s\n", status->envp[i]);
 		i++;
 	}
 	status->error_code = 0;
