@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:39:39 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/30 17:35:18 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/02 14:29:18 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	builtin_exit(char **argv)
 int	builtin_env(char **args, t_status *status)
 {
 	int	i;
-	
+
 	i = 0;
 	if (args[1])
 	{
