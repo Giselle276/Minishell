@@ -3,16 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   piped_tk.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 11:13:27 by claudia           #+#    #+#             */
-/*   Updated: 2025/04/23 18:50:24 by cgil             ###   ########.fr       */
+/*   Updated: 2025/05/02 11:50:17 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
 // obtiene token por token revisando el estado de las comillas
+
+char	*trim_quotes(char *token)
+{
+	char	quote;
+	char	*trimmed;
+	size_t	len;
+
+	if ((token[0] == '"' || token[0] == '\'') && ft_strlen(token) >= 2)
+	{
+		len = ft_strlen(token);
+		quote = token[0];
+		if (token[len - 1] == quote)
+		{
+			trimmed = ft_substr(token, 1, len - 2);
+			free(token);
+			return (trimmed);
+		}
+	}
+	return (token);
+}
 
 bool	has_pipe(t_token *lst)
 {
