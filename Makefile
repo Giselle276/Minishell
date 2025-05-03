@@ -9,7 +9,6 @@ SRC = src/main.c \
 	  src/token/piped_tk.c \
 	  src/token/tokenizing.c \
 	  src/token/token_utils.c \
-	  src/token/join_quotes.c \
 	  src/exec/env_value.c \
 	  src/parser/parse_cmd.c \
 	  src/free/free.c \

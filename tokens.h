@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 17:18:26 by claudia           #+#    #+#             */
-/*   Updated: 2025/05/02 12:00:38 by claudia          ###   ########.fr       */
+/*   Updated: 2025/04/30 16:09:09 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ typedef struct s_positions
 	char	*stemp;
 }	t_positions;
 
-//char	*get_token(char *line, int *i, char *quote_type);
+char	*get_token(char *line, int *i, char *quote_type);
 char			update_quote(char quote, char c);
-//t_token			*tokenize_line(char *cmd_line, t_status *status);
+t_token			*tokenize_line(char *cmd_line, t_status *status);
 void			print_tokens(t_token *token_lst);
 void			print_piped_cmds(t_token **piped_cmds);
 void			tokenizing(t_cmds *ct, t_status *status);
@@ -41,9 +41,5 @@ t_token			**group_piped_cmd(t_token *token_lst);
 void			parser(t_cmds *ct);
 void			print_piped_cmds(t_token **piped_cmds);
 void			print_all_parsed_cmds(t_cmd **cmds);
-t_token			*tokenize_line(char *cmd_line, t_status *status);
-t_token			*process_tokens(char *cmd_line, t_status *status);
-t_token			*create_and_add_token(char *cmd_line, int *i, t_status *status, t_token **tk_lst);
-char			*join_adjacent_quoted(char *line, int *i, char *quote_type);
 // error
 #endif
