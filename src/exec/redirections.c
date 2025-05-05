@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 18:46:02 by claudia           #+#    #+#             */
-/*   Updated: 2025/04/24 19:15:10 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/05 11:45:23 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ static void	handle_redir_in(t_token *redir)
 	if (fd < 0)
 	{
 		perror("Redirección de entrada");
-		exit(1);
+		return ;
+		//exit(1);
 	}
 	dup2(fd, STDIN_FILENO);
 	close(fd);
@@ -52,7 +53,8 @@ static void	handle_redir_out(t_token *redir)
 	if (fd < 0)
 	{
 		perror("Redirección de salida");
-		exit(1);
+		//exit(1);
+		return ;
 	}
 	dup2(fd, STDOUT_FILENO);
 	close(fd);
