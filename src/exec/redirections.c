@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 18:46:02 by claudia           #+#    #+#             */
-/*   Updated: 2025/05/05 16:28:59 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/05 17:44:55 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	handle_heredoc(const char *delimiter)
         }
 
         // Verificar si la línea es igual al delimitador
-        if (strncmp(line, delimiter, strlen(delimiter)) == 0 && strlen(line) == strlen(delimiter))
+        if (ft_strncmp(line, delimiter, strlen(delimiter)) == 0 && strlen(line) == strlen(delimiter))
         {
             free(line); // Liberamos la memoria de la línea
             break; // Si coincide con el delimitador, terminamos el heredoc

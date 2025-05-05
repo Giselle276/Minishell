@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 18:38:51 by cgil              #+#    #+#             */
-/*   Updated: 2025/05/02 17:55:11 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/05 17:44:32 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	builtin_echo(char **argv, t_status *status)
 	{
 		if (missmatched_quotes(argv[i], status))
 			return (status->error_code = 1, 1);
-		write(1, argv[i], strlen(argv[i]));
+		write(1, argv[i], ft_strlen(argv[i]));
 		if (argv[i + 1])
 			write(1, " ", 1);
 		i++;

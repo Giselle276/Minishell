@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_two.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:57:22 by cgil              #+#    #+#             */
-/*   Updated: 2025/05/05 12:46:43 by cgil             ###   ########.fr       */
+/*   Updated: 2025/05/05 19:07:24 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	print_exported_env(t_status *status)
 {
 	int		i;
 	char	*sep;
+	char	*key;
+	char	*value;
 
 	i = 0;
 	while (status->envp[i])
@@ -37,7 +39,9 @@ void	print_exported_env(t_status *status)
 		if (sep)
 		{
 			*sep = '\0';
-			printf("declare -x %s=\"%s\"\n", status->envp[i], sep + 1);
+			key = status->envp[i];
+			value = sep + 1;
+			printf("declare -x %s=\"%s\"\n", key, value);
 			*sep = '=';
 		}
 		else
@@ -52,7 +56,7 @@ void	process_export_argument(char *arg, t_status *status)
 	char	*key;
 	char	*value;
 
-	if(arg[0] == '\0')
+	if (arg[0] == '\0')
 	{
 		write(2, "minishell: export: `': not a valid identifier\n", 47);
 		status->error_code = 1;
@@ -65,7 +69,7 @@ void	process_export_argument(char *arg, t_status *status)
 		key = arg;
 		value = sep + 1;
 		if (value[0] == '\0')
-			value = "\"\"";
+			value = "";
 		status->envp = set_env_value(status->envp, key, value);
 		*sep = '=';
 	}
