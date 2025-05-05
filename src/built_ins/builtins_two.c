@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_two.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:57:22 by cgil              #+#    #+#             */
-/*   Updated: 2025/05/01 19:33:46 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/02 17:21:06 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	builtin_pwd(void)
 {
-	char cwd[1024];
+	char	cwd[1024];
 
 	if (getcwd(cwd, sizeof(cwd)))
 	{
@@ -24,31 +24,25 @@ int	builtin_pwd(void)
 	perror("pwd");
 	return (1);
 }
-
-static int	is_valid_identifier(const char *str)
-{
-	if (!ft_isalpha(*str) && *str != '_')
-		return (0);
-	while (*str && *str != '=')
-	{
-		if (!ft_isalnum(*str) && *str != '_')
-			return (0);
-		str++;
-	}
-	return (1);
-}
-
-int	builtin_export(char **argv, t_status *status)
+//perfecta pero muy larga
+/*int	builtin_export(char **argv, t_status *status)
 {
 	int		i;
 	char	*sep;
 	char	*key;
-	char	*value;
-
-	if (!argv[1])
-		return (builtin_env(argv, status));
+	char	*value;	
 
 	i = 1;
+	if (!argv[1])
+	{
+		i = 0;
+		while (status->envp[i])
+		{
+			printf("declare -x %s\n", status->envp[i]);
+			i++;
+		}
+		return (0);
+	}
 	while (argv[i])
 	{
 		sep = ft_strchr(argv[i], '=');
@@ -57,29 +51,62 @@ int	builtin_export(char **argv, t_status *status)
 			*sep = '\0';
 			key = argv[i];
 			value = sep + 1;
-			if (!is_valid_identifier(key))
-			{
-				ft_putstr_fd("zsh: export: `", 2);
-				ft_putstr_fd(argv[i], 2);
-				ft_putstr_fd("=", 2);
-        		ft_putstr_fd(value, 2);
-				ft_putstr_fd("': not a valid identifier\n", 2);
-			}
-			else
-				status->envp = set_env_value(status->envp, key, value);
-			*sep = '=';
+			status->envp = set_env_value(status->envp, key, value);
+			*sep = '='; // Restaurar la cadena original
 		}
 		else
-		{
-			if (!is_valid_identifier(argv[i]))
-			{
-				ft_putstr_fd("export: `", 2);
-				ft_putstr_fd(argv[i], 2);
-				ft_putstr_fd("': not a valid identifier\n", 2);
-			}
-			else
-				status->envp = set_env_value(status->envp, argv[i], "");
-		}
+			status->envp = set_env_value(status->envp, argv[i], "");
+		i++;
+	}
+	return (0);
+}*/
+
+void	print_exported_env(t_status *status)
+{
+	int	i;
+
+	i = 0;
+	while (status->envp[i])
+	{
+		printf("declare -x %s\n", status->envp[i]);
+		i++;
+	}
+}
+
+void	process_export_argument(char *arg, t_status *status)
+{
+	char	*sep;
+	char	*key;
+	char	*value;
+
+	sep = ft_strchr(arg, '=');
+	if (sep)
+	{
+		*sep = '\0';
+		key = arg;
+		value = sep + 1;
+		if (value[0] == '\0')
+			value = "\"\"";
+		status->envp = set_env_value(status->envp, key, value);
+		*sep = '=';
+	}
+	else
+		status->envp = set_env_value(status->envp, arg, NULL);
+}
+
+int	builtin_export(char **argv, t_status *status)
+{
+	int	i;
+
+	i = 1;
+	if (!argv[1])
+	{
+		print_exported_env(status);
+		return (0);
+	}
+	while (argv[i])
+	{
+		process_export_argument(argv[i], status);
 		i++;
 	}
 	return (0);
