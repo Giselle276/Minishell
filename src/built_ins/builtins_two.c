@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_two.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:57:22 by cgil              #+#    #+#             */
-/*   Updated: 2025/05/02 17:21:06 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/05 12:46:43 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,51 +24,24 @@ int	builtin_pwd(void)
 	perror("pwd");
 	return (1);
 }
-//perfecta pero muy larga
-/*int	builtin_export(char **argv, t_status *status)
-{
-	int		i;
-	char	*sep;
-	char	*key;
-	char	*value;	
-
-	i = 1;
-	if (!argv[1])
-	{
-		i = 0;
-		while (status->envp[i])
-		{
-			printf("declare -x %s\n", status->envp[i]);
-			i++;
-		}
-		return (0);
-	}
-	while (argv[i])
-	{
-		sep = ft_strchr(argv[i], '=');
-		if (sep)
-		{
-			*sep = '\0';
-			key = argv[i];
-			value = sep + 1;
-			status->envp = set_env_value(status->envp, key, value);
-			*sep = '='; // Restaurar la cadena original
-		}
-		else
-			status->envp = set_env_value(status->envp, argv[i], "");
-		i++;
-	}
-	return (0);
-}*/
 
 void	print_exported_env(t_status *status)
 {
-	int	i;
+	int		i;
+	char	*sep;
 
 	i = 0;
 	while (status->envp[i])
 	{
-		printf("declare -x %s\n", status->envp[i]);
+		sep = ft_strchr(status->envp[i], '=');
+		if (sep)
+		{
+			*sep = '\0';
+			printf("declare -x %s=\"%s\"\n", status->envp[i], sep + 1);
+			*sep = '=';
+		}
+		else
+			printf("declare -x %s\n", status->envp[i]);
 		i++;
 	}
 }
@@ -79,6 +52,12 @@ void	process_export_argument(char *arg, t_status *status)
 	char	*key;
 	char	*value;
 
+	if(arg[0] == '\0')
+	{
+		write(2, "minishell: export: `': not a valid identifier\n", 47);
+		status->error_code = 1;
+		return ;
+	}
 	sep = ft_strchr(arg, '=');
 	if (sep)
 	{
@@ -91,7 +70,8 @@ void	process_export_argument(char *arg, t_status *status)
 		*sep = '=';
 	}
 	else
-		status->envp = set_env_value(status->envp, arg, NULL);
+		if (env_var_exists(status->envp, arg) == -1)
+			status->envp = set_env_value(status->envp, arg, NULL);
 }
 
 int	builtin_export(char **argv, t_status *status)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_value.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 19:39:48 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/05/02 17:45:55 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/05 12:48:59 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*get_env_value(char **envp, const char *name)
 	return (NULL);
 }
 
-static int	env_var_exists(char **envp, const char *name)
+int	env_var_exists(char **envp, const char *name)
 {
 	int		i;
 	size_t	len;
@@ -39,7 +39,7 @@ static int	env_var_exists(char **envp, const char *name)
 	i = 0;
 	while (envp[i])
 	{
-		if (ft_strncmp(envp[i], name, len) == 0 && envp[i][len] == '=')
+		if (ft_strncmp(envp[i], name, len) == 0 && (envp[i][len] == '=' || envp[i][len] == '\0'))
 			return (i);
 		i++;
 	}
@@ -80,6 +80,7 @@ static int	env_var_exists(char **envp, const char *name)
 	free(envp);
 	return (new_envp);
 }*/
+
 static char	*create_env_var(const char *name, const char *value)
 {
 	char	*new_var;
@@ -93,7 +94,6 @@ static char	*create_env_var(const char *name, const char *value)
 	}
 	return (new_var);
 }
-
 
 char	**set_env_value(char **envp, const char *name, const char *value)
 {
