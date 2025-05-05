@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 17:03:54 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/30 16:07:00 by cgil             ###   ########.fr       */
+/*   Updated: 2025/05/05 11:41:10 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,6 @@ static void	build_argv(char **argv, t_token *arg)
 		arg = arg->next;
 	}
 	argv[j] = NULL;
-}
-
-static int	exec_builtin_cmd(char **argv, t_cmd *cmd, t_status *status)
-{
-	int	saved_stdin;
-	int	saved_stdout;
-	int	ret;
-	int	i;
-
-	saved_stdin = dup(STDIN_FILENO);
-	saved_stdout = dup(STDOUT_FILENO);
-	handle_redirections(cmd);
-	ret = exec_builtin(argv, status);
-	dup2(saved_stdin, STDIN_FILENO);
-	dup2(saved_stdout, STDOUT_FILENO);
-	close(saved_stdin);
-	close(saved_stdout);
-	i = 0;
-	while (argv[i])
-		free(argv[i++]);
-	return (ret);
 }
 
 static void	exec_child(t_cmd *cmd, int prev_fd,
