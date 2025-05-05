@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:07:52 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/21 12:00:20 by cgil             ###   ########.fr       */
+/*   Updated: 2025/05/05 13:19:31 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,11 @@ t_token	*handle_tokens(t_cmd *cmd, t_token *tmp)
 	{
 		if (tmp->next)
 		{
-			add_token(&cmd->redir_in, create_token(tmp->next->value));
+			t_token *new = malloc(sizeof(t_token));
+			new->value = ft_strdup(tmp->next->value);
+			new->type = tmp->type;  // ✅ CONSERVA EL TIPO
+			new->next = NULL;
+			add_token(&cmd->redir_in, new);
 			tmp = tmp->next;
 		}
 	}
@@ -37,7 +41,11 @@ t_token	*handle_tokens(t_cmd *cmd, t_token *tmp)
 	{
 		if (tmp->next)
 		{
-			add_token(&cmd->redir_out, create_token(tmp->next->value));
+			t_token *new = malloc(sizeof(t_token));
+			new->value = ft_strdup(tmp->next->value);
+			new->type = tmp->type;  // ✅ CONSERVA EL TIPO
+			new->next = NULL;
+			add_token(&cmd->redir_out, new);
 			tmp = tmp->next;
 		}
 	}

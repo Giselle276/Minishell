@@ -27,6 +27,8 @@ SRC = src/main.c \
 	  src/exec/exec_error.c \
 	  src/exec/expand_var_utils.c \
 	  src/token/printfs_borrar.c \
+	  get_next_line/get_next_line.c \
+	  get_next_line/get_next_line_utils.c
 	  
 OBJDIR = objs
 OBJ = $(patsubst src/%.c,$(OBJDIR)/%.o,$(SRC))
