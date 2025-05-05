@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 13:51:43 by cgil              #+#    #+#             */
-/*   Updated: 2025/04/30 18:59:15 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/05 11:38:24 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 # include "./minishell.h"
 
-void	    shell_loop(t_status *status);
-t_cmds	    *init_cmds_table(void);
+void		shell_loop(t_status *status);
+t_cmds		*init_cmds_table(void);
 t_status	*init_shell(char *envp[]);
 
 ///////////// prompt
-void	process_prompt(t_cmds *ct, t_status *status);
+void		process_prompt(t_cmds *ct, t_status *status);
 
 //////////// signals
 void		signal_c(int sg);
@@ -43,12 +43,12 @@ bool		is_valid_pipe_syntax(t_token *lst);
 ///exec//////////////////////////////////////////////////////
 
 void		execute_root(t_status *st, t_cmds *ct);
-int	        exec_simple_command(t_cmds *ct, t_status *status);
+int			exec_simple_command(t_cmds *ct, t_status *status);
 int			exec_pipeline(t_cmds *ct, t_status *status);
 void		handle_redirections(t_cmd *cmd);
 bool		is_builtin(const char *cmd);
 int			exec_builtin(char **argv, t_status *status);
-char        *trim_quotes(char *token);
+char		*trim_quotes(char *token);
 
 //free
 void		free_cmds_table(t_cmds *cmds_table);
@@ -63,13 +63,14 @@ void		free_split(char **split);
 
 //built-in
 int			builtin_cd(char **argvs, t_status *status);
-int         builtin_echo(char **argv, t_status *status);
+int			builtin_echo(char **argv, t_status *status);
 int			builtin_exit(char **argv);
 int			builtin_pwd(void);
 int			builtin_env(char **args, t_status *t_status);
 char		**load_env(char **envp);
 int			builtin_export(char **argv, t_status *status);
 int			builtin_unset(char **argv, t_status *status);
+int			exec_builtin_cmd(char **argv, t_cmd *cmd, t_status *status);
 
 // get, set unset env value
 char		*get_env_value(char **envp, const char *name);

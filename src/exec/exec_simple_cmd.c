@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_simple_cmd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 16:51:58 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/30 18:54:14 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/05 11:35:13 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	fill_argv(char **argv, t_token *arg_token)
 	argv[i] = NULL;
 }
 
-static int	exec_builtin_cmd(char **argv, t_cmd *cmd, t_status *status)
+int	exec_builtin_cmd(char **argv, t_cmd *cmd, t_status *status)
 {
 	int	saved_stdin;
 	int	saved_stdout;
