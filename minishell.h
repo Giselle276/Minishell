@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:08:41 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/05/05 12:18:13 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/05 17:35:59 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # include "./structs.h"
 # include "./shell.h"
 # include "./tokens.h"
-# include "./get_next_line/get_next_line.h"
+# include "src/get_next_line/get_next_line.h"
 
 # define RST	"\033[0m"
 # define G		"\033[1;32m"
