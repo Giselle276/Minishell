@@ -6,7 +6,7 @@
 /*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 18:46:02 by claudia           #+#    #+#             */
-/*   Updated: 2025/05/06 09:39:21 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/06 11:24:17 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	handle_heredoc(const char *delimiter)
 		{
 			line[len - 1] = '\0';
 		}
-		if (ft_strncmp(line, delimiter, strlen(delimiter)) == 0
-			&& strlen(line) == strlen(delimiter))
+		if (ft_strncmp(line, delimiter, ft_strlen(delimiter)) == 0
+			&& ft_strlen(line) == ft_strlen(delimiter))
 		{
 			free(line);
 			break ;
