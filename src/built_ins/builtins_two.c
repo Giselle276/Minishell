@@ -6,11 +6,11 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:57:22 by cgil              #+#    #+#             */
-/*   Updated: 2025/05/05 19:07:24 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/06 16:27:38 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../shell.h"
+#include "../../minishell.h"
 
 int	builtin_pwd(void)
 {
@@ -110,4 +110,3 @@ int	builtin_unset(char **argv, t_status *status)
 	}
 	return (0);
 }
-

@@ -19,6 +19,7 @@ SRC = src/main.c \
 	  src/exec/exec_simple_cmd.c \
 	  src/exec/exec_pipeline.c \
 	  src/built_ins/check_builtins.c \
+	  src/built_ins/builtin_cd.c \
 	  src/built_ins/builtins_one.c \
 	  src/built_ins/builtins_two.c \
 	  src/built_ins/builtin_echo.c \

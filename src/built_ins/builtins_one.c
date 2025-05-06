@@ -6,13 +6,13 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:39:39 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/05/02 17:39:52 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/06 16:27:50 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	builtin_cd(char **args, t_status *status)
+/*int	builtin_cd(char **args, t_status *status)
 {
 	char	*home;
 
@@ -30,17 +30,8 @@ int	builtin_cd(char **args, t_status *status)
 		return (1);
 	}
 	return (0);
-}
+}*/
 
-int	builtin_exit(char **argv)
-{
-	int	code;
-
-	code = 0;
-	if (argv[1])
-		code = ft_atoi(argv[1]);
-	exit(code);
-}
 
 static int	should_print_env_var(const char *env_var)
 {
@@ -114,4 +105,13 @@ char	**load_env(char **envp)
 	}
 	copy[count] = NULL;
 	return (copy);
+}
+int	builtin_exit(char **argv)
+{
+	int	code;
+
+	code = 0;
+	if (argv[1])
+		code = ft_atoi(argv[1]);
+	exit(code);
 }

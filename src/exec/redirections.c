@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 18:46:02 by claudia           #+#    #+#             */
-/*   Updated: 2025/05/06 11:24:17 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/06 16:02:02 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,15 @@ void	handle_heredoc(const char *delimiter)
 		perror("pipe");
 		exit(1);
 	}
-
 	while (1)
 	{
 		write(STDOUT_FILENO, "heredoc> ", 9);
 		line = get_next_line(STDIN_FILENO);
 		if (!line)
-		{
 			break ;
-		}
 		len = ft_strlen(line);
 		if (len > 0 && line[len - 1] == '\n')
-		{
 			line[len - 1] = '\0';
-		}
 		if (ft_strncmp(line, delimiter, ft_strlen(delimiter)) == 0
 			&& ft_strlen(line) == ft_strlen(delimiter))
 		{
