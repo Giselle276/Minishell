@@ -6,7 +6,7 @@
 /*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 12:58:36 by cgil              #+#    #+#             */
-/*   Updated: 2025/05/06 09:50:14 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/06 10:59:15 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,15 @@ void	tokenizing(t_cmds *ct, t_status *status)
 	ct->token_lst = tokenize_line(ct->cmd_line, status);
 	if (!ct->token_lst)
 		return ;
+	if (!is_valid_redirection_syntax(ct->token_lst))
+	{
+		free_tokens(ct->token_lst);
+		ct->token_lst = NULL;
+		return ;
+	}
 	if (!is_valid_pipe_syntax(ct->token_lst))
 	{
-		ft_putstr_fd("minishell: syntax error near pipe\n", 2);
+		//ft_putstr_fd("minishell: syntax error near pipe\n", 2);
 		free_tokens(ct->token_lst);
 		ct->token_lst = NULL;
 		return ;

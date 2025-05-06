@@ -6,7 +6,7 @@
 /*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 11:13:27 by claudia           #+#    #+#             */
-/*   Updated: 2025/05/06 09:48:48 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/06 10:59:37 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,13 +103,26 @@ bool	is_valid_pipe_syntax(t_token *lst)
 	{
 		if (lst->type == T_PIPE)
 		{
-			if (!prev || prev->type == T_PIPE)
+			if (!prev)
+			{
+				ft_putstr_fd("zsh: syntax error  unexpected token `|'\n", 2);
 				return (false);
+			}
+			if (prev->type == T_PIPE)
+			{
+				ft_putstr_fd("zsh: syntax error near unexpected token `|'\n", 2);
+				return (false);
+			}
 			if (!lst->next)
+			{
+				ft_putstr_fd("zsh: syntax error near unexpected token `newline'\n", 2);
 				return (false);
-			if (lst->next->type == T_PIPE || !lst->next->value
-				|| ft_strlen(lst->next->value) == 0)
-				return (0);
+			}
+			if (lst->next->type == T_PIPE)
+			{
+				ft_putstr_fd("zsh: syntax error near unexpected token `|'\n", 2);
+				return (false);
+			}
 		}
 		prev = lst;
 		lst = lst->next;

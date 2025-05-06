@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 17:18:26 by claudia           #+#    #+#             */
-/*   Updated: 2025/05/02 12:00:38 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/06 10:57:59 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,11 @@ void			print_piped_cmds(t_token **piped_cmds);
 void			print_all_parsed_cmds(t_cmd **cmds);
 t_token			*tokenize_line(char *cmd_line, t_status *status);
 t_token			*process_tokens(char *cmd_line, t_status *status);
-t_token			*create_and_add_token(char *cmd_line, int *i, t_status *status, t_token **tk_lst);
+t_token			*create_and_add_token(char *cmd_line, int *i, t_status *status,
+					t_token **tk_lst);
 char			*join_adjacent_quoted(char *line, int *i, char *quote_type);
+int				is_valid_redirection_syntax(t_token *tokens);
+int				is_redirection(t_token_type type);
+bool			is_valid_pipe_syntax(t_token *lst);
 // error
 #endif
