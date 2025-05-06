@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 18:38:51 by cgil              #+#    #+#             */
-/*   Updated: 2025/05/05 17:44:32 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/06 09:42:32 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	is_n_flag(const char *str)
 {
-	int i;
+	int	i;
 
 	if (!str || str[0] != '-')
 		return (0);

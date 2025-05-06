@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 11:12:45 by claudia           #+#    #+#             */
-/*   Updated: 2025/04/25 12:59:42 by cgil             ###   ########.fr       */
+/*   Updated: 2025/05/06 09:49:53 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-//printf("DEBUG get_token_type: '%s'\n", str);
 t_token_type	get_token_type(char *str)
 {
 	if (!str)
@@ -32,7 +31,6 @@ t_token_type	get_token_type(char *str)
 	return (T_WORD);
 }
 
-//asigna memoria para el token
 t_token	*create_token(char *str)
 {
 	t_token	*new;
@@ -46,7 +44,6 @@ t_token	*create_token(char *str)
 	return (new);
 }
 
-// agrega el token al final de la lista
 void	add_token(t_token **tk_list, t_token *new_token)
 {
 	t_token	*tmp;
@@ -75,7 +72,7 @@ void	free_tokens(t_token *token)
 	}
 }
 
-char	update_quote(char quote, char c) // solo cierra al ser iguales
+char	update_quote(char quote, char c)
 {
 	if ((c == '\'' || c == '\"') && quote == 0)
 		return (c);

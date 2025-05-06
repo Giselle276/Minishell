@@ -3,68 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   join_quotes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 11:48:30 by claudia           #+#    #+#             */
-/*   Updated: 2025/05/02 12:20:19 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/06 09:48:28 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-/*char	*join_adjacent_quoted(char *line, int *i, char *quote_type)
-{
-	char	*result;
-	char	*part;
-	int		start;
-	char	quote;
-	char	*temp;
-
-	result = NULL;
-	while (line[*i] && line[*i] == ' ')
-		(*i)++;
-	while (line[*i] && line[*i] != ' ')
-	{
-		quote = 0;
-		if (line[*i] == '"' || line[*i] == '\'')
-		{
-			quote = line[*i];
-			if (*quote_type == 0)
-				*quote_type = quote;
-			(*i)++;
-			start = *i;
-			while (line[*i] && line[*i] != quote)
-				(*i)++;
-			if (!line[*i])
-			{
-				ft_putstr_fd("minishell: unclosed quote\n", 2);
-				free(result);
-				return (NULL);
-			}
-			part = ft_substr(line, start, *i - start);
-			(*i)++;
-		}
-		else
-		{
-			start = *i;
-			while (line[*i] && line[*i] != ' ' && line[*i] != '"' && line[*i] != '\'')
-				(*i)++;
-			part = ft_substr(line, start, *i - start);
-		}
-		if (!part)
-			return (free(result), NULL);
-		if (!result)
-			result = part;
-		else
-		{
-			temp = ft_strjoin(result, part);
-			free(result);
-			free(part);
-			result = temp;
-		}
-	}
-	return (result);
-}*/
 
 char	*process_quoted_token(char *line, int *i, char quote, char *quote_type)
 {

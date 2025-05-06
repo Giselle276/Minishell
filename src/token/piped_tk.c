@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   piped_tk.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 11:13:27 by claudia           #+#    #+#             */
-/*   Updated: 2025/05/02 11:50:17 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/06 09:48:48 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,9 @@ bool	is_valid_pipe_syntax(t_token *lst)
 				return (false);
 			if (!lst->next)
 				return (false);
-			if (lst->next->type == T_PIPE || !lst->next->value || ft_strlen(lst->next->value) == 0)
-					return (0);
+			if (lst->next->type == T_PIPE || !lst->next->value
+				|| ft_strlen(lst->next->value) == 0)
+				return (0);
 		}
 		prev = lst;
 		lst = lst->next;

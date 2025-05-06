@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:08:41 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/05/05 17:35:59 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/06 09:51:32 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,47 +63,7 @@
 # define END "\033[0m"
 # define CYAN "\033[1;36m"
 
-/*typedef enum e_errcode // codigos de error
-{
-	SIGEXIT,
-	ESYNTAX,
-	EUSAGE,
-	EPARSE,
-	EUNFQT,
-	EMPTYLINE,
-	ECOMMAND,
-	ENUMARG,
-	EALLOC,
-	ECMDNF = 127, // command not found
-	SIGNT = 130, // control c signal interrupt
-	SQUIT = 131, //  ctrl + \ no deberia hacer nada
-	EEOF,
-	__ERRMAX
-}					t_errcode;
-
-// flags [2: O_RDONLY |1: WRONLY CREAT APPEND| 0: WRONLY CREAT TRUNC]
-typedef struct s_file // estructura de los archivos
-{
-	char				*path;
-	int					flags;
-	int					fd;
-}						t_file;
-
-typedef struct s_process // estructura de los procesos
-{
-	char				*local_env[32];
-	char				*command;
-	char				*argv[64];
-	t_file				*input_file[16];
-	t_file				*output_file[16];
-	struct s_process	*next;
-	struct s_process	*prev;
-}						t_process;*/
-
 void		print_header(void);
-//t_process	*simple_or_piped(t_token **tokens, int flag);
-//int 		validate_input(const char *input);
-//char		*get_path(char *cmd);
-//void		clean_shell(shell_status);
+
 
 #endif

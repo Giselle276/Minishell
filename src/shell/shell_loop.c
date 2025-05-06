@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_loop.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 16:28:05 by claudia           #+#    #+#             */
-/*   Updated: 2025/05/02 12:22:52 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/06 09:47:58 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	remove_outer_quotes(t_token *token)
 		return ;
 	len = ft_strlen(token->value);
 	if ((token->quote_type == '\'' || token->quote_type == '"')
-		&& len >= 2 && token->value[0] == token->quote_type 
+		&& len >= 2 && token->value[0] == token->quote_type
 		&& token->value[len - 1] == token->quote_type)
 	{
 		trimmed = ft_substr(token->value, 1, len - 2);

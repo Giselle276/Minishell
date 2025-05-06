@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:09:13 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/30 15:56:52 by cgil             ###   ########.fr       */
+/*   Updated: 2025/05/06 09:50:36 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	main(int ac, char *av[], char *envp[])
 {
-	t_status *status;
-	
+	t_status	*status;
+
 	(void) av;
 	if (ac != 1)
 		validate_error(EUSAGE, "Run as: ./minishell\n", NULL);

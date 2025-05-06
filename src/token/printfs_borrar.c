@@ -52,10 +52,10 @@ void	print_piped_cmds(t_token **piped_cmds)
     int	i;
 
 	i = 0;
-	while (piped_cmds[i])  // Recorrer cada grupo de comandos
+	while (piped_cmds[i])
 	{
 		printf("Piped Command %d:\n", i + 1);
-		print_tokens(piped_cmds[i]);// Imprime los tokens de cada comando
+		print_tokens(piped_cmds[i]);
 		i++;
 	}
 }
@@ -81,5 +81,3 @@ void	print_all_parsed_cmds(t_cmd **cmds)
 		i++;
 	}
 }
-
-///acaban printfs//////////////////////////////////////////

@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:07:52 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/05/05 16:29:58 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/06 09:46:11 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-// revisa si hay redirecciones y segun ellas crea y guarda
-// el token de a donde se va realizar la redireccion
-// si es un builtin lo guarda en args
 
 void	init_cmd(t_cmd *cmd)
 {
@@ -25,13 +21,15 @@ void	init_cmd(t_cmd *cmd)
 
 t_token	*handle_tokens(t_cmd *cmd, t_token *tmp)
 {
+	t_token	*new;
+
 	if (tmp->type == T_REDIR_IN || tmp->type == T_HEREDOC)
 	{
 		if (tmp->next)
 		{
-			t_token *new = malloc(sizeof(t_token));
+			new = malloc(sizeof(t_token));
 			new->value = ft_strdup(tmp->next->value);
-			new->type = tmp->type;  // ✅ CONSERVA EL TIPO
+			new->type = tmp->type;
 			new->next = NULL;
 			add_token(&cmd->redir_in, new);
 			tmp = tmp->next;
@@ -41,9 +39,9 @@ t_token	*handle_tokens(t_cmd *cmd, t_token *tmp)
 	{
 		if (tmp->next)
 		{
-			t_token *new = malloc(sizeof(t_token));
+			new = malloc(sizeof(t_token));
 			new->value = ft_strdup(tmp->next->value);
-			new->type = tmp->type;  // ✅ CONSERVA EL TIPO
+			new->type = tmp->type;
 			new->next = NULL;
 			add_token(&cmd->redir_out, new);
 			tmp = tmp->next;
@@ -102,11 +100,9 @@ void	parser(t_cmds *ct)
 	{
 		ct->piped_cmd = group_piped_cmd(ct->token_lst);
 		ct->parsed_cmds = parse_all_cmds(ct->piped_cmd);
-		//print_all_parsed_cmds(ct->parsed_cmds);
 	}
 	else
 	{
 		ct->parsed_simple = parse_cmd_tokens(ct->token_lst);
-		//print_cmd(ct->parsed_simple);
 	}
 }

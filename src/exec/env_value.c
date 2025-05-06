@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_value.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 19:39:48 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/05/05 12:48:59 by cgil             ###   ########.fr       */
+/*   Updated: 2025/05/06 09:42:05 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,47 +39,13 @@ int	env_var_exists(char **envp, const char *name)
 	i = 0;
 	while (envp[i])
 	{
-		if (ft_strncmp(envp[i], name, len) == 0 && (envp[i][len] == '=' || envp[i][len] == '\0'))
+		if (ft_strncmp(envp[i], name, len) == 0
+			&& (envp[i][len] == '=' || envp[i][len] == '\0'))
 			return (i);
 		i++;
 	}
 	return (-1);
 }
-
-/*char	**set_env_value(char **envp, const char *name, const char *value)
-{
-	int		i;
-	char	**new_envp;
-	char	*new_var;
-	int		exists;
-
-	if (value == NULL)
-		new_var = ft_strdup(name);
-	else
-	{
-		new_var = ft_strjoin(name, "=");
-		new_var = ft_strjoin_free(new_var, value);
-	}
-	exists = env_var_exists(envp, name);
-	if (exists >= 0)
-	{
-		free(envp[exists]);
-		envp[exists] = new_var;
-		return (envp);
-	}
-	i = 0;
-	while (envp[i])
-		i++;
-	new_envp = malloc(sizeof(char *) * (i + 2));
-	if (!new_envp)
-		return (NULL);
-	for (int j = 0; j < i; j++)
-		new_envp[j] = envp[j];
-	new_envp[i] = new_var;
-	new_envp[i + 1] = NULL;
-	free(envp);
-	return (new_envp);
-}*/
 
 static char	*create_env_var(const char *name, const char *value)
 {
