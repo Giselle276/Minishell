@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_prompt.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 16:45:45 by cgil              #+#    #+#             */
-/*   Updated: 2025/04/30 15:58:11 by cgil             ###   ########.fr       */
+/*   Updated: 2025/05/06 18:47:05 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	process_prompt(t_cmds *ct, t_status *status)
 		free(ct->cmd_line);
 		ct->cmd_line = NULL;
 	}
-	add_history(ct->cmd_line);
+	else
+		add_history(ct->cmd_line);
 	status->error_code = 0;
 }
 

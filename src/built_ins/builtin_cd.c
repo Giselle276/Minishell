@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:18:52 by claudia           #+#    #+#             */
-/*   Updated: 2025/05/06 16:42:55 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/06 22:40:32 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static char	*get_cd_target(char **args, t_status *status)
 	{
 		target = get_env_value(status->envp, "OLDPWD");
 		if (!target)
-			return (write(2, "cd: OLDPWD not set\n", 18), NULL);
+			return (write(2, "cd: OLDPWD not set qe pasa\n", 18), NULL);
 		printf("%s\n", target);
 		return (ft_strdup(target));
 	}

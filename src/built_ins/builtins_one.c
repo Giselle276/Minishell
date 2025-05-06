@@ -6,32 +6,11 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:39:39 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/05/06 16:27:50 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/06 18:30:53 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-/*int	builtin_cd(char **args, t_status *status)
-{
-	char	*home;
-
-	home = get_env_value(status->envp, "HOME");
-	if (!args[1] && home)
-	{
-		if (chdir(home) == 0)
-			return (0);
-		else
-			return (1);
-	}
-	if (chdir(args[1]) != 0)
-	{
-		perror("cd");
-		return (1);
-	}
-	return (0);
-}*/
-
 
 static int	should_print_env_var(const char *env_var)
 {
@@ -106,12 +85,41 @@ char	**load_env(char **envp)
 	copy[count] = NULL;
 	return (copy);
 }
+
+static int	is_numeric(const char *str)
+{
+	int	i;
+
+	if (!str || !*str)
+		return (0);
+	i = 0;
+	if (str[i] == '+' || str[i] == '-')
+		i++;
+	if (!str[i])
+		return (0);
+	while (str[i])
+	{
+		if (!isdigit((unsigned char)str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int	builtin_exit(char **argv)
 {
 	int	code;
 
 	code = 0;
 	if (argv[1])
+	{
+		if (!is_numeric(argv[1]))
+		{
+			fprintf(stderr, "exit: %s: numeric argument required\n", argv[1]);
+			exit(2);
+		}
 		code = ft_atoi(argv[1]);
+	}
 	exit(code);
 }
+
