@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 13:51:43 by cgil              #+#    #+#             */
-/*   Updated: 2025/05/07 12:25:22 by cgil             ###   ########.fr       */
+/*   Updated: 2025/05/07 13:15:01 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_cmd		**parse_all_cmds(t_token **piped_cmds);
 void		print_cmd(t_cmd *cmd);
 void		print_pipes_only(t_token *lst);
 bool		is_valid_pipe_syntax(t_token *lst);
+
 
 ///exec//////////////////////////////////////////////////////
 

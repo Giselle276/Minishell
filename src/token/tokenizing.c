@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 12:58:36 by cgil              #+#    #+#             */
-/*   Updated: 2025/05/06 10:59:15 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/07 11:18:19 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,3 +100,4 @@ void	tokenizing(t_cmds *ct, t_status *status)
 		return ;
 	}
 }
+
