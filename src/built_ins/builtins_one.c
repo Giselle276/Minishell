@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_one.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:39:39 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/05/06 18:30:53 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/07 12:25:06 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,12 +111,18 @@ int	builtin_exit(char **argv)
 	int	code;
 
 	code = 0;
+	printf("exit\n");
 	if (argv[1])
 	{
 		if (!is_numeric(argv[1]))
 		{
-			fprintf(stderr, "exit: %s: numeric argument required\n", argv[1]);
+			write(2, "minshell: numeric argument required\n", 37);
 			exit(2);
+		}
+		if (argv[2])
+		{
+			write(2, "minishell: too many arguments\n", 31);
+			return (1);
 		}
 		code = ft_atoi(argv[1]);
 	}
