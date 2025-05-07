@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 18:46:02 by claudia           #+#    #+#             */
-/*   Updated: 2025/05/06 16:02:02 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/07 13:17:12 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,22 +53,7 @@ void	handle_redirections(t_cmd *cmd)
 	t_token	*tmp;
 	int		fd;
 
-	tmp = cmd->redir_out;
-	while (tmp)
-	{
-		if (tmp->type == T_APPEND)
-			fd = open(tmp->value, O_WRONLY | O_CREAT | O_APPEND, 0644);
-		else
-			fd = open(tmp->value, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		if (fd < 0)
-		{
-			perror(tmp->value);
-			exit(1);
-		}
-		dup2(fd, STDOUT_FILENO);
-		close(fd);
-		tmp = tmp->next;
-	}
+	// Procesar primero los redireccionamientos de entrada (incluye heredoc)
 	tmp = cmd->redir_in;
 	while (tmp)
 	{
@@ -85,6 +70,23 @@ void	handle_redirections(t_cmd *cmd)
 			dup2(fd, STDIN_FILENO);
 			close(fd);
 		}
+		tmp = tmp->next;
+	}
+	// Luego redireccionar la salida
+	tmp = cmd->redir_out;
+	while (tmp)
+	{
+		if (tmp->type == T_APPEND)
+			fd = open(tmp->value, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		else
+			fd = open(tmp->value, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (fd < 0)
+		{
+			perror(tmp->value);
+			exit(1);
+		}
+		dup2(fd, STDOUT_FILENO);
+		close(fd);
 		tmp = tmp->next;
 	}
 }

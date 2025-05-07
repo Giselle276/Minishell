@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   piped_tk.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 11:13:27 by claudia           #+#    #+#             */
-/*   Updated: 2025/05/06 10:59:37 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/07 13:37:20 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,34 +98,26 @@ bool	is_valid_pipe_syntax(t_token *lst)
 
 	prev = NULL;
 	if (!lst)
-		return (false);
+		return (true); // Si no hay tokens, no hay errores de sintaxis.
 	while (lst)
 	{
 		if (lst->type == T_PIPE)
 		{
-			if (!prev)
+			// Si el pipe es el primer token o sigue otro pipe
+			if (!prev || prev->type == T_PIPE)
 			{
-				ft_putstr_fd("zsh: syntax error  unexpected token `|'\n", 2);
-				return (false);
+				ft_putstr_fd("minishell: syntax error near unexpected token `|'\n", 2);
+				return (false); // Indicamos que hubo un error de sintaxis, pero no salimos
 			}
-			if (prev->type == T_PIPE)
+			// Si el pipe es el último token o el siguiente token no es un comando válido
+			if (!lst->next || lst->next->type == T_PIPE || lst->next->type == T_REDIR_IN || lst->next->type == T_REDIR_OUT || lst->next->type == T_APPEND || lst->next->type == T_HEREDOC)
 			{
-				ft_putstr_fd("zsh: syntax error near unexpected token `|'\n", 2);
-				return (false);
-			}
-			if (!lst->next)
-			{
-				ft_putstr_fd("zsh: syntax error near unexpected token `newline'\n", 2);
-				return (false);
-			}
-			if (lst->next->type == T_PIPE)
-			{
-				ft_putstr_fd("zsh: syntax error near unexpected token `|'\n", 2);
-				return (false);
+				ft_putstr_fd("minishell: syntax error near unexpected token `|'\n", 2);
+				return (false); // Indicamos que hubo un error de sintaxis, pero no salimos
 			}
 		}
 		prev = lst;
 		lst = lst->next;
 	}
-	return (true);
+	return (true); // No hubo errores de sintaxis
 }

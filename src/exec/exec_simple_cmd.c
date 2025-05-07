@@ -6,7 +6,7 @@
 /*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 16:51:58 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/05/05 11:35:13 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/07 13:37:07 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	exec_child_process(char **argv, t_cmd *cmd, t_status *status)
 	if (access(path, F_OK) != 0)
 	{
 		free(path);
-		ft_putstr_fd("zsh: no such file or directory: ", 2);
+		ft_putstr_fd("minishell: no such file or directory: ", 2);
 		ft_putstr_fd(argv[0], 2);
 		ft_putstr_fd("\n", 2);
 		free_argv(argv);
@@ -115,12 +115,47 @@ void	exec_child_process(char **argv, t_cmd *cmd, t_status *status)
 	exit(127);
 }
 
+
+void	write_interactive_to_file(const char *filename)
+{
+     int fd;
+
+    fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    if (fd < 0)
+    {
+        perror("open");
+        return;
+    }
+    close(fd);
+}
+
 int	exec_simple_command(t_cmds *ct, t_status *status)
 {
 	t_cmd	*cmd;
 	char	*argv[256];
 
 	cmd = ct->parsed_simple;
+
+		if (cmd->redir_in)
+	{
+		int fd = open(cmd->redir_in->value, O_RDONLY);
+		if (fd < 0)
+		{
+			ft_putstr_fd("minishell: ", 2);
+			ft_putstr_fd(cmd->redir_in->value, 2);
+			ft_putstr_fd(": No such file or directory\n", 2);
+			status->error_code = 1;
+			return (1);
+		}
+		close(fd);
+	}
+
+	
+	if ((!cmd->args || !cmd->args->value) && cmd->redir_out && !cmd->redir_in)
+	{
+		write_interactive_to_file(cmd->redir_out->value); // o como accedas al nombre del archivo
+		return (0);
+	}
 	fill_argv(argv, cmd->args);
 	if (!argv[0] || ft_strlen(argv[0]) == 0)
 	{
