@@ -16,7 +16,7 @@ SRC = src/main.c \
 	  src/parser/parsing.c \
 	  src/free/free.c \
 	  src/free/free_two.c \
-	  src/exec/exec.c \
+	  src/exec/exec_child.c \
 	  src/exec/exec_simple_cmd.c \
 	  src/exec/exec_pipeline.c \
 	  src/built_ins/check_builtins.c \
@@ -29,7 +29,6 @@ SRC = src/main.c \
 	  src/exec/expand_var.c \
 	  src/exec/exec_error.c \
 	  src/exec/expand_var_utils.c \
-	  src/token/printfs_borrar.c \
 	  src/get_next_line/get_next_line.c \
 	  src/get_next_line/get_next_line_utils.c \
 	  

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 17:03:54 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/05/05 11:41:10 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/09 21:12:17 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ static void	exec_child(t_cmd *cmd, int prev_fd,
 	perror("execve");
 	exit(127);
 }
-
 
 static void	handle_parent(int *prev_fd, int *pipefd)
 {

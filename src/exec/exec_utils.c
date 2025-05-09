@@ -6,11 +6,19 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 12:17:48 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/05/02 12:06:28 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/09 20:33:41 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+void	execute_root(t_status *st, t_cmds *ct)
+{
+	if (ct->parsed_simple)
+		exec_simple_command(ct, st);
+	else if (ct->parsed_cmds)
+		exec_pipeline(ct, st);
+}
 
 void	free_split(char **split)
 {
