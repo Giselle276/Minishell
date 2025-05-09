@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 18:46:02 by claudia           #+#    #+#             */
-/*   Updated: 2025/05/07 13:17:12 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/09 13:08:24 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	handle_redirections(t_cmd *cmd)
 	t_token	*tmp;
 	int		fd;
 
-	// Procesar primero los redireccionamientos de entrada (incluye heredoc)
 	tmp = cmd->redir_in;
 	while (tmp)
 	{
@@ -72,7 +71,6 @@ void	handle_redirections(t_cmd *cmd)
 		}
 		tmp = tmp->next;
 	}
-	// Luego redireccionar la salida
 	tmp = cmd->redir_out;
 	while (tmp)
 	{

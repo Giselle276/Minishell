@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_simple_cmd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 16:51:58 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/05/07 13:37:07 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/09 17:16:34 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*find_command_path(char *cmd, char **envp)
 	char	*full;
 	int		i;
 
+	if (!cmd)
+		return (NULL);
 	if (ft_strchr(cmd, '/'))
 		return (ft_strdup(cmd));
 	path = get_env_value(envp, "PATH");
@@ -115,48 +117,76 @@ void	exec_child_process(char **argv, t_cmd *cmd, t_status *status)
 	exit(127);
 }
 
-
 void	write_interactive_to_file(const char *filename)
 {
-     int fd;
+	int	fd;
 
-    fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-    if (fd < 0)
-    {
-        perror("open");
-        return;
-    }
-    close(fd);
+	fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (fd < 0)
+	{
+		perror("open");
+		return ;
+	}
+	close(fd);
+}
+void handle_heredoc_no_cmd(const char *delimiter)
+{
+	char *line;
+	size_t len;
+
+	while (1)
+	{
+		write(STDOUT_FILENO, "heredoc> ", 9);
+		line = get_next_line(STDIN_FILENO);
+		if (!line)
+			break ;
+		len = ft_strlen(line);
+		if (len > 0 && line[len - 1] == '\n')
+			line[len - 1] = '\0';
+		if (ft_strncmp(line, delimiter, ft_strlen(delimiter)) == 0
+			&& ft_strlen(line) == ft_strlen(delimiter))
+		{
+			free(line);
+			break ;
+		}
+		free(line);
+	}
 }
 
 int	exec_simple_command(t_cmds *ct, t_status *status)
 {
 	t_cmd	*cmd;
 	char	*argv[256];
+	int		fd;
 
 	cmd = ct->parsed_simple;
-
-		if (cmd->redir_in)
+	if (cmd->redir_in)
 	{
-		int fd = open(cmd->redir_in->value, O_RDONLY);
-		if (fd < 0)
+		if (cmd->redir_in->type == T_REDIR_IN)
 		{
-			ft_putstr_fd("minishell: ", 2);
-			ft_putstr_fd(cmd->redir_in->value, 2);
-			ft_putstr_fd(": No such file or directory\n", 2);
-			status->error_code = 1;
-			return (1);
-		}
+			fd = open(cmd->redir_in->value, O_RDONLY);
+			if (fd < 0)
+			{
+				ft_putstr_fd("minishell: ", 2);
+				ft_putstr_fd(cmd->redir_in->value, 2);
+				ft_putstr_fd(": No such file or directory\n", 2);
+				status->error_code = 1;
+				return (1);
+			}
 		close(fd);
+		}
 	}
-
-	
+	if (!cmd->args && cmd->redir_in && cmd->redir_in->type == T_HEREDOC)
+	{
+		handle_heredoc_no_cmd(cmd->redir_in->value);
+		return (0);
+	}
+	fill_argv(argv, cmd->args);
 	if ((!cmd->args || !cmd->args->value) && cmd->redir_out && !cmd->redir_in)
 	{
 		write_interactive_to_file(cmd->redir_out->value); // o como accedas al nombre del archivo
 		return (0);
 	}
-	fill_argv(argv, cmd->args);
 	if (!argv[0] || ft_strlen(argv[0]) == 0)
 	{
 		free_argv(argv);
@@ -176,4 +206,3 @@ int	exec_simple_command(t_cmds *ct, t_status *status)
 	exec_external_cmd(argv, cmd, status);
 	return (0);
 }
-

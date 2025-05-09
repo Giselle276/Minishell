@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 13:51:43 by cgil              #+#    #+#             */
-/*   Updated: 2025/05/07 13:15:01 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/09 16:43:35 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,7 @@ void		handle_assignment(char *assignment, t_status *status);
 void		exec_external_cmd(char **argv, t_cmd *cmd, t_status *status);
 void		exec_child_process(char **argv, t_cmd *cmd, t_status *status);
 int			env_var_exists(char **envp, const char *name);
+
+void	handle_heredoc(const char *delimiter);
 
 #endif
