@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 16:51:58 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/05/09 17:16:34 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/09 18:24:33 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ void	write_interactive_to_file(const char *filename)
 	}
 	close(fd);
 }
+
 void handle_heredoc_no_cmd(const char *delimiter)
 {
 	char *line;

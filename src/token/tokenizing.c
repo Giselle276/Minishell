@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 12:58:36 by cgil              #+#    #+#             */
-/*   Updated: 2025/05/07 11:18:19 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/09 18:23:08 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ t_token	*create_and_add_token(char *cmd_line, int *i,
 	return (new_token);
 }
 
-
 t_token	*process_tokens(char *cmd_line, t_status *status)
 {
 	t_token	*new_token;
@@ -80,7 +79,6 @@ t_token	*tokenize_line(char *cmd_line, t_status *status)
 	return (process_tokens(cmd_line, status));
 }
 
-
 void	tokenizing(t_cmds *ct, t_status *status)
 {
 	ct->token_lst = tokenize_line(ct->cmd_line, status);
@@ -94,10 +92,8 @@ void	tokenizing(t_cmds *ct, t_status *status)
 	}
 	if (!is_valid_pipe_syntax(ct->token_lst))
 	{
-		//ft_putstr_fd("minishell: syntax error near pipe\n", 2);
 		free_tokens(ct->token_lst);
 		ct->token_lst = NULL;
 		return ;
 	}
 }
-

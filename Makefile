@@ -13,6 +13,7 @@ SRC = src/main.c \
 	  src/token/validate_syntax.c \
 	  src/exec/env_value.c \
 	  src/parser/parse_cmd.c \
+	  src/parser/parsing.c \
 	  src/free/free.c \
 	  src/free/free_two.c \
 	  src/exec/exec.c \

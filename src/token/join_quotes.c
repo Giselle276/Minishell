@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   join_quotes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 11:48:30 by claudia           #+#    #+#             */
-/*   Updated: 2025/05/06 09:48:28 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/09 18:22:09 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,3 @@ char	*join_adjacent_quoted(char *line, int *i, char *quote_type)
 	}
 	return (result);
 }
-
-
-
-
-
