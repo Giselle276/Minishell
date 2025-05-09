@@ -30,6 +30,7 @@ SRC = src/main.c \
 	  src/exec/exec_error.c \
 	  src/exec/expand_var_utils.c \
 	  src/get_next_line/get_next_line.c \
+	  src/heredoc/heredoc.c \
 	  src/get_next_line/get_next_line_utils.c \
 	  
 OBJDIR = objs
@@ -55,6 +56,7 @@ $(OBJDIR)/%.o: src/%.c $(INCLUDES)
 	@mkdir -p $(OBJDIR)/free
 	@mkdir -p $(OBJDIR)/built_ins
 	@mkdir -p $(OBJDIR)/get_next_line
+	@mkdir -p $(OBJDIR)/heredoc
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJ) $(LIBFT)
