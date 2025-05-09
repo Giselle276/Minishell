@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:08:41 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/05/06 09:51:32 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/09 17:37:24 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,5 @@
 # define BLUE "\033[1;34m"
 # define END "\033[0m"
 # define CYAN "\033[1;36m"
-
-void		print_header(void);
-
 
 #endif

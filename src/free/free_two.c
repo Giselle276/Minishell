@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_two.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 17:19:44 by cgil              #+#    #+#             */
-/*   Updated: 2025/04/25 10:46:02 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/09 17:53:10 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	free_argv(char **argv)
 
 	i = 0;
 	if (!argv)
-		return;
+		return ;
 	while (argv[i])
 		free(argv[i++]);
 }

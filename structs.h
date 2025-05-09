@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 16:57:28 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/05/07 13:01:53 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/09 17:41:28 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "./minishell.h"
 
-typedef enum e_errcode // codigos de error
+typedef enum e_errcode
 {
 	SIGEXIT,
 	ESYNTAX,
@@ -26,21 +26,21 @@ typedef enum e_errcode // codigos de error
 	ECOMMAND,
 	ENUMARG,
 	EALLOC,
-	ECMDNF = 127, // command not found
-	SIGNT = 130, // control c signal interrupt
-	SQUIT = 131, //  ctrl + \ no deberia hacer nada
+	ECMDNF = 127,
+	SIGNT = 130,
+	SQUIT = 131,
 	EEOF,
 	__ERRMAX
 }					t_errcode;
 
-typedef enum e_token_type // tipo de token
+typedef enum e_token_type
 {
 	T_WORD,
 	T_BUILTIN,
 	T_PIPE,
 	T_REDIR_IN,
 	T_REDIR_OUT,
-	T_APPEND, // >> -> si no existe lo crea y si existe lo agrega al final
+	T_APPEND,
 	T_HEREDOC,
 	T_INVALID,
 }			t_token_type;
@@ -51,16 +51,10 @@ typedef struct s_status
 	char		**child_envp;
 	int			error_code;
 	int			stat;
-	int         signal_interrupted; 
-	//int			std_fd[2];
+	int			signal_interrupted;
 }				t_status;
 
-/*typedef struct s_status
-{
-	int			stat;
-}				t_status;*/
-
-typedef struct s_token // clasificacion de los tokens
+typedef struct s_token
 {
 	char			*value;
 	t_token_type	type;
@@ -70,18 +64,18 @@ typedef struct s_token // clasificacion de los tokens
 
 typedef struct s_cmd
 {
-	t_token	*args;// Argumentos del comando
-	t_token	*redir_in;// Redirecciones de entrada (<, <<)
-	t_token	*redir_out;// Redirecciones de salida (>, >>)
+	t_token	*args;
+	t_token	*redir_in;
+	t_token	*redir_out;
 }	t_cmd;
 
 typedef struct s_cmds
 {
 	char		*cmd_line;
 	t_token		*token_lst;
-	t_token		**piped_cmd; // comandos 
+	t_token		**piped_cmd;
 	t_token		*not_piped_cmd;
-	t_cmd		**parsed_cmds; // listo para ejecucion
+	t_cmd		**parsed_cmds;
 	t_cmd		*parsed_simple;
 }				t_cmds;
 

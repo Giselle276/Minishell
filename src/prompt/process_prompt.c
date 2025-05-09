@@ -3,16 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   process_prompt.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 16:45:45 by cgil              #+#    #+#             */
-/*   Updated: 2025/05/07 13:15:18 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/09 17:50:45 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
 static int	is_empty_line(char *input);
+
+static void	handle_empty_line(char **line, t_status *status)
+{
+	status->error_code = EMPTYLINE;
+	free(*line);
+	*line = NULL;
+}
 
 void	process_prompt(t_cmds *ct, t_status *status)
 {
@@ -34,11 +41,7 @@ void	process_prompt(t_cmds *ct, t_status *status)
 		exit (EXIT_SUCCESS);
 	}
 	if (is_empty_line(ct->cmd_line))
-	{
-		status->error_code = EMPTYLINE;
-		free(ct->cmd_line);
-		ct->cmd_line = NULL;
-	}
+		handle_empty_line(&ct->cmd_line, status);
 	else
 		add_history(ct->cmd_line);
 	status->error_code = 0;

@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:18:52 by claudia           #+#    #+#             */
-/*   Updated: 2025/05/06 22:40:32 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/09 17:52:42 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,11 @@ int	builtin_cd(char **args, t_status *status)
 	oldpwd = getcwd(NULL, 0);
 	if (!oldpwd)
 		return (perror("getcwd"), 1);
-
 	target = get_cd_target(args, status);
 	if (!target)
 		return (free(oldpwd), 1);
-
 	if (change_dir(target) != 0)
 		return (free(oldpwd), free(target), 1);
-
 	update_pwd_vars(status, oldpwd);
 	free(oldpwd);
 	free(target);

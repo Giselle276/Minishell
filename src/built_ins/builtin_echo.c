@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 18:38:51 by cgil              #+#    #+#             */
-/*   Updated: 2025/05/06 09:42:32 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/09 17:52:05 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static int	is_n_flag(const char *str)
 
 	if (!str || str[0] != '-')
 		return (0);
-
 	i = 1;
 	while (str[i])
 	{
@@ -36,7 +35,6 @@ static int	missmatched_quotes(char *str, t_status *status)
 
 	single = 0;
 	db_q = 0;
-
 	while (*str)
 	{
 		if (*str == '\'')
@@ -80,4 +78,3 @@ int	builtin_echo(char **argv, t_status *status)
 	status->error_code = 0;
 	return (0);
 }
-

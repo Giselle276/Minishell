@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:07:52 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/05/06 09:46:11 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/09 17:58:15 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	init_cmd(t_cmd *cmd)
 	cmd->redir_out = NULL;
 }
 
-t_token	*handle_tokens(t_cmd *cmd, t_token *tmp)
+/*t_token	*handle_tokens(t_cmd *cmd, t_token *tmp)
 {
 	t_token	*new;
 
@@ -49,6 +49,37 @@ t_token	*handle_tokens(t_cmd *cmd, t_token *tmp)
 	}
 	else if (tmp->type == T_WORD || tmp->type == T_BUILTIN)
 		add_token(&cmd->args, create_token(tmp->value));
+	return (tmp->next);
+}*/
+
+static t_token	*handle_redirection(t_cmd *cmd, t_token *tmp)
+{
+	t_token	*new;
+
+	if (!tmp->next)
+		return tmp;
+
+	new = malloc(sizeof(t_token));
+	new->value = ft_strdup(tmp->next->value);
+	new->type = tmp->type;
+	new->next = NULL;
+
+	if (tmp->type == T_REDIR_IN || tmp->type == T_HEREDOC)
+		add_token(&cmd->redir_in, new);
+	else if (tmp->type == T_REDIR_OUT || tmp->type == T_APPEND)
+		add_token(&cmd->redir_out, new);
+
+	return (tmp->next);
+}
+
+t_token	*handle_tokens(t_cmd *cmd, t_token *tmp)
+{
+	if (tmp->type == T_REDIR_IN || tmp->type == T_HEREDOC
+		|| tmp->type == T_REDIR_OUT || tmp->type == T_APPEND)
+		tmp = handle_redirection(cmd, tmp);
+	else if (tmp->type == T_WORD || tmp->type == T_BUILTIN)
+		add_token(&cmd->args, create_token(tmp->value));
+
 	return (tmp->next);
 }
 
