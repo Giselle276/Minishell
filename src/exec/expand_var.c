@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 13:06:18 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/28 13:16:33 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/09 21:37:25 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ static char	*extract_suffix(char *str)
 	suffix = ft_strdup(str + i);
 	return (suffix);
 }
-
 
 static char	*get_prefix(const char *str, char *var)
 {

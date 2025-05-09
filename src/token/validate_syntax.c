@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_syntax.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 10:30:52 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/05/07 13:36:16 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/09 21:41:29 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int	is_valid_redirection_syntax(t_token *tokens)
 		{
 			if (!tmp->next || tmp->next->type != T_WORD)
 			{
-				ft_putstr_fd("minishell: syntax error near unexpected token `newline'\n", 2);
+				ft_putstr_fd("minishell: syntax error near", 2);
+				ft_putstr_fd("token `newline'\n", 2);
 				return (0);
 			}
 		}

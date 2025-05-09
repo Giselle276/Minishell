@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 11:13:27 by claudia           #+#    #+#             */
-/*   Updated: 2025/05/09 18:19:35 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/09 21:36:12 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ bool	is_valid_pipe_syntax(t_token *lst)
 				ft_putstr_fd("minishell: syntax error near unexpected token `|'\n", 2);
 				return (false);
 			}
-			if (!lst->next || lst->next->type == T_PIPE || lst->next->type == T_REDIR_IN || lst->next->type == T_REDIR_OUT || lst->next->type == T_APPEND || lst->next->type == T_HEREDOC)
+				if (!lst->next || lst->next->type == T_PIPE || lst->next->type == T_REDIR_IN || lst->next->type == T_REDIR_OUT || lst->next->type == T_APPEND || lst->next->type == T_HEREDOC)
 			{
 				ft_putstr_fd("minishell: syntax error near unexpected token `|'\n", 2);
 				return (false);
