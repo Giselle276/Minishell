@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 11:13:27 by claudia           #+#    #+#             */
-/*   Updated: 2025/05/09 21:36:12 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/09 21:46:05 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ t_token	**group_piped_cmd(t_token *token_lst)
 	return (piped_cmds);
 }
 
-bool	is_valid_pipe_syntax(t_token *lst)
+/*bool	is_valid_pipe_syntax(t_token *lst)
 {
 	t_token	*prev;
 
@@ -116,4 +116,4 @@ bool	is_valid_pipe_syntax(t_token *lst)
 		lst = lst->next;
 	}
 	return (true);
-}
+}*/

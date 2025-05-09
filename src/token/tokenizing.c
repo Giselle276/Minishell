@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 12:58:36 by cgil              #+#    #+#             */
-/*   Updated: 2025/05/09 18:23:08 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/09 22:10:35 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_token	*create_and_validate_tk(char *tk_str, t_status *status)
 	new_token = create_token(tk_str);
 	if (new_token->type == T_INVALID)
 	{
-		ft_putstr_fd("Minishell: syntax error\n", 2);
+		ft_putstr_fd("Minishell: syntax error near unexpected token `|'\n", 2);
 		status->error_code = 2;
 		free(new_token->value);
 		free(new_token);

@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 10:30:52 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/05/09 21:41:29 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/09 22:08:40 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,43 @@ int	is_valid_redirection_syntax(t_token *tokens)
 		tmp = tmp->next;
 	}
 	return (1);
+}
+
+bool	is_invalid_pipe_sequence(t_token *prev)
+{
+	return (!prev || prev->type == T_PIPE);
+}
+
+bool	is_invalid_next_token(t_token *lst)
+{
+	return (!lst->next || lst->next->type == T_PIPE
+		|| lst->next->type == T_REDIR_IN
+		|| lst->next->type == T_REDIR_OUT
+		|| lst->next->type == T_APPEND
+		|| lst->next->type == T_HEREDOC);
+}
+
+bool	is_valid_pipe_syntax(t_token *lst)
+{
+	t_token	*prev;
+
+	prev = NULL;
+	if (!lst)
+		return (true);
+	while (lst)
+	{
+		if (lst->type == T_PIPE)
+		{
+			if (is_invalid_pipe_sequence(prev)
+				|| is_invalid_next_token(lst))
+			{
+				ft_putstr_fd("minishell: syntax error near", 2);
+				ft_putstr_fd("unexpected token `|'\n", 2);
+				return (false);
+			}
+		}
+		prev = lst;
+		lst = lst->next;
+	}
+	return (true);
 }
