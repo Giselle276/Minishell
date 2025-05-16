@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 13:06:18 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/05/09 21:37:25 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/16 13:23:49 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*get_var_value(char *var_start, t_status *status)
 	int		var_len;
 
 	if (*var_start == '?')
-		return (ft_itoa(status->error_code));
+		return (ft_itoa(status->stat));
 	var_len = 0;
 	while (var_start[var_len]
 		&& (ft_isalnum(var_start[var_len]) || var_start[var_len] == '_'))
