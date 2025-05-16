@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_var_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 11:43:22 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/04/30 16:07:34 by cgil             ###   ########.fr       */
+/*   Updated: 2025/05/16 14:09:39 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,17 @@ void	handle_assignment(char *assignment, t_status *status)
 static void	exec_parent_process(pid_t pid, char **argv, t_status * status)
 {
 	int	code;
-
 	waitpid(pid, &code, 0);
 	free_argv(argv);
-	status->stat = WEXITSTATUS(code);
+	if (WIFSIGNALED(code))
+	{
+	    int sig = WTERMSIG(code);
+	    status->stat = 128 + sig; // estándar de bash
+	    if (sig == SIGINT)
+	        write(STDOUT_FILENO, "\n", 1);  // mostrar salto de línea después de ^C
+	}
+	else if (WIFEXITED(code))
+	    status->stat = WEXITSTATUS(code);
 }
 
 void	exec_external_cmd(char **argv, t_cmd *cmd, t_status *status)
@@ -48,9 +55,17 @@ void	exec_external_cmd(char **argv, t_cmd *cmd, t_status *status)
 
 	pid = fork();
 	if (pid == 0)
+	{
+		signal(SIGINT, SIG_DFL);  // Hijo recibe señales como en bash
+		signal(SIGQUIT, SIG_DFL);
 		exec_child_process(argv, cmd, status);
+	}
 	else if (pid > 0)
+	{
+		signal(SIGINT, SIG_IGN);  // Shell ignora CTRL+C mientras espera
 		exec_parent_process(pid, argv, status);
+		signal(SIGINT, signal_c); // Restaurar señal para próximo prompt
+	}
 	else
 		perror("fork");
 }

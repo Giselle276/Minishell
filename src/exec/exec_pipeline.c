@@ -6,7 +6,7 @@
 /*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 17:03:54 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/05/16 13:26:02 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/16 13:55:02 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int	exec_pipeline(t_cmds *ct, t_status *status)
 	int		prev_fd;
 	pid_t	pid;
 	t_cmd	**cmds;
+	int wstatus;
 
 	i = 0;
 	prev_fd = -1;
@@ -91,6 +92,12 @@ int	exec_pipeline(t_cmds *ct, t_status *status)
 		i++;
 	}
 	while (i--)
-		wait(NULL);
+	{
+    	wait(&wstatus);
+    	if (WIFSIGNALED(wstatus))
+        	status->stat = 128 + WTERMSIG(wstatus);
+    	else if (WIFEXITED(wstatus))
+        	status->stat = WEXITSTATUS(wstatus);
+	}
 	return (0);
 }
