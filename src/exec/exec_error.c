@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 11:46:04 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/05/09 21:05:55 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/16 15:47:33 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,3 @@ void	error_denied(char **argv)
 	ft_putstr_fd(*argv, 2);
 	ft_putstr_fd("\n", 2);
 }
-
-

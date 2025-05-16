@@ -18,7 +18,9 @@ SRC = src/main.c \
 	  src/free/free_two.c \
 	  src/exec/exec_child.c \
 	  src/exec/exec_simple_cmd.c \
+	  src/exec/more_utils.c \
 	  src/exec/exec_pipeline.c \
+	  src/exec/exec_pipeline_utils.c \
 	  src/built_ins/check_builtins.c \
 	  src/built_ins/builtin_cd.c \
 	  src/built_ins/builtins_one.c \

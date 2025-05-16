@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 17:03:54 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/05/16 13:55:02 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/16 16:37:56 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	build_argv(char **argv, t_token *arg)
 	argv[j] = NULL;
 }
 
-static void	exec_child(t_cmd *cmd, int prev_fd,
+void	exec_child(t_cmd *cmd, int prev_fd,
 	int *pipefd, int is_last, t_status *status)
 {
 	char	*argv[256];
@@ -58,46 +58,10 @@ static void	exec_child(t_cmd *cmd, int prev_fd,
 	exit(127);
 }
 
-static void	handle_parent(int *prev_fd, int *pipefd)
+void	handle_parent(int *prev_fd, int *pipefd)
 {
 	if (*prev_fd != -1)
 		close(*prev_fd);
 	close(pipefd[1]);
 	*prev_fd = pipefd[0];
-}
-
-int	exec_pipeline(t_cmds *ct, t_status *status)
-{
-	int		i;
-	int		pipefd[2];
-	int		prev_fd;
-	pid_t	pid;
-	t_cmd	**cmds;
-	int wstatus;
-
-	i = 0;
-	prev_fd = -1;
-	cmds = ct->parsed_cmds;
-	while (cmds[i])
-	{
-		if (pipe(pipefd) == -1)
-			exit(1);
-		pid = fork();
-		if (pid == -1)
-			exit(1);
-		if (pid == 0)
-			exec_child(cmds[i], prev_fd, pipefd, cmds[i + 1] == NULL, status);
-		else
-			handle_parent(&prev_fd, pipefd);
-		i++;
-	}
-	while (i--)
-	{
-    	wait(&wstatus);
-    	if (WIFSIGNALED(wstatus))
-        	status->stat = 128 + WTERMSIG(wstatus);
-    	else if (WIFEXITED(wstatus))
-        	status->stat = WEXITSTATUS(wstatus);
-	}
-	return (0);
 }

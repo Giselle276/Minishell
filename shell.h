@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 13:51:43 by cgil              #+#    #+#             */
-/*   Updated: 2025/05/09 17:42:21 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/16 16:19:42 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "./minishell.h"
 
+// 64
 void		shell_loop(t_status *status);
 t_cmds		*init_cmds_table(void);
 t_status	*init_shell(char *envp[]);
@@ -90,5 +91,10 @@ int			env_var_exists(char **envp, const char *name);
 
 ///heredoc///////////////////////////////////////////
 void		handle_heredoc(const char *delimiter);
+void		handle_heredoc_no_cmd(const char *delimiter);
+void		write_interactive_to_file(const char *filename);
+void		fill_argv(char **argv, t_token *arg_token);
+void		handle_parent(int *prev_fd, int *pipefd);
+void		exec_child(t_cmd *cmd, int prev_fd, int *pipefd, int is_last, t_status *status);
 
 #endif

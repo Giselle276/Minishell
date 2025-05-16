@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 11:08:03 by cgil              #+#    #+#             */
-/*   Updated: 2025/05/09 21:05:32 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/16 15:34:37 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,41 +61,6 @@ int	exec_builtin_cmd(char **argv, t_cmd *cmd, t_status *status)
 		free(argv[i++]);
 	return (ret);
 }
-
-/*void	exec_child_process(char **argv, t_cmd *cmd, t_status *status)
-{
-	char	*path;
-
-	handle_redirections(cmd);
-	path = find_command_path(argv[0], status->envp);
-	if (!path)
-	{
-		validate_path(path, &argv[0]);
-		free_argv(argv);
-		exit(127);
-	}
-	if (access(path, F_OK) != 0)
-	{
-		free(path);
-		ft_putstr_fd("minishell: no such file or directory: ", 2);
-		ft_putstr_fd(argv[0], 2);
-		ft_putstr_fd("\n", 2);
-		free_argv(argv);
-		exit(127);
-	}
-	else if (access(path, X_OK) != 0)
-	{
-		free(path);
-		error_denied(argv);
-		free_argv(argv);
-		exit(126);
-	}
-	execve(path, argv, status->envp);
-	free(path);
-	error_denied(argv);
-	free_argv(argv);
-	exit(127);
-}*/
 
 static void	handle_path_error(char *path, char **argv, int code)
 {

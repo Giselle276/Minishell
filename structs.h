@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 16:57:28 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/05/09 17:41:28 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/16 16:32:47 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,14 @@ typedef struct s_cmds
 	t_cmd		**parsed_cmds;
 	t_cmd		*parsed_simple;
 }				t_cmds;
+
+typedef struct s_exec_child_args {
+    t_cmd *cmd;
+    int prev_fd;
+    int *pipefd;
+    int is_last;
+    t_status *status;
+} t_exec_child_args;
+
 
 #endif
