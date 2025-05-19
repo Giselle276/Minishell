@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 10:30:52 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/05/19 16:23:23 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/19 17:01:30 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ bool	is_invalid_pipe_sequence(t_token *prev)
 
 bool	is_invalid_next_token(t_token *lst)
 {
-	return (!lst->next || lst->next->type == T_PIPE);
+	return (!lst->next
+		|| lst->next->type == T_PIPE
+		|| lst->next->type == T_HEREDOC);
 }
 
 bool	is_valid_pipe_syntax(t_token *lst)
