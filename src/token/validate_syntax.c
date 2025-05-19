@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 10:30:52 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/05/09 22:08:40 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/19 16:23:23 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,7 @@ bool	is_invalid_pipe_sequence(t_token *prev)
 
 bool	is_invalid_next_token(t_token *lst)
 {
-	return (!lst->next || lst->next->type == T_PIPE
-		|| lst->next->type == T_REDIR_IN
-		|| lst->next->type == T_REDIR_OUT
-		|| lst->next->type == T_APPEND
-		|| lst->next->type == T_HEREDOC);
+	return (!lst->next || lst->next->type == T_PIPE);
 }
 
 bool	is_valid_pipe_syntax(t_token *lst)
@@ -67,7 +63,7 @@ bool	is_valid_pipe_syntax(t_token *lst)
 			if (is_invalid_pipe_sequence(prev)
 				|| is_invalid_next_token(lst))
 			{
-				ft_putstr_fd("minishell: syntax error near", 2);
+				ft_putstr_fd("minishell: syntax error near ", 2);
 				ft_putstr_fd("unexpected token `|'\n", 2);
 				return (false);
 			}
