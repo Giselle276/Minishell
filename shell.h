@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 13:51:43 by cgil              #+#    #+#             */
-/*   Updated: 2025/05/16 16:19:42 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/19 12:55:24 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ void		handle_heredoc(const char *delimiter);
 void		handle_heredoc_no_cmd(const char *delimiter);
 void		write_interactive_to_file(const char *filename);
 void		fill_argv(char **argv, t_token *arg_token);
-void		handle_parent(int *prev_fd, int *pipefd);
-void		exec_child(t_cmd *cmd, int prev_fd, int *pipefd, int is_last, t_status *status);
+void		exec_child(t_cmd *cmd, t_status *status);
 
 #endif
