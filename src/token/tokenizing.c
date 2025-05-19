@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cgil <cgil@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 12:58:36 by cgil              #+#    #+#             */
-/*   Updated: 2025/05/09 22:10:35 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/19 14:04:26 by cgil             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,10 @@ t_token	*process_tokens(char *cmd_line, t_status *status)
 	i = 0;
 	while (cmd_line[i])
 	{
+		while (cmd_line[i] == ' ' || cmd_line[i] == '\t')
+			i++;
+		if (!cmd_line[i])
+			break ;
 		new_token = create_and_add_token(cmd_line, &i, status, &tk_lst);
 		if (!new_token)
 			return (NULL);
