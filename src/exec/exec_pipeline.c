@@ -6,7 +6,7 @@
 /*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 17:03:54 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/05/20 11:45:41 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/19 12:54:37 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ void	exec_child(t_cmd *cmd, t_status *status)
 	char	*argv[256];
 	char	*path;
 
-	if (handle_redirections(cmd, status))
-		exit(status->error_code);
+	handle_redirections(cmd);
 	build_argv(argv, cmd->args);
 	if (is_builtin(argv[0]))
 	{

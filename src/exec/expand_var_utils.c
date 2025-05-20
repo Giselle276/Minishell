@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_var_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 11:43:22 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/05/20 11:50:41 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/16 15:44:44 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ static void	exec_parent_process(pid_t pid, char **argv, t_status *status)
 	if (WIFSIGNALED(code))
 	{
 		sig = WTERMSIG(code);
-		status->error_code = 128 + sig;
+		status->stat = 128 + sig;
 		if (sig == SIGINT)
 			write(STDOUT_FILENO, "\n", 1);
 	}
 	else if (WIFEXITED(code))
-		status->error_code = WEXITSTATUS(code);
+		status->stat = WEXITSTATUS(code);
 }
 
 void	exec_external_cmd(char **argv, t_cmd *cmd, t_status *status)

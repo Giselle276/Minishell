@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 18:42:06 by claudia           #+#    #+#             */
-/*   Updated: 2025/05/20 18:45:09 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/20 21:45:18 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	process_export_argument(char *arg, t_status *status)
 
 	if (!is_valid_identifier(arg))
 	{
-		write(2, "minishell: export: `': not a valid identifier\n", 47);
+		write(2, "minishell: export: not a valid identifier\n", 43);
 		status->error_code = 1;
 		return ;
 	}
@@ -87,6 +87,7 @@ int	builtin_export(char **argv, t_status *status)
 {
 	int	i;
 
+	status->error_code = 0;
 	i = 1;
 	if (!argv[1])
 	{
@@ -98,5 +99,5 @@ int	builtin_export(char **argv, t_status *status)
 		process_export_argument(argv[i], status);
 		i++;
 	}
-	return (0);
+	return (status->error_code);
 }

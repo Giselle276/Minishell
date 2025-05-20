@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   more_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:38:59 by claudia           #+#    #+#             */
-/*   Updated: 2025/05/20 12:27:12 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/20 21:47:55 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ static int	execute_command_logic(t_cmd *cmd, t_status *status)
 	}
 	if (is_builtin(argv[0]))
 	{
-		status->error_code = exec_builtin_cmd(argv, cmd, status);
-		return (status->error_code);
+		status->stat = exec_builtin_cmd(argv, cmd, status);
+		return (status->stat);
 	}
 	exec_external_cmd(argv, cmd, status);
 	return (0);
@@ -83,10 +83,7 @@ int	exec_simple_command(t_cmds *ct, t_status *status)
 
 	cmd = ct->parsed_simple;
 	if (handle_single_redir_in(cmd, status))
-	{
-		status->stat = status->error_code;
-		return (status->error_code);
-	}
+		return (1);
 	if (handle_heredoc_no_args(cmd))
 		return (0);
 	if (handle_redir_out_no_args(cmd))

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 18:46:02 by claudia           #+#    #+#             */
-/*   Updated: 2025/05/20 12:27:39 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/16 15:46:10 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-static int	handle_input_redirection(t_token *redir_in, t_status *status)
+static void	handle_input_redirection(t_token *redir_in)
 {
 	int	fd;
 
@@ -26,18 +26,16 @@ static int	handle_input_redirection(t_token *redir_in, t_status *status)
 			if (fd < 0)
 			{
 				perror(redir_in->value);
-				status->error_code = 1;
-				return (1);
+				exit(1);
 			}
 			dup2(fd, STDIN_FILENO);
 			close(fd);
 		}
 		redir_in = redir_in->next;
 	}
-	return (0);
 }
 
-static int	handle_output_redirection(t_token *redir_out, t_status *status)
+static void	handle_output_redirection(t_token *redir_out)
 {
 	int	fd;
 
@@ -50,21 +48,16 @@ static int	handle_output_redirection(t_token *redir_out, t_status *status)
 		if (fd < 0)
 		{
 			perror(redir_out->value);
-			status->error_code = 1;
-			return (1);
+			exit(1);
 		}
 		dup2(fd, STDOUT_FILENO);
 		close(fd);
 		redir_out = redir_out->next;
 	}
-	return (0);
 }
 
-int	handle_redirections(t_cmd *cmd, t_status *status)
+void	handle_redirections(t_cmd *cmd)
 {
-	if (handle_input_redirection(cmd->redir_in, status))
-		return (1);
-	if (handle_output_redirection(cmd->redir_out, status))
-		return (1);
-	return (0);
+	handle_input_redirection(cmd->redir_in);
+	handle_output_redirection(cmd->redir_out);
 }
