@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_child.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 11:08:03 by cgil              #+#    #+#             */
-/*   Updated: 2025/05/16 15:34:37 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/20 12:02:16 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	exec_builtin_cmd(char **argv, t_cmd *cmd, t_status *status)
 
 	saved_stdin = dup(STDIN_FILENO);
 	saved_stdout = dup(STDOUT_FILENO);
-	handle_redirections(cmd);
+	handle_redirections(cmd,status);
 	ret = exec_builtin(argv, status);
 	dup2(saved_stdin, STDIN_FILENO);
 	dup2(saved_stdout, STDOUT_FILENO);
@@ -91,7 +91,7 @@ void	exec_child_process(char **argv, t_cmd *cmd, t_status *status)
 {
 	char	*path;
 
-	handle_redirections(cmd);
+	handle_redirections(cmd,status);
 	path = validate_and_get_path(argv, status);
 	execve(path, argv, status->envp);
 	free(path);
