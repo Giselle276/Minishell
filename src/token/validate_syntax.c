@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 10:30:52 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/05/19 17:01:30 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/20 18:29:01 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	is_valid_redirection_syntax(t_token *tokens)
 		{
 			if (!tmp->next || tmp->next->type != T_WORD)
 			{
-				ft_putstr_fd("minishell: syntax error near", 2);
+				ft_putstr_fd("minishell: syntax error near ", 2);
 				ft_putstr_fd("token `newline'\n", 2);
 				return (0);
 			}
