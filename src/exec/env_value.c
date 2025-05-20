@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_value.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmaccha- <gmaccha-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 19:39:48 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/05/06 09:42:05 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/20 18:06:12 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ char	**unset_env_value(char **envp, const char *name)
 	len = ft_strlen(name);
 	while (envp[i])
 		i++;
-	new_envp = malloc(sizeof(char *) * i);
+	new_envp = malloc(sizeof(char *) * (i + 1));
 	if (!new_envp)
 		return (NULL);
 	i = 0;

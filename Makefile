@@ -26,6 +26,7 @@ SRC = src/main.c \
 	  src/built_ins/builtins_one.c \
 	  src/built_ins/builtins_two.c \
 	  src/built_ins/builtin_echo.c \
+	  src/built_ins/builtin_export.c \
 	  src/exec/exec_utils.c \
 	  src/exec/redirections.c \
 	  src/exec/expand_var.c \

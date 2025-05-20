@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 11:46:04 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/05/16 15:47:33 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/20 17:42:53 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 void	validate_path(char *path, char **argv)
 {
-	if (!path || access(path, F_OK) != 0)
+	if (!path)
 	{
-		ft_putstr_fd("minishell: no such file or directory: ", 2);
+		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(*argv, 2);
-		ft_putstr_fd("\n", 2);
+		ft_putstr_fd(": command not found\n", 2);
 	}
 	else
 	{
-		ft_putstr_fd("minishell: command not found: ", 2);
-		ft_putstr_fd(*argv, 2);
-		ft_putstr_fd("\n", 2);
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(path, 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
 	}
 }
 
