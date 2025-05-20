@@ -6,7 +6,7 @@
 /*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 13:51:43 by cgil              #+#    #+#             */
-/*   Updated: 2025/05/20 11:57:17 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/20 12:28:40 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ bool		is_valid_pipe_syntax(t_token *lst);
 void		execute_root(t_status *st, t_cmds *ct);
 int			exec_simple_command(t_cmds *ct, t_status *status);
 int			exec_pipeline(t_cmds *ct, t_status *status);
-int         handle_redirections(t_cmd *cmd, t_status *status);
+int			handle_redirections(t_cmd *cmd, t_status *status);
 bool		is_builtin(const char *cmd);
 int			exec_builtin(char **argv, t_status *status);
 char		*trim_quotes(char *token);

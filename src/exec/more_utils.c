@@ -6,7 +6,7 @@
 /*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:38:59 by claudia           #+#    #+#             */
-/*   Updated: 2025/05/20 12:00:04 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/20 12:27:12 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ int	exec_simple_command(t_cmds *ct, t_status *status)
 	cmd = ct->parsed_simple;
 	if (handle_single_redir_in(cmd, status))
 	{
-    	status->stat = status->error_code;
-    	return (status->error_code);
+		status->stat = status->error_code;
+		return (status->error_code);
 	}
 	if (handle_heredoc_no_args(cmd))
 		return (0);

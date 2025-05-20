@@ -6,7 +6,7 @@
 /*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 18:46:02 by claudia           #+#    #+#             */
-/*   Updated: 2025/05/20 11:56:35 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/20 12:27:39 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	handle_input_redirection(t_token *redir_in, t_status *status)
 			if (fd < 0)
 			{
 				perror(redir_in->value);
-				status->error_code = 1; // <- Guardamos el error
+				status->error_code = 1;
 				return (1);
 			}
 			dup2(fd, STDIN_FILENO);
@@ -37,7 +37,7 @@ static int	handle_input_redirection(t_token *redir_in, t_status *status)
 	return (0);
 }
 
-static int	handle_output_redirection(t_token *redir_out,t_status *status)
+static int	handle_output_redirection(t_token *redir_out, t_status *status)
 {
 	int	fd;
 
