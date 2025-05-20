@@ -6,7 +6,7 @@
 /*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:38:59 by claudia           #+#    #+#             */
-/*   Updated: 2025/05/20 21:47:55 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/20 22:21:07 by claudia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,10 @@ int	exec_simple_command(t_cmds *ct, t_status *status)
 
 	cmd = ct->parsed_simple;
 	if (handle_single_redir_in(cmd, status))
-		return (1);
+	{
+		status->stat = status->error_code;
+		return (status->stat);
+	}
 	if (handle_heredoc_no_args(cmd))
 		return (0);
 	if (handle_redir_out_no_args(cmd))
