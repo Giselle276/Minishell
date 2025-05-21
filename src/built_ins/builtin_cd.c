@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:18:52 by claudia           #+#    #+#             */
-/*   Updated: 2025/05/20 22:29:33 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/21 11:45:35 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static char	*get_cd_target(char **args, t_status *status)
 			return (write(2, "cd: HOME not set\n", 18), NULL);
 		return (ft_strdup(target));
 	}
-	else if (strcmp(args[1], "-") == 0)
+	else if (ft_strcmp(args[1], "-") == 0)
 	{
 		target = get_env_value(status->envp, "OLDPWD");
 		if (!target)

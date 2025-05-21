@@ -40,7 +40,7 @@ OBJDIR = objs
 OBJ = $(patsubst src/%.c,$(OBJDIR)/%.o,$(SRC))
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I. -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -I.
 
 BABY_BLUE = \033[38;2;177;240;247m
 RESET = \033[0m

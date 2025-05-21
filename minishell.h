@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:08:41 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/05/09 17:37:24 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/21 13:10:55 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,23 +44,8 @@
 # define S      "\033[38;5;147m"
 # define USER_M		"\033[38;2;193;255;215m"
 # define BABY_BLUE		"\033[38;2;177;240;247m"
-
-# define T_SQUOTE	'\''
-# define T_DQUOTE	'"'
-# define T_ESCAPE	'\\'
-# define T_PIPE		'|'
-# define T_LESS		'<'
-# define T_GREATER	'>'
-# define T_SMCOLON	';'
-# define T_SPACE	' '
-
-# define RED "\033[0;31m"
-# define DARK_PINK "\033[38;2;189;30;30m"
-# define LIGHT_PINK "\033[38;2;216;131;115m"
-# define GREEN "\033[1;32m"
-# define YELLOW "\033[0;33m"
-# define BLUE "\033[1;34m"
 # define END "\033[0m"
-# define CYAN "\033[1;36m"
+
+# define T_PIPE		'|'
 
 #endif

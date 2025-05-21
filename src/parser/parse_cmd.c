@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:07:52 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/05/09 18:05:06 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/21 13:02:32 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,39 +18,6 @@ void	init_cmd(t_cmd *cmd)
 	cmd->redir_in = NULL;
 	cmd->redir_out = NULL;
 }
-
-/*t_token	*handle_tokens(t_cmd *cmd, t_token *tmp)
-{
-	t_token	*new;
-
-	if (tmp->type == T_REDIR_IN || tmp->type == T_HEREDOC)
-	{
-		if (tmp->next)
-		{
-			new = malloc(sizeof(t_token));
-			new->value = ft_strdup(tmp->next->value);
-			new->type = tmp->type;
-			new->next = NULL;
-			add_token(&cmd->redir_in, new);
-			tmp = tmp->next;
-		}
-	}
-	else if (tmp->type == T_REDIR_OUT || tmp->type == T_APPEND)
-	{
-		if (tmp->next)
-		{
-			new = malloc(sizeof(t_token));
-			new->value = ft_strdup(tmp->next->value);
-			new->type = tmp->type;
-			new->next = NULL;
-			add_token(&cmd->redir_out, new);
-			tmp = tmp->next;
-		}
-	}
-	else if (tmp->type == T_WORD || tmp->type == T_BUILTIN)
-		add_token(&cmd->args, create_token(tmp->value));
-	return (tmp->next);
-}*/
 
 t_cmd	*parse_cmd_tokens(t_token *tokens)
 {
