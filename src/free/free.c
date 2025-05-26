@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:21:22 by cgil              #+#    #+#             */
-/*   Updated: 2025/04/24 19:15:18 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/26 14:21:41 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	free_shell(t_status *shell_st)
 {
 	if (!shell_st)
 		return ;
-	free_str_array(shell_st->child_envp);
 	free_envp(shell_st->envp);
 	free(shell_st);
 }

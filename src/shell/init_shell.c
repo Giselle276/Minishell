@@ -6,7 +6,7 @@
 /*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 18:17:04 by claudia           #+#    #+#             */
-/*   Updated: 2025/05/21 13:02:47 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/26 14:21:44 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ t_status	*init_shell(char *envp[])
 	status->envp = load_env(envp);
 	status->error_code = 0;
 	status->stat = 0;
-	status->child_envp = NULL;
 	return (status);
 }
 

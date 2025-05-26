@@ -6,7 +6,7 @@
 /*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 16:57:28 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/05/19 11:29:17 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/26 14:22:11 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,8 @@ typedef enum e_token_type
 typedef struct s_status
 {
 	char		**envp;
-	char		**child_envp;
 	int			error_code;
 	int			stat;
-	int			signal_interrupted;
 }				t_status;
 
 typedef struct s_token
