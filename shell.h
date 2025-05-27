@@ -6,7 +6,7 @@
 /*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 13:51:43 by cgil              #+#    #+#             */
-/*   Updated: 2025/05/21 13:06:26 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/27 12:12:25 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,6 @@ void		handle_heredoc_no_cmd(const char *delimiter);
 void		write_interactive_to_file(const char *filename);
 void		fill_argv(char **argv, t_token *arg_token);
 void		exec_child(t_cmd *cmd, t_status *status);
+void		update_shlvl(char ***env);
 
 #endif
