@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   more_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claudia <claudia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:38:59 by claudia           #+#    #+#             */
-/*   Updated: 2025/05/20 22:21:07 by claudia          ###   ########.fr       */
+/*   Updated: 2025/05/28 13:47:24 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,6 @@ static int	execute_command_logic(t_cmd *cmd, t_status *status)
 	fill_argv(argv, cmd->args);
 	if (!argv[0] || ft_strlen(argv[0]) == 0)
 	{
-		free_argv(argv);
-		return (0);
-	}
-	if (is_assignment(argv[0]))
-	{
-		handle_assignment(argv[0], status);
 		free_argv(argv);
 		return (0);
 	}

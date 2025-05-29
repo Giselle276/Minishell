@@ -6,7 +6,7 @@
 /*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 13:51:43 by cgil              #+#    #+#             */
-/*   Updated: 2025/05/27 12:12:25 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/28 13:47:46 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ char		**unset_env_value(char **envp, const char *name);
 char		*find_command_path(char *cmd, char **envp);
 void		expand_env_vars(t_token *tokens, t_status *status);
 char		*expand_var(const char *str, t_status *status);
-int			is_assignment(char *str);
-void		handle_assignment(char *assignment, t_status *status);
 void		exec_external_cmd(char **argv, t_cmd *cmd, t_status *status);
 void		exec_child_process(char **argv, t_cmd *cmd, t_status *status);
 int			env_var_exists(char **envp, const char *name);

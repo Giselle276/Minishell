@@ -6,7 +6,7 @@
 /*   By: gmaccha- <gmaccha-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:08:41 by gmaccha-          #+#    #+#             */
-/*   Updated: 2025/05/21 13:10:55 by gmaccha-         ###   ########.fr       */
+/*   Updated: 2025/05/29 13:13:52 by gmaccha-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # include "./tokens.h"
 # include "src/get_next_line/get_next_line.h"
 
-# define RST	"\033[0m"
+# define RST	"\001\033[0m\002"
 # define G		"\033[1;32m"
 # define Y		"\033[38;2;252;255;166m"
 # define B		"\033[1;34m"
@@ -42,7 +42,7 @@
 # define C		"\033[1;36m"
 # define W		"\033[1;37m"
 # define S      "\033[38;5;147m"
-# define USER_M		"\033[38;2;193;255;215m"
+# define USER_M		"\001\033[38;2;193;255;215m\002"
 # define BABY_BLUE		"\033[38;2;177;240;247m"
 # define END "\033[0m"
 
