@@ -1,26 +1,28 @@
 # Minishell
+Una shell interactiva tipo Bash creada en C como parte del proyecto de la escuela 42.
 
-**Minishell** es una versión simplificada de un shell Unix, desarrollada como parte del currículo del proyecto de la escuela 42. El objetivo principal es entender el funcionamiento interno de un shell, la gestión de procesos, señales, redirecciones y la implementación de built-ins.
+### 📄 Descripción:
+Minishell es una versión simplificada de un shell Unix, desarrollada para comprender el funcionamiento de:
+* La ejecución de comandos
+* Redirecciones, pipes y heredocs
+* Variables de entorno
+* Manejo de señales y errores
+* Implementación de comandos built-in
+Simula el comportamiento de Bash en modo interactivo.
 
-Este proyecto permite ejecutar comandos, manejar redirecciones, pipes, variables de entorno y señales, entre otras funcionalidades, simulando el comportamiento de Bash en modo interactivo.
-## Funcionalidades
-
-### ✔️ Parsing y ejecución
+### 🧩 Funcionalidades
+✔️ Parsing y ejecución
 - Separación de comandos por `;` o nuevas líneas.
 - Soporte de pipes `|`.
 - Redirecciones de entrada `<`, salida `>` y `>>`.
 - Soporte de heredocs `<<`.
 
-### ✔️ Built-ins implementados
-- `echo` / `echo -n` / `echo -nnnnn`
-- `cd`: `cd -`, `cd ~`, `cd ..` (y actualización de **PWD** y **OLDPWD**)
-- `pwd`
-- `export`
-- `unset`
-- `env`
-- `exit`
+✔️ Built-ins implementados
+- `echo` / `echo -n`
+- `cd`: soporta `cd -`, `cd ~`, `cd ..`
+- `pwd`, `export`, `unset`, `env`, `exit`
 
-### ✔️ Variables de entorno
+✔️ Variables de entorno
 - Lectura, modificación y exportación de variables de entorno.
 - Comportamiento similar a Bash:
   - `export VAR=valor`
@@ -49,7 +51,7 @@ Para compilar el proyecto, ejecuta:
 make
 ```
 
-## Ejecución:
+## 🚀 Ejecución:
 Para iniciar la shell:
 ```bash
 ./minishell
@@ -68,15 +70,14 @@ minishell> echo $VAR
 42
 minishell> ls -l | grep minishell
 ```
-* Puedes usar las flechas del teclado (↑ ↓) para navegar por el historial de comandos anteriores.
-* La shell permanece activa hasta que el usuario ejecuta exit o presiona Ctrl+D en una línea vacía.
-./folder           # Debe devolver 126 (permiso denegado o no ejecutable)
-cd notadir         # Debe devolver 1 (directorio no existe)
+* Usa las flechas (↑ ↓) para navegar por el historial.
+* Finaliza con exit o Ctrl+D.
 
-## Ejemplo:
+## 🧪 Ejemplo de uso:
 ![Demo](assets/example_mini.gif)
 
-### 📤 Comportamiento de echo
+### 🎯 Casos de prueba
+📤 Comportamiento de echo
 ```bash
 echo $$$$                          # Manejo correcto de múltiples signos $
 echo -nnnn hola                    # El flag -n puede repetirse
@@ -85,20 +86,15 @@ echo "$USER '$USER'"              # Combinación de comillas dobles y simples
 echo "'$USER'"                    # Todo entre comillas simples = literal
 echo $''                          # Manejo de expansiones vacías
 ```
-### 🧩 Comillas, variables y espacios
+🧩 Comillas, variables y espacios
 * Manejo correcto de:
-
 * Comillas simples y dobles.
-
 * Expansiones dentro de comillas.
-
 * Combinaciones complejas: ec'h''o', ls '-la', etc.
-
 * Expansión de variables: $USER, $HOME, $?, etc.
-
 * Comandos con espacios y tabulaciones múltiples.
 
-### 🌍 Export, unset y env
+🌍 Export, unset y env
 
 * Variables vacías:
 ```bash
@@ -114,14 +110,14 @@ $VAR
 * unset VAR debe eliminarla correctamente.
 * env no debe mostrar variables sin valor asignado.
 
-### 📁 cd y actualización de PWD / OLDPWD
+📁 cd y actualización de PWD / OLDPWD
 ```bash
 cd              # Va al HOME
 cd -            # Vuelve al OLDPWD
 cd ~            # Equivalente a cd
 cd ..           # Sube un nivel
 ```
-### 🚪exit y sus errores
+🚪exit y sus errores
 ```bash
 exit                  # Sale con código 0
 exit 42               # Sale con código 42
@@ -129,7 +125,7 @@ exit 999999999999     # Error: valor fuera de rango
 exit hola             # Error: valor no numérico
 exit 2 hola           # Error: demasiados argumentos
 ```
-### Comprobaciones de ejecución simultánea: 
+Comprobaciones de ejecución simultánea: 
 ```bash
 sleep 2 | ls
 ```
