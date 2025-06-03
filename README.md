@@ -132,4 +132,4 @@ sleep 2 | ls
 ```
 ## by:
 - 👩‍💻 **Claudia Sofía Gil** - [`cgil`](https://github.com/claauugil)
-- 👩‍💻 **Gisell Maccha** - [`gmaccha-`](https://github.com/Giselle276)
+- 👩‍💻 **Giselle Maccha** - [`gmaccha-`](https://github.com/Giselle276)
