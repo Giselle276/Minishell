@@ -73,6 +73,9 @@ minishell> ls -l | grep minishell
 ./folder           # Debe devolver 126 (permiso denegado o no ejecutable)
 cd notadir         # Debe devolver 1 (directorio no existe)
 
+## Ejemplo:
+![Demo](assets/example_mini.gif)
+
 ### 📤 Comportamiento de echo
 ```bash
 echo $$$$                          # Manejo correcto de múltiples signos $
