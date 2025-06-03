@@ -133,3 +133,7 @@ sleep 2 | ls
 ## by:
 - 👩‍💻 **Claudia Sofía Gil** - [`cgil`](https://github.com/claauugil)
 - 👩‍💻 **Giselle Maccha** - [`gmaccha-`](https://github.com/Giselle276)
+  
+![image](https://github.com/user-attachments/assets/c6567286-2840-49e0-af9a-1f4fdd6309dc)
+
+
