@@ -11,18 +11,18 @@ Minishell es una versión simplificada de un shell Unix, desarrollada para compr
 Simula el comportamiento de Bash en modo interactivo.
 
 ### 🧩 Funcionalidades
-✔️ Parsing y ejecución
+### 🧠 Parsing y ejecución
 - Separación de comandos por `;` o nuevas líneas.
 - Soporte de pipes `|`.
 - Redirecciones de entrada `<`, salida `>` y `>>`.
 - Soporte de heredocs `<<`.
 
-✔️ Built-ins implementados
+### 🔧 Built-ins implementados
 - `echo` / `echo -n`
 - `cd`: soporta `cd -`, `cd ~`, `cd ..`
 - `pwd`, `export`, `unset`, `env`, `exit`
 
-✔️ Variables de entorno
+### 🌱 Variables de entorno
 - Lectura, modificación y exportación de variables de entorno.
 - Comportamiento similar a Bash:
   - `export VAR=valor`
@@ -30,11 +30,11 @@ Simula el comportamiento de Bash en modo interactivo.
   - `echo $VAR`
   - `$?` para obtener el último código de salida.
 
-### ✔️ Señales
+### 🚨 Señales
 - Manejo de `SIGINT` (Ctrl+C) y `SIGQUIT` (Ctrl+\) como Bash.
 - Ignora señales en heredoc cuando corresponde.
 
-### ✔️ Gestión de errores y memoria
+### 🧼 Gestión de errores y memoria
 - Mensajes de error similares a Bash.
 - Liberación completa de memoria en cada ciclo del shell.
 - Manejo adecuado de errores de sistema (`execve`, `fork`, `pipe`, etc.).
@@ -125,7 +125,7 @@ exit 999999999999     # Error: valor fuera de rango
 exit hola             # Error: valor no numérico
 exit 2 hola           # Error: demasiados argumentos
 ```
-Comprobaciones de ejecución simultánea: 
+🧵 Comprobaciones de ejecución simultánea: 
 ```bash
 sleep 2 | ls
 ```
